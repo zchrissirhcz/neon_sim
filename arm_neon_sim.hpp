@@ -115,6 +115,8 @@ using float64x2_t = TxN<double, 2>;
 //----------------------------------------------------------------------
 // 2. Intrinsics implementation
 //----------------------------------------------------------------------
+
+// Load
 uint8x8_t vld1_u8(uint8_t const* ptr)
 {
     uint8x8_t r;
@@ -124,6 +126,31 @@ uint8x8_t vld1_u8(uint8_t const* ptr)
     return r;
 }
 
+uint8x16_t vld1q_u8(uint8_t const * ptr)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+
+void vst1q_u8(uint8_t* ptr, uint8x16_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[i] = val[i];
+    }
+}
+
+// Store
+void vst1_u8(uint8_t* ptr, uint8x8_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[i] = val[i];
+    }
+}
+
+// other
 uint8x8_t vadd_u8(uint8x8_t a, uint8x8_t b)
 {
     uint8x8_t r;
@@ -133,11 +160,32 @@ uint8x8_t vadd_u8(uint8x8_t a, uint8x8_t b)
     return r;
 }
 
-void vst1_u8(uint8_t* ptr, uint8x8_t val)
+uint8x16_t vdupq_n_u8(uint8_t value)
 {
-    for (int i = 0; i < 8; i++) {
-        ptr[i] = val[i];
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++) {
+        r[i] = value;
     }
+    return r;
+}
+
+uint8x16_t vqsubq_u8(uint8x16_t a, uint8x16_t b)
+{
+    uint8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        int16_t temp = (int16_t)a[i] - (int16_t)b[i];
+        if (temp > UINT8_MAX) {
+            D[i] = UINT8_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
 }
 
 //----------------------------------------------------------------------

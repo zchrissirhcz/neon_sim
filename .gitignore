@@ -32,3 +32,5 @@ build/log.txt
 **/.cache/
 
 .gdb_history
+
+build/*.png

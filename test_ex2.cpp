@@ -14,10 +14,21 @@
 //8-bit 灰度PNG图片读取与写入
 int main()
 {
+#if __ANDROID__
+    std::string load_prefix = "/data/local/tmp";
+#elif __linux__
+    std::string load_prefix = "/home/zz/data";
+#elif _MSC_VER
+    std::string load_prefix = "d:/data";
+#else
+#pragma error
+#endif
+
 
     size_t gx, gy;		//Var für Bild 图像尺寸  size_t = unsigned char
     png_bytep gbild_;	//图像数据首地址 unsigned char *
-    readImageData("ggray.png",&gbild_,&gx,&gy);	//Bild lesen 读图
+    std::string image_path = load_prefix + "/ggray.png";
+    readImageData(image_path.c_str(), &gbild_,&gx,&gy);	//Bild lesen 读图
 
     unsigned char **gbild = (unsigned char**)malloc(sizeof(char *) * gy);	//定义二维数据
     for(int i = 0 ; i < gy ; i++)
@@ -48,7 +59,7 @@ int main()
         }
     }
     writeImageData("out.png", gbild_out_, gx, gy, 8);	//制作PNG图
-}	
+}
 //struct timespec start, end;							//Var für Zeitmessung
 //clock_gettime(CLOCK_REALTIME, &start);				//Zeitmessung - Start
 //clock_gettime(CLOCK_REALTIME, &end);					//Zeitmessung - End
