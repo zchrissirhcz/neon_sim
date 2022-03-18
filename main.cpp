@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
+#if __ARM_NEON
 #include <arm_neon.h>
+#include "arm_neon_helper.hpp"
+#else
+#include "arm_neon_sim.hpp"
+#endif
+
 #include <math.h>
 
 //---------------------------------------------
@@ -24,9 +32,13 @@ int main()
     rega = vld1_u8(&a[0]);
     regb = vld1_u8(&b[0]);
 
+    std::cout << rega << std::endl;
+
     regc = vadd_u8(rega, regb);	//做加法
 
-    vst1_u8(&c[0], regc);		//回写到c中
+    std::cout << regc << std::endl;
+
+    vst1_u8(&c[0], regc);  //回写到c中
 
     //测试
     for(int i = 0 ; i < 8 ; i++)
