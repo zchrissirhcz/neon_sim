@@ -2,8 +2,24 @@ cmake_minimum_required(VERSION 3.20)
 
 project(hello)
 
-add_executable(testbed main.cpp)
+include("deps.cmake")
 
-if (ANDROID)
-    target_link_libraries(testbed log)
-endif()
+add_library(neon_sim INTERFACE
+  arm_neon_sim.hpp
+)
+
+enable_testing()
+
+
+macro(neon_sim_add_test name)
+  add_executable(test_${name} ${CMAKE_CURRENT_SOURCE_DIR}/test_${name}.cpp)
+  set(dep_libs neon_sim ${ARGN} GTest::gtest GTest::gtest_main)
+  if(ANDROID)
+    list(APPEND dep_libs log)
+  endif()
+  target_link_libraries(test_${name} PRIVATE ${dep_libs})
+  gtest_add_tests(TARGET test_${name})
+endmacro()
+
+neon_sim_add_test(ex1)
+neon_sim_add_test(ex2 png_static)
