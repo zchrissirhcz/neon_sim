@@ -23,3 +23,4 @@ endmacro()
 
 neon_sim_add_test(ex1)
 neon_sim_add_test(ex2 png_static)
+neon_sim_add_test(ex3)

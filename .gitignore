@@ -34,3 +34,4 @@ build/log.txt
 .gdb_history
 
 build/*.png
+build/*.txt

@@ -31,7 +31,18 @@ test_ex2()
     adb pull /data/local/tmp/out.png ./
 }
 
+test_ex3()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_ex3
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+    adb pull /data/local/tmp/out.png ./
+}
+
 
 #testbed
 #test_ex1
-test_ex2
+#test_ex2
+test_ex3

@@ -126,7 +126,7 @@ uint8x8_t vld1_u8(uint8_t const* ptr)
     return r;
 }
 
-uint8x16_t vld1q_u8(uint8_t const * ptr)
+uint8x16_t vld1q_u8(uint8_t const* ptr)
 {
     uint8x16_t r;
     for (int i = 0; i < 16; i++) {
@@ -135,12 +135,24 @@ uint8x16_t vld1q_u8(uint8_t const * ptr)
     return r;
 }
 
-void vst1q_u8(uint8_t* ptr, uint8x16_t val)
+uint16x8_t vld1q_u16(uint16_t const* ptr)
 {
-    for (int i = 0; i < 16; i++) {
-        ptr[i] = val[i];
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = ptr[i];
     }
+    return r;
 }
+
+uint32x4_t vld1q_u32(uint32_t const * ptr)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+
 
 // Store
 void vst1_u8(uint8_t* ptr, uint8x8_t val)
@@ -150,7 +162,28 @@ void vst1_u8(uint8_t* ptr, uint8x8_t val)
     }
 }
 
-// other
+void vst1q_u8(uint8_t* ptr, uint8x16_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[i] = val[i];
+    }
+}
+
+void vst1q_u16(uint16_t* ptr, uint16x8_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[i] = val[i];
+    }
+}
+
+void vst1q_u32(uint32_t* ptr, uint32x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[i] = val[i];
+    }
+}
+
+// Vector Arithmetic
 uint8x8_t vadd_u8(uint8x8_t a, uint8x8_t b)
 {
     uint8x8_t r;
@@ -160,6 +193,83 @@ uint8x8_t vadd_u8(uint8x8_t a, uint8x8_t b)
     return r;
 }
 
+uint16x8_t vaddl_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = (uint16_t)(a[i]) + (uint16_t)(b[i]);
+    }
+    return D;
+}
+
+uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] + (uint16_t)(b[i]);
+    }
+    return r;
+}
+
+uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8_t r;
+    for (int i=0; i<8; i++)
+    {
+        uint16_t temp = (uint16_t)a[i] + (uint16_t)b[i];
+        if (temp > UINT8_MAX) {
+            r[i] = UINT8_MAX;
+        }
+        else {
+            r[i] = temp;
+        }
+    }
+    return r;
+}
+
+uint8x8_t vsub_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint8x8_t D;
+    for (int i = 0; i < 8; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+
+
+uint8x8_t vqsub_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        if (temp > UINT8_MAX) {
+            D[i] = UINT8_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint32x4_t vmulq_n_u32(uint32x4_t N, uint32_t M)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+// Vector manipulation 
 uint8x16_t vdupq_n_u8(uint8_t value)
 {
     uint8x16_t r;
