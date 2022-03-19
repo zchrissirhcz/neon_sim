@@ -26,7 +26,25 @@ struct TxN
 {
     T val[N];
 
-    TxN() = default;
+    TxN() {
+        for (int i = 0; i < N; i++) {
+            val[i] = 0;
+        }
+    }
+
+    //! braced-init-list
+    TxN(std::initializer_list<T> init)//: size_(init.size()), capacity_(init.size())
+    {
+        if (init.size() != N) {
+            abort();
+        }
+        typename std::initializer_list<T>::iterator it = init.begin();
+        for (int i = 0; i < init.size(); i++) {
+            val[i] = *it;
+            it ++;
+        }
+    }
+
 
     T& operator[](size_t i)
     {
@@ -43,15 +61,17 @@ struct TxN
         return N;
     }
 
-    // NOTE: if supporing this copy constructor, 
-    // then have to implement initializer list based ctor, otherwise compile failed.
-    // template<typename Tp>
-    // TxN(const TxN<Tp, N>& other)
-    // {
-    //     for (int i = 0; i < N; i++) {
-    //         val[i] = other[i];
-    //     }
-    // }
+    // type operator
+    template<typename T2, size_t N2>
+    operator TxN<T2, N2>()
+    {
+        if (sizeof(T)*N == sizeof(T2)*N2) {
+            TxN<T2, N2> obj;
+            memcpy(obj.val, val, sizeof(T)*N);
+            return obj;
+        }
+        abort();
+    }
 
     // there are at least three different ways to do this operator, but
     //  this is the easiest, so I included below.
@@ -121,6 +141,7 @@ using uint64x2_t = TxN<uint64_t, 2>;
 using float16x8_t = TxN<__fp16, 8>;
 using float32x4_t = TxN<float, 4>;
 using float64x2_t = TxN<double, 2>;
+
 
 //-------
 //vector register arary types
@@ -431,7 +452,7 @@ uint16x8_t vld1q_u16(uint16_t const* ptr)
     return r;
 }
 
-uint32x4_t vld1q_u32(uint32_t const * ptr)
+uint32x4_t vld1q_u32(uint32_t const* ptr)
 {
     uint32x4_t r;
     for (int i = 0; i < 4; i++) {
@@ -440,7 +461,7 @@ uint32x4_t vld1q_u32(uint32_t const * ptr)
     return r;
 }
 
-float32x4_t vld1q_f32(float32_t const * ptr)
+float32x4_t vld1q_f32(float32_t const* ptr)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++)
@@ -450,7 +471,17 @@ float32x4_t vld1q_f32(float32_t const * ptr)
     return r;
 }
 
-float32x4_t	vld1q_dup_f32(float32_t const * ptr)
+int16x8_t vld1q_s16(int16_t const* ptr)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+
+float32x4_t vld1q_dup_f32(float32_t const* ptr)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++) {
@@ -690,7 +721,7 @@ float32x4_t vmovq_n_f32(float32_t value)
     return r;
 }
 
-float32x2_t	vget_low_f32(float32x4_t a)
+float32x2_t vget_low_f32(float32x4_t a)
 {
     float32x2_t r;
     for (int i = 0; i < 2; i++)
@@ -700,11 +731,32 @@ float32x2_t	vget_low_f32(float32x4_t a)
     return r;
 }
 
-float32x2_t	vget_high_f32(float32x4_t a)
+int16x4_t vget_low_s16(int16x8_t a)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+float32x4_t vget_high_f32(float32x4_t a)
 {
     float32x2_t r;
     int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
+int16x4_t vget_high_s16(int16x8_t a)
+{
+    int16x4_t r;
+    int mid = 8 / 2;
+    for (int i = 0; i < 4; i++)
     {
         r[i] = a[mid + i];
     }
@@ -856,7 +908,104 @@ float32x4_t vrecpsq_f32(float32x4_t a, float32x4_t b)
     return r;
 }
 
+/// transpose
+uint8x8x2_t vtrn_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 4; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+int16x4x2_t vtrn_s16(int16x4_t a, int16x4_t b)
+{
+    int16x4x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 2; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+
+uint16x8x2_t vtrnq_u16(uint16x8_t a, uint16x8_t b)
+{
+    uint16x8x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 4; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+uint32x4x2_t vtrnq_u32(uint32x4_t a, uint32x4_t b)
+{
+    uint32x4x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 2; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+// combine
+uint8x16_t vcombine_u8(uint8x8_t low, uint8x8_t high)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < 8; i++)
+    {
+        r[8 + i] = high[i];
+    }
+    return r;
+}
+
+// vmov
+int16x4_t vmovn_s32(int32x4_t a)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
 
 //----------------------------------------------------------------------
-// 4. Helper functions
+// 5. Helper functions
 //----------------------------------------------------------------------
+
+std::ostream& operator <<(std::ostream& os, uint8x8x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+
+std::ostream& operator <<(std::ostream& os, uint16x8x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+
+std::ostream& operator <<(std::ostream& os, uint32x4x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
