@@ -128,7 +128,8 @@ int main()
         // => buff = { 1.0, 5.0, 9.0, 13.0 }
         for (int i = 0; i < 4; i++)
         {
-            std::cout << buff[i] << ", " << std::endl;
+            if (i > 0) std::cout << ", ";
+            std::cout << buff[i];
         }
         std::cout << std::endl;
     }

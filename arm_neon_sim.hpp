@@ -72,15 +72,15 @@ struct TxN
         {
             if (typeid(t.val[i]) == typeid(int8_t))
             {
-                os << ',' << static_cast<int>(t.val[i]);
+                os << ", " << static_cast<int>(t.val[i]);
             }
             else if (typeid(t.val[i]) == typeid(uint8_t))
             {
-                os << ',' << static_cast<unsigned int>(t.val[i]);
+                os << ", " << static_cast<unsigned int>(t.val[i]);
             }
             else
             {
-                os << ',' << t.val[i];
+                os << ", " << t.val[i];
             }
         }
         return os;
@@ -452,7 +452,9 @@ float32x4_t vld1q_f32(float32_t const * ptr)
 float32x4_t	vld1q_dup_f32(float32_t const * ptr)
 {
     float32x4_t r;
-    //TODO
+    for (int i = 0; i < 4; i++) {
+        r[i] = ptr[0];
+    }
     return r;
 }
 
@@ -497,7 +499,7 @@ void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
 {
     for (int i = 0; i < 4; i++)
     {
-        //TODO
+        ptr[i] = val.val[i][lane];
     }
 }
 
@@ -743,9 +745,10 @@ float32x2_t	vget_low_f32(float32x4_t a)
 float32x2_t	vget_high_f32(float32x4_t a)
 {
     float32x2_t r;
+    int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r[i] = a[mid + i];
     }
     return r;
 }
