@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20)
 
 project(hello)
 
+set(CMAKE_CXX_STANDARD 11)
+
 include("deps.cmake")
 
 add_library(neon_sim INTERFACE
@@ -25,3 +27,4 @@ neon_sim_add_test(ex1)
 neon_sim_add_test(ex2 png_static)
 neon_sim_add_test(ex3)
 neon_sim_add_test(ex4)
+neon_sim_add_test(ex5)

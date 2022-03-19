@@ -7,7 +7,7 @@
             // "type": "cppdbg", // cpptools plugin
             "type": "lldb", // clangd + codelldb plugins
             "request": "launch",
-            "program": "${workspaceFolder}/build/linux-x64/testbed",
+            "program": "${workspaceFolder}/build/linux-x64/test_ex5",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

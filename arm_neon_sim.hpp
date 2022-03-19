@@ -6,6 +6,7 @@
 #include <iostream>
 #include <array>
 #include <stdint.h>
+#include <string.h>
 #include <math.h> // fabs
 #include <limits.h> // INT_MAX
 
@@ -679,50 +680,7 @@ uint8x16_t vqsubq_u8(uint8x16_t a, uint8x16_t b)
     return D;
 }
 
-
-float slow_reciprocal(float x)
-{
-    if (x<1) {
-        for (float i=1; ; i+=1)
-        {
-            float diff = abs(i*i - x);
-            if (diff < 1e-3) {
-                return i;
-            }
-        }
-    } else if (x>1) {
-        return 0; //TODO
-    }
-    return 1;
-}
-
-float32x4_t vrecpeq_f32(float32x4_t N)
-{
-    float32x4_t D;
-    for (int i=0; i<4; i++)
-    {
-        //D[i] = (1.0 / N[i] );
-        // float temp = FISqrt(N[i]);
-
-        // float temp = fast_inv_sqrt(N[i]);
-        // D[i] = temp * temp;
-        D[i] = slow_reciprocal(N[i]);
-    }
-    return D;
-}
-
-float32x4_t	vrecpsq_f32(float32x4_t a, float32x4_t b)
-{
-    float32x4_t r;
-    for (int i = 0; i < 4; i++)
-    {
-        //TODO
-        r[i] = a[i] + b[i]; // fake. just mock
-    }
-    return r;
-}
-
-float32x4_t	vmovq_n_f32	(float32_t value)
+float32x4_t vmovq_n_f32(float32_t value)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++)
@@ -810,5 +768,95 @@ float32x4_t	vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
 }
 
 //----------------------------------------------------------------------
-// 3. Helper functions
+// 3. reverse and reverse square root
+//----------------------------------------------------------------------
+struct float_parts {
+    explicit float_parts(float v);
+    explicit operator float() const;
+
+    uint32_t sign;
+    uint32_t fraction;
+    uint32_t exp;
+
+    int exp_bits[8];
+    int fraction_bits[23];
+    std::string exp_bits_str = std::string(8, '0');
+    std::string fraction_bits_str = std::string(23, '0');
+private:
+    void int32_to_binary(int data, int* bits, int n = 32) {
+        for (int i = 0; i < n; i++){
+            bits[n-1-i] = data & 1;
+            data = data >> 1;
+        }
+    }
+};
+
+uint32_t RecipEstimate(uint32_t a) {
+    a = a * 2 + 1;
+    uint32_t b = (1 << 19) / a;
+    return (b + 1) / 2;
+}
+
+float FPRecipEstimate(float operand) {
+    float_parts parts{operand};
+    parts.exp = 253 - parts.exp;
+    uint32_t scaled = 0x100 | ((parts.fraction >> 15) & 0xFF);
+    uint32_t estimate = RecipEstimate(scaled);
+    parts.fraction = (estimate & 0xff) << 15;
+    return float(parts);
+}
+
+float_parts::float_parts(float v) {
+    uint32_t v_bits;
+    memcpy(&v_bits, &v, sizeof(float));
+
+    sign = (v_bits >> 31) & 0x1;
+    fraction = v_bits & ((1 << 23) - 1);
+    exp = (v_bits >> 23) & 0xff;
+
+    int32_to_binary(exp, exp_bits, 8);
+    int32_to_binary(fraction, fraction_bits, 23);
+
+    for (int i = 0; i < 8; i++) {
+        exp_bits_str[i] = exp_bits[i] + '0';
+    }
+    for (int i = 0; i < 23; i++) {
+        fraction_bits_str[i] = fraction_bits[i] + '0';
+    }
+}
+
+float_parts::operator float() const {
+    uint32_t v_bits = 
+        ((sign & 0x1) << 31) |
+        (fraction & ((1 << 23) - 1)) |
+        ((exp & 0xff) << 23);
+
+    float result;
+    memcpy(&result, &v_bits, sizeof(float));
+    return result;
+}
+
+float32x4_t vrecpeq_f32(float32x4_t N)
+{
+    float32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = FPRecipEstimate(N[i]);
+    }
+    return D;
+}
+
+float32x4_t vrecpsq_f32(float32x4_t a, float32x4_t b)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = 2.0 - (a[i] * b[i]);
+    }
+    return r;
+}
+
+
+//----------------------------------------------------------------------
+// 4. Helper functions
 //----------------------------------------------------------------------
