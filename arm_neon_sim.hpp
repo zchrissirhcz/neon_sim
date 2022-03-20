@@ -769,6 +769,107 @@ void vst1q_f32(float32_t* ptr, float32x4_t val)
     }
 }
 
+// vst3
+void vst3_s8(int8_t * ptr, int8x8x3_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3_s16(int16_t * ptr, int16x4x3_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3_s32(int32_t * ptr, int32x2x3_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+
+void vst3_u8(uint8_t * ptr, uint8x8x3_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3_u16(uint16_t * ptr, uint16x4x3_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3_u32(uint32_t * ptr, uint32x2x3_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+
+// vst3q
+void vst3q_s8(int8_t * ptr, int8x16x3_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3q_s16(int16_t * ptr, int16x8x3_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3q_s32(int32_t * ptr, int32x4x3_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3q_u8(uint8_t * ptr, uint8x16x3_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3q_u16(uint16_t * ptr, uint16x8x3_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+void vst3q_u32(uint32_t * ptr, uint32x4x3_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[3*i+0] = val.val[0][i];
+        ptr[3*i+1] = val.val[1][i];
+        ptr[3*i+2] = val.val[2][i];
+    }
+}
+
 // vst4q_lane
 void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
 {
@@ -1217,6 +1318,92 @@ float32x4_t vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
 }
 
 // shift right
+
+int8x8_t vshrn_n_s16(int16x8_t a, const int n)
+{
+    if (n<1 || n>8) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    int8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+int16x4_t vshrn_n_s32(int32x4_t a, const int n)
+{
+    if (n<1 || n>16) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    int16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+int32x2_t vshrn_n_s64(int64x2_t a, const int n)
+{
+    if (n<1 || n>32) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    int32x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+uint8x8_t vshrn_n_u16(uint16x8_t a, const int n)
+{
+    if (n<1 || n>8) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+uint16x4_t vshrn_n_u32(uint32x4_t a, const int n)
+{
+    if (n<1 || n>16) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+uint32x2_t vshrn_n_u64(uint64x2_t a, const int n)
+{
+    if (n<1 || n>32) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+
 /// @param n 1-8
 uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
 {
@@ -1255,15 +1442,6 @@ uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
         D[i] = temp;
     }
     return D;
-}
-
-int8x8_t vshrn_n_s16(int16x8_t a, const int n)
-{
-    int8x8_t r;
-    for (int i = 0; i < 8; i++) {
-        r[i] = a[i] >> n;
-    }
-    return r;
 }
 
 // type conversion
