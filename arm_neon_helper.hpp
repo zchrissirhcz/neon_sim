@@ -59,6 +59,17 @@ std::ostream& operator <<(std::ostream& os, int16x4_t v_data)
     return os;
 }
 
+std::ostream& operator <<(std::ostream& os, uint16x4_t v_data)
+{
+    for (int i = 0; i < 4; i++) {
+        if (i > 0) {
+            os << ", ";
+        }
+        os << v_data[i];
+    }
+    return os;
+}
+
 std::ostream& operator <<(std::ostream& os, uint32x4_t v_data)
 {
     for (int i = 0; i < 4; i++) {

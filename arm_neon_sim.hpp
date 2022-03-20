@@ -490,6 +490,18 @@ float32x4_t vld1q_dup_f32(float32_t const* ptr)
     return r;
 }
 
+int16x8x3_t vld3q_s16(int16_t const * ptr)
+{
+    int16x8x3_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+
 // Store
 void vst1_u8(uint8_t* ptr, uint8x8_t val)
 {
@@ -966,6 +978,20 @@ uint32x4x2_t vtrnq_u32(uint32x4_t a, uint32x4_t b)
     return r;
 }
 
+int16x8x2_t vtrnq_s16(int16x8_t a, int16x8_t b)
+{
+    int16x8x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 4; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
 // combine
 uint8x16_t vcombine_u8(uint8x8_t low, uint8x8_t high)
 {
@@ -987,6 +1013,46 @@ int16x4_t vmovn_s32(int32x4_t a)
     int16x4_t r;
     for (int i = 0; i < 4; i++) {
         r[i] = a[i];
+    }
+    return r;
+}
+
+// table lookup
+uint8x8_t vqtbl1_u8(uint8x16_t t, uint8x8_t idx)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = t[idx[i]];
+    }
+    return r;
+}
+
+int32x2_t vrev64_s32(int32x2_t vec)
+{
+    int32x2_t r;
+    const int n = 2;
+    for (int i = 0; i < n; i++)
+    {
+        r[i] = vec[n - 1 - i];
+    }
+    return r;
+}
+
+uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
+{
+    uint16x4_t r;
+    int len = 4;
+    if (len > 4 || len < 0) {
+        abort();
+    }
+    for (int i = 0; i < len - n; i++)
+    {
+        r[i] = a[n + i];
+    }
+    for (int i = n; i < len; i++)
+    {
+        r[i] = b[i - n];
     }
     return r;
 }
