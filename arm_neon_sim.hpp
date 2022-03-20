@@ -551,6 +551,128 @@ float32x4_t vld1q_f32(float32_t const* ptr)
     return r;
 }
 
+
+// vld2
+uint8x8x2_t vld2_u8(uint8_t const * ptr)
+{
+    uint8x8x2_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int8x8x2_t vld2_s8(int8_t const * ptr)
+{
+    int8x8x2_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+uint16x4x2_t vld2_u16(uint16_t const * ptr)
+{
+    uint16x4x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int16x4x2_t vld2_s16(int16_t const * ptr)
+{
+    int16x4x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+uint32x2x2_t vld2_u32(uint32_t const * ptr)
+{
+    uint32x2x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int32x2x2_t vld_s32(int32_t const * ptr)
+{
+    int32x2x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+float32x2x2_t vld2_f32(float const * ptr)
+{
+    float32x2x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+
+// vld2q
+uint8x16x2_t vld2q_u8(uint8_t const * ptr)
+{
+    uint8x16x2_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int8x16x2_t vld2q_s8(int8_t const * ptr)
+{
+    int8x16x2_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+uint16x8x2_t vld2q_u16(uint16_t const * ptr)
+{
+    uint16x8x2_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int16x8x2_t vld2q_s16(int16_t const * ptr)
+{
+    int16x8x2_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+uint32x4x2_t vld2q_u32(uint32_t const * ptr)
+{
+    uint32x4x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+int32x4x2_t vld2q_s32(int32_t const * ptr)
+{
+    int32x4x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[2*i + 0];
+        r.val[1][i] = ptr[2*i + 1];
+    }
+    return r;
+}
+
 // vld3
 uint8x8x3_t vld3_u8(uint8_t const * ptr)
 {
@@ -664,6 +786,174 @@ int16x8x3_t vld3q_s16(int16_t const * ptr)
     }
     return r;
 }
+uint32x4x3_t vld3q_u32(uint32_t const * ptr)
+{
+    uint32x4x3_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int32x4x3_t vld3q_s32(int32_t const * ptr)
+{
+    int32x4x3_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+
+//////////
+// vld4
+uint8x8x4_t vld4_u8(uint8_t const * ptr)
+{
+    uint8x8x4_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int8x8x4_t vld4_s8(int8_t const * ptr)
+{
+    int8x8x4_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+uint16x4x4_t vld4_u16(uint16_t const * ptr)
+{
+    uint16x4x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int16x4x4_t vld4_s16(int16_t const * ptr)
+{
+    int16x4x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+uint32x2x4_t vld4_u32(uint32_t const * ptr)
+{
+    uint32x2x4_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int32x2x4_t vld4_s32(int32_t const * ptr)
+{
+    int32x2x4_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+float32x2x4_t vld4_f32(float const * ptr)
+{
+    float32x2x4_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+
+// vld4q
+uint8x16x4_t vld4q_u8(uint8_t const * ptr)
+{
+    uint8x16x4_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int8x16x4_t vld4q_s8(int8_t const * ptr)
+{
+    int8x16x4_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+uint16x8x4_t vld4q_u16(uint16_t const * ptr)
+{
+    uint16x8x4_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int16x8x4_t vld4q_s16(int16_t const * ptr)
+{
+    int16x8x4_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+uint32x4x4_t vld4q_u32(uint32_t const * ptr)
+{
+    uint32x4x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
+int32x4x4_t vld4q_s32(int32_t const * ptr)
+{
+    int32x4x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[4*i + 0];
+        r.val[1][i] = ptr[4*i + 1];
+        r.val[2][i] = ptr[4*i + 2];
+        r.val[3][i] = ptr[4*i + 3];
+    }
+    return r;
+}
 
 // vld1q_dup
 float32x4_t vld1q_dup_f32(float32_t const* ptr)
@@ -769,6 +1059,95 @@ void vst1q_f32(float32_t* ptr, float32x4_t val)
     }
 }
 
+// vst2
+void vst2_s8(int8_t * ptr, int8x8x2_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2_s16(int16_t * ptr, int16x4x2_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2_s32(int32_t * ptr, int32x2x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+
+void vst2_u8(uint8_t * ptr, uint8x8x2_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2_u16(uint16_t * ptr, uint16x4x2_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2_u32(uint32_t * ptr, uint32x2x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+
+// vst2q
+void vst2q_s8(int8_t * ptr, int8x16x2_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2q_s16(int16_t * ptr, int16x8x2_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2q_s32(int32_t * ptr, int32x4x2_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2q_u8(uint8_t * ptr, uint8x16x2_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2q_u16(uint16_t * ptr, uint16x8x2_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+void vst2q_u32(uint32_t * ptr, uint32x4x2_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[2*i+0] = val.val[0][i];
+        ptr[2*i+1] = val.val[1][i];
+    }
+}
+
 // vst3
 void vst3_s8(int8_t * ptr, int8x8x3_t val)
 {
@@ -870,6 +1249,121 @@ void vst3q_u32(uint32_t * ptr, uint32x4x3_t val)
     }
 }
 
+////////////////////////
+// vst4
+void vst4_s8(int8_t * ptr, int8x8x4_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4_s16(int16_t * ptr, int16x4x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4_s32(int32_t * ptr, int32x2x4_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+
+void vst4_u8(uint8_t * ptr, uint8x8x4_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+4] = val.val[3][i];
+    }
+}
+void vst4_u16(uint16_t * ptr, uint16x4x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4_u32(uint32_t * ptr, uint32x2x4_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+2] = val.val[3][i];
+    }
+}
+
+// vst4q
+void vst4q_s8(int8_t * ptr, int8x16x4_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4q_s16(int16_t * ptr, int16x8x4_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4q_s32(int32_t * ptr, int32x4x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4q_u8(uint8_t * ptr, uint8x16x4_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4q_u16(uint16_t * ptr, uint16x8x4_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+void vst4q_u32(uint32_t * ptr, uint32x4x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[4*i+0] = val.val[0][i];
+        ptr[4*i+1] = val.val[1][i];
+        ptr[4*i+2] = val.val[2][i];
+        ptr[4*i+3] = val.val[3][i];
+    }
+}
+///////////////////////
+
 // vst4q_lane
 void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
 {
@@ -879,6 +1373,66 @@ void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
     }
 }
 
+// vmaxq_type
+int8x16_t vmaxq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int16x8_t vmaxq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int32x4_t vmaxq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int8x16_t vmaxq_u8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int16x8_t vmaxq_u16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int32x4_t vmaxq_u32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] > M[i] ? N[i] : M[i];
+    }
+    return D;
+}
 
 float32x4_t vmaxq_f32(float32x4_t N, float32x4_t M)
 {
@@ -890,16 +1444,87 @@ float32x4_t vmaxq_f32(float32x4_t N, float32x4_t M)
     return D;
 }
 
+
 // Vector Arithmetic
-uint8x8_t vadd_u8(uint8x8_t a, uint8x8_t b)
+
+// vadd
+int8x8_t vadd_s8(int8x8_t N, int8x8_t M)
 {
-    uint8x8_t r;
-    for (int i = 0; i < 8; i++) {
-        r[i] = a[i] + b[i];
+    int8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i];
     }
-    return r;
+    return D;
 }
 
+int16x4_t vadd_s16(int16x4_t N, int16x4_t M)
+{
+    int16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+
+int32x2_t vadd_s32(int32x2_t N, int32x2_t M)
+{
+    int32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+int64x1_t vadd_s64(int64x1_t N, int64x1_t M)
+{
+    int64x1_t D;
+    D[0] = N[0] + M[0];
+    return D;
+}
+
+
+uint8x8_t vadd_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint16x4_t vadd_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint32x2_t vadd_u32(uint32x2_t N, uint32x2_t M)
+{
+    uint32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint64x1_t vadd_u64(uint64x1_t N, uint64x1_t M)
+{
+    uint64x1_t D;
+    D[0] = N[0] + M[0];
+    return D;
+}
+
+// vaddl
 uint16x8_t vaddl_u8(uint8x8_t a, uint8x8_t b)
 {
     uint16x8_t D;
@@ -921,6 +1546,76 @@ uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
 }
 
 // vaddq
+
+int8x16_t vaddq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+int16x8_t vaddq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+int32x4_t vaddq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+int64x2_t vaddq_s64(int64x2_t N, int64x2_t M)
+{
+    int64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint8x16_t vaddq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint16x8_t vaddq_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+uint32x4_t vaddq_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
 float32x4_t vaddq_f32(float32x4_t a, float32x4_t b)
 {
     float32x4_t r;
@@ -928,6 +1623,16 @@ float32x4_t vaddq_f32(float32x4_t a, float32x4_t b)
         r[i] = a[i] + b[i];
     }
     return r;
+}
+
+uint64x2_t vaddq_u64(uint64x2_t N, uint64x2_t M)
+{
+    uint64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
 }
 
 uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
@@ -946,15 +1651,6 @@ uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
     return r;
 }
 
-int16x8_t vaddq_s16(int16x8_t N, int16x8_t M)
-{
-    int16x8_t D;
-    for (size_t i=0; i<8; i++)
-    {
-        D[i] = N[i] + M[i];
-    }
-    return D;
-}
 
 // vqaddq
 uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
@@ -976,17 +1672,202 @@ uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
 uint16x4_t vpaddl_u8(uint8x8_t a)
 {
     uint16x4_t r;
+    for (int i = 0; i < 2; i++){
+        r[i] = a[2*i] + a[2*i+1];
+    }
+    return r;
+}
+
+uint16x8_t vpaddlq_u8(uint8x16_t a)
+{
+    uint16x8_t r;
     for (int i = 0; i < 4; i++){
         r[i] = a[2*i] + a[2*i+1];
     }
     return r;
 }
 
+uint32x4_t vpaddlq_u16(uint16x8_t a)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 2; i++){
+        r[i] = a[2*i] + a[2*i+1];
+    }
+    return r;
+}
+
 // sub
+int8x8_t vsub_s8(int8x8_t N, int8x8_t M)
+{
+    int8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int16x4_t vsub_s16(int16x4_t N, int16x4_t M)
+{
+    int16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int32x2_t vsub_s32(int32x2_t N, int32x2_t M)
+{
+    int32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int64x1_t vsub_s64(int64x1_t N, int64x1_t M)
+{
+    int64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
 uint8x8_t vsub_u8(uint8x8_t N, uint8x8_t M)
 {
     uint8x8_t D;
-    for (int i = 0; i < 8; i++)
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint16x4_t vsub_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint32x2_t vsub_u32(uint32x2_t N, uint32x2_t M)
+{
+    uint32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint64x1_t vsub_u64(uint64x1_t N, uint64x1_t M)
+{
+    uint64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+
+float32x2_t vsub_f32(float32x2_t N, float32x2_t M)
+{
+    float32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+
+float64x1_t vsub_f32(float64x1_t N, float64x1_t M)
+{
+    float64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+
+// vsubq_type
+int8x16_t vsubq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int16x8_t vsubq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int32x4_t vsubq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+int64x2_t vsubq_s64(int64x2_t N, int64x2_t M)
+{
+    int64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint8x16_t vsubq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint16x8_t vsubq_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint32x4_t vsubq_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+uint64x2_t vsubq_u64(uint64x2_t N, uint64x2_t M)
+{
+    uint64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - M[i];
+    }
+    return D;
+}
+
+float32x4_t vsubq_f32(float32x4_t N, float32x4_t M)
+{
+    float32x4_t D;
+    for (size_t i=0; i<4; i++)
     {
         D[i] = N[i] - M[i];
     }
@@ -1026,6 +1907,57 @@ int8x8_t vrsubhn_s16(int16x8_t N, int16x8_t M)
 }
 
 
+// vmulq
+int8x16_t vmulq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++) {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+int16x8_t vmulq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++) {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+int32x4_t vmulq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++) {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+uint8x16_t vmulq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (int i=0; i<16; i++){
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+uint16x8_t vmulq_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++) {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+uint32x4_t vmulq_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++) {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+// vmulq_n
 uint32x4_t vmulq_n_u32(uint32x4_t N, uint32_t M)
 {
     uint32x4_t D;
@@ -1056,6 +1988,7 @@ float32x4_t vmulq_f32(float32x4_t a, float32x4_t b)
     return r;
 }
 
+// vmull
 uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
 {
     uint16x8_t r;
@@ -1064,7 +1997,91 @@ uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
     }
     return r;
 }
+uint32x4_t vmull_u16(uint16x4_t a, uint16x4_t b)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+uint64x2_t vmull_u32(uint32x2_t a, uint32x2_t b)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
 
+int16x8_t vmull_s8(int8x8_t a, int8x8_t b)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+int32x4_t vmull_s16(int16x4_t a, int16x4_t b)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+int64x2_t vmull_s32(int32x2_t a, int32x2_t b)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+
+// vmull_n
+int32x4_t vmull_n_s16(int16x4_t N, int16_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+int64x2_t vmull_n_s32(int32x2_t N, int32_t M)
+{
+    int64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+uint32x4_t vmull_n_u16(uint16x4_t N, uint16_t M)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+uint64x2_t vmull_n_u32(uint32x2_t N, uint32_t M)
+{
+    uint64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+
+// vqdmull
 int32x4_t vqdmull_s16(int16x4_t M, int16x4_t N)
 {
     int32x4_t D;
@@ -1091,6 +2108,67 @@ uint16x8_t vmlal_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
     return D;
 }
 
+// vmlaq
+int8x16_t vmlaq_s8(int8x16_t N, int8x16_t M, int8x16_t P)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
+int16x8_t vmlaq_s16(int16x8_t N, int16x8_t M, int16x8_t P)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
+int32x4_t vmlaq_s32(int32x4_t N, int32x4_t M, int32x4_t P)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
+uint8x16_t vmlaq_u8(uint8x16_t N, uint8x16_t M, uint8x16_t P)
+{
+    uint8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
+uint16x8_t vmlaq_u16(uint16x8_t N, uint16x8_t M, uint16x8_t P)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
+uint32x4_t vmlaq_u32(uint32x4_t N, uint32x4_t M, uint32x4_t P)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] + M[i] * P[i];
+    }
+    return D;
+}
+
 float32x4_t vmlaq_f32(float32x4_t N, float32x4_t M, float32x4_t P)
 {
     float32x4_t D;
@@ -1101,7 +2179,7 @@ float32x4_t vmlaq_f32(float32x4_t N, float32x4_t M, float32x4_t P)
     return D;
 }
 
-
+// vmlaq_n
 float32x4_t vmlaq_n_f32(float32x4_t a, float32x4_t b, float32_t c)
 {
     float32x4_t D;
@@ -1114,13 +2192,84 @@ float32x4_t vmlaq_n_f32(float32x4_t a, float32x4_t b, float32_t c)
 
 // Vector manipulation 
 ////// vdup
-uint8x8_t vdup_n_u8(uint8_t value)
+int8x8_t vdup_n_s8(int8_t N)
 {
-    uint8x8_t r;
-    for (int i = 0; i < 8; i++) {
-        r[i] = value;
+    int8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N;
     }
-    return r;
+    return D;
+}
+
+int16x4_t vdup_n_s16(int16_t N)
+{
+    int16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+int32x2_t vdup_n_s32(int32_t N)
+{
+    int32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+int64x1_t vdup_n_s64(int64_t N)
+{
+    int64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+uint8x8_t vdup_n_u8(uint8_t N)
+{
+    uint8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+uint16x4_t vdup_n_u16(uint16_t N)
+{
+    uint16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+uint32x2_t vdup_n_u32(uint32_t N)
+{
+    uint32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N;
+    }
+    return D;
+}
+
+uint64x1_t vdup_n_u64(uint64_t N)
+{
+    uint64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        D[i] = N;
+    }
+    return D;
 }
 
 ////// vdupq
@@ -1210,9 +2359,20 @@ float32x4_t vmovq_n_f32(float32_t value)
     return r;
 }
 
+// vget_low
 float32x2_t vget_low_f32(float32x4_t a)
 {
     float32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+uint32x2_t vget_low_u32(uint32x4_t a)
+{
+    uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
         r[i] = a[i];
@@ -1230,6 +2390,17 @@ int16x4_t vget_low_s16(int16x8_t a)
     return r;
 }
 
+uint16x4_t vget_low_u16(uint16x8_t a)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+// vget_high
 float32x4_t vget_high_f32(float32x4_t a)
 {
     float32x2_t r;
@@ -1251,6 +2422,29 @@ int16x4_t vget_high_s16(int16x8_t a)
     }
     return r;
 }
+
+uint16x4_t vget_high_u16(uint16x8_t a)
+{
+    uint16x4_t r;
+    int mid = 8 / 2;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
+uint32x2_t vget_high_u32(uint32x4_t a)
+{
+    uint32x2_t r;
+    int mid = 4 / 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
 
 float32x2_t vpmax_f32(float32x2_t a, float32x2_t b)
 {
@@ -1281,6 +2475,67 @@ float32_t vgetq_lane_f32(float32x4_t v, int lane)
         abort();
     }
     return v[lane];
+}
+
+// vminq_type
+int8x16_t vminq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int16x8_t vminq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int32x4_t vminq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int8x16_t vminq_u8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int16x8_t vminq_u16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
+}
+
+int32x4_t vminq_u32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] < M[i] ? N[i] : M[i];
+    }
+    return D;
 }
 
 float32x4_t vminq_f32(float32x4_t N, float32x4_t M)
@@ -1331,6 +2586,21 @@ int8x8_t vshrn_n_s16(int16x8_t a, const int n)
         r[i] = a[i] >> n;
     }
     return r;
+}
+
+uint16x4_t vshr_n_u16(uint16x4_t v, const int n)
+{
+    if (n<1 || n>8) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    uint16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = v[i] >> n;
+    }
+    return D;
 }
 
 int16x4_t vshrn_n_s32(int32x4_t a, const int n)
@@ -1444,10 +2714,101 @@ uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
     return D;
 }
 
+uint8x8_t vrshrn_n_u16(uint16x8_t a, const int n)
+{
+    uint8x8_t r;
+    const int delta = (1 << (n-1));
+    for (int i = 0; i < 8; i++) {
+        r[i] = (a[i] + delta) >> n;
+    }
+    return r;
+}
+
+// shift left
+int32x4_t vshlq_n_s32(int32x4_t M, const int n)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++) {
+        D[i] = M[i] << n;
+    }
+    return D;
+}
+
 // type conversion
 uint8x8_t vreinterpret_u8_s8(int8x8_t a)
 {
     return a;
+}
+
+int16x8_t vreinterpretq_s16_u16(uint16x8_t a)
+{
+    return a;
+}
+
+uint16x8_t vreinterpretq_u16_s16(int16x8_t a)
+{
+    return a;
+}
+
+uint16x4_t vreinterpret_u16_u8(uint8x8_t a)
+{
+    return a;
+}
+
+uint32x2_t vreinterpret_u32_u16(uint16x4_t a)
+{
+    return a;
+}
+
+uint8x8_t vreinterpret_u8_u32(uint32x2_t a)
+{
+    return a;
+}
+
+uint32x2_t vreinterpret_u32_u8(uint8x8_t a)
+{
+    return a;
+}
+
+int8x8_t vreinterpret_s8_u8(uint8x8_t a)
+{
+    return a;
+}
+
+float32x4_t vcvtq_f32_s32(int32x4_t a)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+int32x4_t vcvtq_s32_f32(float32x4_t a)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+uint32x4_t vcvtq_u32_f32(float32x4_t a)
+{
+    uint32x4_t r;
+    for (int i = 0; i <4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+int32x4_t vcvtnq_s32_f32(float32x4_t a)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
 }
 
 //----------------------------------------------------------------------
@@ -1540,6 +2901,20 @@ float32x4_t vrecpsq_f32(float32x4_t a, float32x4_t b)
 }
 
 /// transpose
+int8x8x2_t vtrn_s8(int8x8_t a, int8x8_t b)
+{
+    int8x8x2_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 4; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
 uint8x8x2_t vtrn_u8(uint8x8_t a, uint8x8_t b)
 {
     uint8x8x2_t r;
@@ -1568,7 +2943,49 @@ int16x4x2_t vtrn_s16(int16x4_t a, int16x4_t b)
     return r;
 }
 
+uint16x4x2_t vtrn_u16(uint16x4_t a, uint16x4_t b)
+{
+    uint16x4x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 2; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
 
+int32x2x2_t vtrn_s32(int32x2_t a, int32x2_t b)
+{
+    int32x2x2_t r;
+    for (int i = 0; i < 1; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 1; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+uint32x2x2_t vtrn_u32(uint32x2_t a, uint32x2_t b)
+{
+    uint32x2x2_t r;
+    for (int i = 0; i < 1; i++) {
+        r.val[0][2*i] = a[2*i];
+        r.val[0][2*i+1] = b[2*i];
+    }
+    for (int i = 0; i < 1; i++) {
+        r.val[1][2*i] = a[2*i+1];
+        r.val[1][2*i+1] = b[2*i+1];
+    }
+    return r;
+}
+
+// trnq
 uint16x8x2_t vtrnq_u16(uint16x8_t a, uint16x8_t b)
 {
     uint16x8x2_t r;
@@ -1615,13 +3032,73 @@ int16x8x2_t vtrnq_s16(int16x8_t a, int16x8_t b)
 uint8x16_t vcombine_u8(uint8x8_t low, uint8x8_t high)
 {
     uint8x16_t r;
-    for (int i = 0; i < 8; i++)
-    {
+    const int n = 8;
+    for (int i = 0; i < n; i++) {
         r[i] = low[i];
     }
-    for (int i = 0; i < 8; i++)
-    {
-        r[8 + i] = high[i];
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
+    }
+    return r;
+}
+uint16x8_t vcombine_u16(uint16x4_t low, uint16x4_t high)
+{
+    uint16x8_t r;
+    const int n = 4;
+    for (int i = 0; i < n; i++) {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
+    }
+    return r;
+}
+uint32x4_t vcombine_u32(uint32x2_t low, uint32x2_t high)
+{
+    uint32x4_t r;
+    const int n = 2;
+    for (int i = 0; i < n; i++) {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
+    }
+    return r;
+}
+
+int8x16_t vcombine_s8(int8x8_t low, int8x8_t high)
+{
+    int8x16_t r;
+    const int n = 8;
+    for (int i = 0; i < n; i++) {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
+    }
+    return r;
+}
+int16x8_t vcombine_s16(int16x4_t low, int16x4_t high)
+{
+    int16x8_t r;
+    const int n = 4;
+    for (int i = 0; i < n; i++) {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
+    }
+    return r;
+}
+int32x4_t vcombine_s32(int32x2_t low, int32x2_t high)
+{
+    int32x4_t r;
+    const int n = 2;
+    for (int i = 0; i < n; i++) {
+        r[i] = low[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[n + i] = high[i];
     }
     return r;
 }
@@ -1635,6 +3112,104 @@ int16x4_t vmovn_s32(int32x4_t a)
     }
     return r;
 }
+
+uint16x4_t vmovn_u32(uint32x4_t a)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+uint8x8_t vmovn_u16(uint16x8_t a)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+// vmovl
+uint16x8_t vmovl_u8(uint8x8_t a)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+uint32x4_t vmovl_u16(uint16x4_t a)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+uint64x2_t vmovl_u32(uint32x2_t a)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+int16x8_t vmovl_s8(int8x8_t a)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+int32x4_t vmovl_s16(int16x4_t a)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+int64x2_t vmovl_s32(int32x2_t a)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+// vqmovn
+uint8x8_t vqmovn_u16(uint16x8_t a)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        if (a[i] > UINT8_MAX) {
+            r[i] = UINT8_MAX;
+        } else {
+            r[i] = a[i];
+        }
+    }
+    return r;
+}
+
+uint8x8_t vqmovun_s16(int16x8_t a)
+{
+    //TODO: verify this
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        if (a[i] > UINT8_MAX) {
+            r[i] = UINT8_MAX;
+        } else {
+            r[i] = a[i];
+        }
+    }
+    return r;
+}
+
 
 // table lookup
 uint8x8_t vqtbl1_u8(uint8x16_t t, uint8x8_t idx)
@@ -1693,6 +3268,24 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
     return r;
 }
 
+// vextq
+uint16x8_t vextq_u16(uint16x8_t a, uint16x8_t b, const int n)
+{
+    uint16x8_t r;
+    int len = 8;
+    if (n > 8 || n < 0) {
+        fprintf(stderr, "%s: param n is not in range [0, 8]\n", __FUNCTION__);
+        abort();
+    }
+    for (int i = 0; i < len - n; i++) {
+        r[i] = a[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[i + len - n] = b[i];
+    }
+    return r;
+}
+
 // compare
 uint8x16_t vcgtq_u8(uint8x16_t N, uint8x16_t M)
 {
@@ -1720,6 +3313,28 @@ uint8x16_t vbslq_u8(uint8x16_t mask, uint8x16_t src1, uint8x16_t src2)
                 r[i] += (src2[i] & x);
             }
         }
+    }
+    return r;
+}
+
+// vtbl1
+uint8x8_t vtbl1_u8(uint8x8_t a, uint8x8_t idx)
+{
+    // TODO: verify this
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a.val[idx.val[i]];
+    }
+    return r;
+}
+
+// vtbl4
+uint8x8_t vtbl4_u8(uint8x8x4_t a, uint8x8_t idx)
+{
+    // TODO: verify this
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a.val[idx.val[i]][i];
     }
     return r;
 }
