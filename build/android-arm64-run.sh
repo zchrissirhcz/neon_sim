@@ -68,10 +68,30 @@ test_ex6()
     adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
 }
 
+test_ex7()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_ex7
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
+
+test_ex8()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_ex8
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
+
 #testbed
 #test_ex1
 #test_ex2
 #test_ex3
 #test_ex4
 #test_ex5
-test_ex6
+#test_ex6
+#test_ex7
+test_ex8

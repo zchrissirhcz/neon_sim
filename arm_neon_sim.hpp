@@ -492,6 +492,18 @@ float32x4_t vld1q_dup_f32(float32_t const* ptr)
     return r;
 }
 
+uint8x8x3_t vld3_u8(uint8_t const * ptr)
+{
+    uint8x8x3_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+
 int16x8x3_t vld3q_s16(int16_t const * ptr)
 {
     int16x8x3_t r;
@@ -675,6 +687,25 @@ float32x4_t	vmulq_f32(float32x4_t a, float32x4_t b)
     return r;
 }
 
+uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+
+uint16x8_t vmlal_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
 float32x4_t vmlaq_f32(float32x4_t N, float32x4_t M, float32x4_t P)
 {
     float32x4_t D;
@@ -697,10 +728,69 @@ float32x4_t vmlaq_n_f32(float32x4_t a, float32x4_t b, float32_t c)
 }
 
 // Vector manipulation 
+////// vdup
+uint8x8_t vdup_n_u8(uint8_t value)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+
+////// vdupq
 uint8x16_t vdupq_n_u8(uint8_t value)
 {
     uint8x16_t r;
     for (int i = 0; i < 16; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+int8x16_t vdupq_n_s8(int8_t value)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+uint16x8_t vdupq_n_u16(uint16_t value)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+int16x8_t vdupq_n_16(int16_t value)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+uint32x4_t vdupq_n_u32(uint32_t value)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+int32x4_t vdupq_n_s32(int32_t value)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = value;
+    }
+    return r;
+}
+float32x4_t vdupq_n_f32(float32_t value)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i++) {
         r[i] = value;
     }
     return r;
@@ -777,7 +867,7 @@ int16x4_t vget_high_s16(int16x8_t a)
     return r;
 }
 
-float32x2_t	vpmax_f32(float32x2_t a, float32x2_t b)
+float32x2_t vpmax_f32(float32x2_t a, float32x2_t b)
 {
     float32x2_t r;
     r[0] = a[0] > a[1] ? a[0] : a[1];
@@ -785,7 +875,7 @@ float32x2_t	vpmax_f32(float32x2_t a, float32x2_t b)
     return r;
 }
 
-float32x2_t	vpmin_f32(float32x2_t a, float32x2_t b)
+float32x2_t vpmin_f32(float32x2_t a, float32x2_t b)
 {
     float32x2_t r;
     r[0] = a[0] < a[1] ? a[0] : a[1];
@@ -795,8 +885,17 @@ float32x2_t	vpmin_f32(float32x2_t a, float32x2_t b)
 
 float32_t vget_lane_f32(float32x2_t v, const int lane)
 {
-    float32_t r = v[lane];
-    return r;
+    return v[lane];
+}
+
+float32_t vgetq_lane_f32(float32x4_t v, int lane)
+{
+    if (lane < 0 || lane > 3)
+    {
+        fprintf(stderr, "%s: lane should is out of range [0, 3]", __FUNCTION__);
+        abort();
+    }
+    return v[lane];
 }
 
 float32x4_t vminq_f32(float32x4_t N, float32x4_t M)
@@ -1045,7 +1144,8 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
 {
     uint16x4_t r;
     int len = 4;
-    if (len > 4 || len < 0) {
+    if (len > 3 || len < 0) {
+        fprintf(stderr, "%s: param n is not in range [0, 4]\n", __FUNCTION__);
         abort();
     }
     for (int i = 0; i < len - n; i++)
