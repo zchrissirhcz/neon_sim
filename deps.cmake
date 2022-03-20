@@ -41,3 +41,19 @@ set_target_properties(png_static
 )
 
 #find_package(libpng16 REQUIRED)
+
+
+#--- OpenCV
+set(A_VERSION "4.5.5")
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+  set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/windows/${A_VERSION}")
+elseif(ANDROID)
+  set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/android-arm64/${A_VERSION}/sdk/native/jni")
+elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+  message("not supported platform(${CVPKG_TARGET_PLATFORM}) for package OpenCV")
+elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+  set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/linux-x64/${A_VERSION}/lib/cmake/opencv4")
+endif()
+
+message(STATUS ">>> OpenCV_DIR: ${OpenCV_DIR}")
+find_package(OpenCV REQUIRED)

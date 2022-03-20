@@ -426,7 +426,8 @@ typedef struct float64x2x4_t {
 // 2. Intrinsics implementation
 //----------------------------------------------------------------------
 
-// Load
+////// Load
+// vld1
 uint8x8_t vld1_u8(uint8_t const* ptr)
 {
     uint8x8_t r;
@@ -435,7 +436,62 @@ uint8x8_t vld1_u8(uint8_t const* ptr)
     }
     return r;
 }
+int8x8_t vld1_s8(int8_t const* ptr)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+uint16x4_t vld1_u16(uint16_t const * ptr)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+int16x4_t vld1_s16(int16_t const * ptr)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+uint32x2_t vld1_u32(uint32_t const * ptr)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+int32x2_t vld1_s32(int32_t const * ptr)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+float32x2_t vld1_f32(float32_t const * ptr)
+{
+    float32x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+float64x1_t vld1_f64(float64_t const * ptr)
+{
+    float64x1_t r;
+    r[0] = ptr[0];
+    return r;
+}
 
+// vld1q
 uint8x16_t vld1q_u8(uint8_t const* ptr)
 {
     uint8x16_t r;
@@ -444,7 +500,14 @@ uint8x16_t vld1q_u8(uint8_t const* ptr)
     }
     return r;
 }
-
+int8x16_t vld1q_s8(int8_t const* ptr)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
 uint16x8_t vld1q_u16(uint16_t const* ptr)
 {
     uint16x8_t r;
@@ -453,7 +516,14 @@ uint16x8_t vld1q_u16(uint16_t const* ptr)
     }
     return r;
 }
-
+int16x8_t vld1q_s16(int16_t const* ptr)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
 uint32x4_t vld1q_u32(uint32_t const* ptr)
 {
     uint32x4_t r;
@@ -462,7 +532,14 @@ uint32x4_t vld1q_u32(uint32_t const* ptr)
     }
     return r;
 }
-
+int32x4_t vld1q_s32(int32_t const* ptr)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
 float32x4_t vld1q_f32(float32_t const* ptr)
 {
     float32x4_t r;
@@ -473,16 +550,121 @@ float32x4_t vld1q_f32(float32_t const* ptr)
     return r;
 }
 
-int16x8_t vld1q_s16(int16_t const* ptr)
+// vld3
+uint8x8x3_t vld3_u8(uint8_t const * ptr)
 {
-    int16x8_t r;
-    for (int i = 0; i < 8; i++)
-    {
-        r[i] = ptr[i];
+    uint8x8x3_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int8x8x3_t vld3_s8(int8_t const * ptr)
+{
+    int8x8x3_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+uint16x4x3_t vld3_u16(uint16_t const * ptr)
+{
+    uint16x4x3_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int16x4x3_t vld3_s16(int16_t const * ptr)
+{
+    int16x4x3_t r;
+    for (int i = 0; i < 4; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+uint32x2x3_t vld3_u32(uint32_t const * ptr)
+{
+    uint32x2x3_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int32x2x3_t vld3_s32(int32_t const * ptr)
+{
+    int32x2x3_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+float32x2x3_t vld3_f32(float const * ptr)
+{
+    float32x2x3_t r;
+    for (int i = 0; i < 2; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
     }
     return r;
 }
 
+// vld3q
+uint8x16x3_t vld3q_u8(uint8_t const * ptr)
+{
+    uint8x16x3_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int8x16x3_t vld3q_s8(int8_t const * ptr)
+{
+    int8x16x3_t r;
+    for (int i = 0; i < 16; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+uint16x8x3_t vld3q_u16(uint16_t const * ptr)
+{
+    uint16x8x3_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+int16x8x3_t vld3q_s16(int16_t const * ptr)
+{
+    int16x8x3_t r;
+    for (int i = 0; i < 8; i++) {
+        r.val[0][i] = ptr[3*i + 0];
+        r.val[1][i] = ptr[3*i + 1];
+        r.val[2][i] = ptr[3*i + 2];
+    }
+    return r;
+}
+
+// vld1q_dup
 float32x4_t vld1q_dup_f32(float32_t const* ptr)
 {
     float32x4_t r;
@@ -492,67 +674,91 @@ float32x4_t vld1q_dup_f32(float32_t const* ptr)
     return r;
 }
 
-uint8x8x3_t vld3_u8(uint8_t const * ptr)
-{
-    uint8x8x3_t r;
-    for (int i = 0; i < 8; i++)
-    {
-        r.val[0][i] = ptr[3*i + 0];
-        r.val[1][i] = ptr[3*i + 1];
-        r.val[2][i] = ptr[3*i + 2];
-    }
-    return r;
-}
+////// Store
 
-int16x8x3_t vld3q_s16(int16_t const * ptr)
-{
-    int16x8x3_t r;
-    for (int i = 0; i < 8; i++)
-    {
-        r.val[0][i] = ptr[3*i + 0];
-        r.val[1][i] = ptr[3*i + 1];
-        r.val[2][i] = ptr[3*i + 2];
-    }
-    return r;
-}
-
-// Store
+// vst1
 void vst1_u8(uint8_t* ptr, uint8x8_t val)
 {
     for (int i = 0; i < 8; i++) {
         ptr[i] = val[i];
     }
 }
+void vst1_s8(int8_t* ptr, int8x8_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1_u16(uint16_t * ptr, uint16x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1_s16(int16_t * ptr, int16x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1_u32(uint32_t * ptr, uint32x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1_s32(int32_t * ptr, int32x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[i] = val[i];
+    }
+}
 
+// vst1q
 void vst1q_u8(uint8_t* ptr, uint8x16_t val)
 {
     for (int i = 0; i < 16; i++) {
         ptr[i] = val[i];
     }
 }
-
+void vst1q_s8(int8_t* ptr, int8x16_t val)
+{
+    for (int i = 0; i < 16; i++) {
+        ptr[i] = val[i];
+    }
+}
 void vst1q_u16(uint16_t* ptr, uint16x8_t val)
 {
     for (int i = 0; i < 8; i++) {
         ptr[i] = val[i];
     }
 }
-
+void vst1q_s16(int16_t* ptr, int16x8_t val)
+{
+    for (int i = 0; i < 8; i++) {
+        ptr[i] = val[i];
+    }
+}
 void vst1q_u32(uint32_t* ptr, uint32x4_t val)
 {
     for (int i = 0; i < 4; i++) {
         ptr[i] = val[i];
     }
 }
-
+void vst1q_s32(int32_t* ptr, int32x4_t val)
+{
+    for (int i = 0; i < 4; i++) {
+        ptr[i] = val[i];
+    }
+}
 void vst1q_f32(float32_t* ptr, float32x4_t val)
 {
-    for (int i = 0; i < 4; i++)
-    {
+    for (int i = 0; i < 4; i++) {
         ptr[i] = val[i];
     }
 }
 
+// vst4q_lane
 void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
 {
     for (int i = 0; i < 4; i++)
@@ -602,7 +808,7 @@ uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
     return r;
 }
 
-float32x4_t	vaddq_f32(float32x4_t a, float32x4_t b)
+float32x4_t vaddq_f32(float32x4_t a, float32x4_t b)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++) {
@@ -677,7 +883,7 @@ float32x4_t vmulq_n_f32(float32x4_t N, float32_t M)
     return D;
 }
 
-float32x4_t	vmulq_f32(float32x4_t a, float32x4_t b)
+float32x4_t vmulq_f32(float32x4_t a, float32x4_t b)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++)
@@ -922,7 +1128,7 @@ uint32x4_t vcltq_f32(float32x4_t N, float32x4_t M)
     return D;
 }
 
-float32x4_t	vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
+float32x4_t vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
 {
     float32x4_t r;
     for (int i = 0; i < 4; i++)
