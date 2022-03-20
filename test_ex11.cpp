@@ -24,6 +24,8 @@ int test_vext()
     uint8x8_t s6 = vext_u8(m, s0, 2);
     uint8x8_t s7 = vext_u8(m, s0, 1);
 
+    std::cout << "s1: " << s1 << std::endl;
+
     uint8_t s1_data[8];
     vst1_u8(s1_data, s1);
 
@@ -49,23 +51,26 @@ int test_vext()
     return 0;
 }
 
+
 void test_vpaddl()
 {
-#if __ANDROID__
+#if __ARM_NEON
     uint8_t data[] = {
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
     };
     uint8x8_t v_data = vld1_u8(data);
     uint16x4_t v_buf = vpaddl_u8(v_data);
-    uint16_t buf[8];
+    uint16_t buf[4];
     vst1_u16(buf, v_buf);
 
-    for (int i = 0; i < 8; i++)
+    std::cout << "v_data:" << v_data << std::endl;
+
+    for (int i = 0; i < 4; i++)
     {
         fprintf(stderr, "%d, ", buf[i]);
     }
     fprintf(stderr, "\n");
-#endif // __ANDROID__
+#endif
 }
 
 void dumpq_s16(int16_t data[8], const std::string& msg)
@@ -311,14 +316,14 @@ void test_vcltq()
 
 int main()
 {
-    //test_vext();
-    //test_vpaddl();
-    //test_shift_right();
-    //test_sub();
-    //test_vrsubhn();
-    //test_vqdmull();
-    //test_vld_lane();
-    //test_transpose8x8();
+    test_vext();
+    test_vpaddl();
+    test_shift_right();
+    test_sub();
+    test_vrsubhn();
+    test_vqdmull();
+    test_vld_lane();
+    test_transpose8x8();
     test_vcltq();
 
     return 0;

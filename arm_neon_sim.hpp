@@ -679,8 +679,9 @@ int8x8_t vld1_lane_s8(int8_t const * ptr, int8x8_t src, const int lane)
 {
     int8x8_t r;
     for (int i = 0; i < 8; i++) {
-        r[i] = src[lane];
+        r[i] = src[i];
     }
+    r[lane] = ptr[0];
     return r;
 }
 
@@ -871,6 +872,14 @@ uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
     return D;
 }
 
+uint16x4_t vpaddl_u8(uint8x8_t a)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++){
+        r[i] = a[2*i] + a[2*i+1];
+    }
+    return r;
+}
 
 // sub
 uint8x8_t vsub_u8(uint8x8_t N, uint8x8_t M)
@@ -1224,6 +1233,7 @@ uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
         } else if (temp < 0) {
             temp = 0;
         }
+        D[i] = temp;
     }
     return D;
 }
@@ -1242,6 +1252,7 @@ uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
         } else if (temp < 0) {
             temp = 0;
         }
+        D[i] = temp;
     }
     return D;
 }
@@ -1479,10 +1490,10 @@ uint8x8_t vext_u8(uint8x8_t a, uint8x8_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[n + i];
+        r[i] = a[i];
     }
-    for (int i = n; i < len; i++) {
-        r[i] = b[i - n];
+    for (int i = 0; i < n; i++) {
+        r[i + len - n] = b[i];
     }
     return r;
 }
@@ -1496,10 +1507,10 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[n + i];
+        r[i] = a[i];
     }
-    for (int i = n; i < len; i++) {
-        r[i] = b[i - n];
+    for (int i = 0; i < n; i++) {
+        r[i + len - n] = b[i];
     }
     return r;
 }
