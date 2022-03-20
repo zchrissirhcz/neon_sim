@@ -10,6 +10,7 @@
 #include <math.h> // fabs
 #include <limits.h> // INT_MAX
 
+#define __ARM_NEON 1
 #define __aarch64__ 1
 
 typedef float float32_t;
@@ -674,6 +675,15 @@ float32x4_t vld1q_dup_f32(float32_t const* ptr)
     return r;
 }
 
+int8x8_t vld1_lane_s8(int8_t const * ptr, int8x8_t src, const int lane)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = src[lane];
+    }
+    return r;
+}
+
 ////// Store
 
 // vst1
@@ -808,6 +818,7 @@ uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
     return r;
 }
 
+// vaddq
 float32x4_t vaddq_f32(float32x4_t a, float32x4_t b)
 {
     float32x4_t r;
@@ -833,6 +844,35 @@ uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
     return r;
 }
 
+int16x8_t vaddq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] + M[i];
+    }
+    return D;
+}
+
+// vqaddq
+uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        uint16_t temp = (uint16_t)N[i] + (uint16_t)M[i];
+        if (temp > UINT8_MAX) {
+            D[i] = UINT8_MAX;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+// sub
 uint8x8_t vsub_u8(uint8x8_t N, uint8x8_t M)
 {
     uint8x8_t D;
@@ -862,6 +902,19 @@ uint8x8_t vqsub_u8(uint8x8_t N, uint8x8_t M)
     }
     return D;
 }
+
+int8x8_t vrsubhn_s16(int16x8_t N, int16x8_t M)
+{
+    int8x8_t D;
+    const int16_t shift = 8;
+    const int16_t delta = (1<<(shift-1));
+    for (int i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i] + delta) >> shift;
+    }
+    return D;
+}
+
 
 uint32x4_t vmulq_n_u32(uint32x4_t N, uint32_t M)
 {
@@ -900,6 +953,22 @@ uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
         r[i] = a[i] * b[i];
     }
     return r;
+}
+
+int32x4_t vqdmull_s16(int16x4_t M, int16x4_t N)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        // saturating
+        if (N[i] == INT16_MIN && M[i] == INT16_MIN) {
+            D[i] = INT32_MAX;
+        } 
+        else { // most cases
+            D[i] = (M[i] * N[i])*2;
+        }
+    }
+    return D;
 }
 
 uint16x8_t vmlal_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
@@ -969,7 +1038,7 @@ uint16x8_t vdupq_n_u16(uint16_t value)
     }
     return r;
 }
-int16x8_t vdupq_n_16(int16_t value)
+int16x8_t vdupq_n_s16(int16_t value)
 {
     int16x8_t r;
     for (int i = 0; i < 8; i++) {
@@ -1136,6 +1205,60 @@ float32x4_t vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
         r[i] = mask[i] ? a[i] : b[i];
     }
     return r;
+}
+
+// shift right
+/// @param n 1-8
+uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
+{
+    if (n<1 || n>8) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+
+    uint8x8_t D;
+    for (int i=0; i<8; i++) {
+        int16_t temp = v[i] >> n;
+        if (temp > UINT8_MAX) {
+            temp = UINT8_MAX;
+        } else if (temp < 0) {
+            temp = 0;
+        }
+    }
+    return D;
+}
+
+uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
+{
+    if (n<1 || n>8) {
+        fprintf(stderr, "%s: param n not in range [1, 8]\n", __FUNCTION__);
+        abort();
+    }
+    uint8x8_t D;
+    for (int i=0; i<8; i++) {
+        int16_t temp = ( v[i] + (1<<(n-1) ) ) >> n;
+        if (temp > UINT8_MAX) {
+            temp = UINT8_MAX;
+        } else if (temp < 0) {
+            temp = 0;
+        }
+    }
+    return D;
+}
+
+int8x8_t vshrn_n_s16(int16x8_t a, const int n)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = a[i] >> n;
+    }
+    return r;
+}
+
+// type conversion
+uint8x8_t vreinterpret_u8_s8(int8x8_t a)
+{
+    return a;
 }
 
 //----------------------------------------------------------------------
@@ -1346,20 +1469,36 @@ int32x2_t vrev64_s32(int32x2_t vec)
     return r;
 }
 
+// vext
+uint8x8_t vext_u8(uint8x8_t a, uint8x8_t b, const int n)
+{
+    uint8x8_t r;
+    int len = 8;
+    if (n > 8 || n < 0) {
+        fprintf(stderr, "%s: param n is not in range [0, 8]\n", __FUNCTION__);
+        abort();
+    }
+    for (int i = 0; i < len - n; i++) {
+        r[i] = a[n + i];
+    }
+    for (int i = n; i < len; i++) {
+        r[i] = b[i - n];
+    }
+    return r;
+}
+
 uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
 {
     uint16x4_t r;
     int len = 4;
-    if (len > 3 || len < 0) {
+    if (n > 3 || n < 0) {
         fprintf(stderr, "%s: param n is not in range [0, 4]\n", __FUNCTION__);
         abort();
     }
-    for (int i = 0; i < len - n; i++)
-    {
+    for (int i = 0; i < len - n; i++) {
         r[i] = a[n + i];
     }
-    for (int i = n; i < len; i++)
-    {
+    for (int i = n; i < len; i++) {
         r[i] = b[i - n];
     }
     return r;
