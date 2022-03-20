@@ -10,6 +10,8 @@
 #include <math.h> // fabs
 #include <limits.h> // INT_MAX
 
+#define __aarch64__ 1
+
 typedef float float32_t;
 typedef double float64_t;
 
@@ -1061,17 +1063,267 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
 // 5. Helper functions
 //----------------------------------------------------------------------
 
+/////// print register arrays
+
+// u8
 std::ostream& operator <<(std::ostream& os, uint8x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+std::ostream& operator <<(std::ostream& os, uint8x8x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint8x8x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, uint8x16x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, uint8x16x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint8x16x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
 
+
+// s8
+std::ostream& operator <<(std::ostream& os, int8x8x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int8x8x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int8x8x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, int8x16x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int8x16x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int8x16x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// u16
+std::ostream& operator <<(std::ostream& os, uint16x4x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, uint16x4x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint16x4x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
 std::ostream& operator <<(std::ostream& os, uint16x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+std::ostream& operator <<(std::ostream& os, uint16x8x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint16x8x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
 
+// s16
+std::ostream& operator <<(std::ostream& os, int16x4x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int16x4x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int16x4x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, int16x8x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int16x8x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int16x8x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// u32
+std::ostream& operator <<(std::ostream& os, uint32x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, uint32x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint32x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
 std::ostream& operator <<(std::ostream& os, uint32x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+std::ostream& operator <<(std::ostream& os, uint32x4x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint32x4x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// s32
+std::ostream& operator <<(std::ostream& os, int32x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int32x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int32x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, int32x4x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int32x4x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int32x4x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// f32
+std::ostream& operator <<(std::ostream& os, float32x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, float32x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, float32x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, float32x4x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, float32x4x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, float32x4x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// u64
+std::ostream& operator <<(std::ostream& os, uint64x1x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, uint64x1x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint64x1x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, uint64x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, uint64x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, uint64x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// s64
+std::ostream& operator <<(std::ostream& os, int64x1x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int64x1x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int64x1x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, int64x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, int64x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, int64x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+
+// f64
+#if __aarch64__
+std::ostream& operator <<(std::ostream& os, float64x1x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, float64x1x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, float64x1x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+std::ostream& operator <<(std::ostream& os, float64x2x2_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1];
+}
+std::ostream& operator <<(std::ostream& os, float64x2x3_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
+}
+std::ostream& operator <<(std::ostream& os, float64x2x4_t v_data)
+{
+    return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
+}
+#endif // __aarch64__
