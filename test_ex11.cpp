@@ -314,6 +314,26 @@ void test_vcltq()
 #endif
 }
 
+void test_vbslq()
+{
+    uint8x16_t src = {
+        111, 112, 113, 114, 115, 116, 117, 118,
+        121, 122, 123, 124, 125, 126, 127, 128
+    };
+    uint8x16_t dest = {
+        211, 212, 213, 214, 215, 216, 217, 218,
+        221, 222, 223, 224, 225, 226, 227, 228
+    };
+    uint8x16_t mask = {
+        0x00,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0x00,0x00,0x00,0x00,0x00,0x00
+    };
+
+    dest = vbslq_u8(mask, src, dest);
+
+    std::cout << "dest is:" << dest << std::endl;
+}
+
 int main()
 {
     test_vext();
@@ -325,6 +345,7 @@ int main()
     test_vld_lane();
     test_transpose8x8();
     test_vcltq();
+    test_vbslq();
 
     return 0;
 }

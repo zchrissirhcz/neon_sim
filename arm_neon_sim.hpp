@@ -1693,6 +1693,37 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
     return r;
 }
 
+// compare
+uint8x16_t vcgtq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (int i=0; i<16; i++) {
+        D[i] = N[i] > M[i] ? 0xFF : 0;
+    }
+    return D;
+}
+
+//Bitwise Select. This instruction sets each bit in the destination SIMD&FP register to the 
+// corresponding bit from the first source SIMD&FP register when the original destination bit was 1,
+// otherwise from the second source SIMD&FP register.
+// the original destination 说的就是 mask
+uint8x16_t vbslq_u8(uint8x16_t mask, uint8x16_t src1, uint8x16_t src2)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++) {
+        r[i] = 0;
+        for (int j = 0; j < 8; j++) {
+            uint8_t x = (1 << (8 - 1 - j));
+            if ( (mask[i] & x) == x) {
+                r[i] += (src1[i] & x);
+            } else {
+                r[i] += (src2[i] & x);
+            }
+        }
+    }
+    return r;
+}
+
 //----------------------------------------------------------------------
 // 5. Helper functions
 //----------------------------------------------------------------------

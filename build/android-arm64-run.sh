@@ -137,6 +137,18 @@ test_rgb2bgr()
     adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
 }
 
+test_threshold()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_threshold
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+
+    adb pull /data/local/tmp/res_cv.png ./
+    adb pull /data/local/tmp/res_my.png ./
+}
+
 #testbed
 #test_ex1
 #test_ex2
@@ -148,6 +160,7 @@ test_rgb2bgr()
 #test_ex8
 #test_ex9
 #test_ex10
-#test_ex11
+test_ex11
 #test_rgb2gray
-test_rgb2bgr
+#test_rgb2bgr
+#test_threshold
