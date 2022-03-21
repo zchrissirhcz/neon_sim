@@ -534,8 +534,40 @@ uint64x2x2_t	vld2q_u64	(uint64_t const * ptr);
 float64x2x2_t	vld2q_f64	(float64_t const * ptr);
 
 // vld2_lane_type:
+int16x4x2_t	vld2_lane_s16	(int16_t const * ptr, int16x4x2_t src, const int lane);
+int32x2x2_t	vld2_lane_s32	(int32_t const * ptr, int32x2x2_t src, const int lane);
+uint16x4x2_t	vld2_lane_u16	(uint16_t const * ptr, uint16x4x2_t src, const int lane);
+uint32x2x2_t	vld2_lane_u32	(uint32_t const * ptr, uint32x2x2_t src, const int lane);
+float32x2x2_t	vld2_lane_f32	(float32_t const * ptr, float32x2x2_t src, const int lane);
+int8x8x2_t	vld2_lane_s8	(int8_t const * ptr, int8x8x2_t src, const int lane);
+uint8x8x2_t	vld2_lane_u8	(uint8_t const * ptr, uint8x8x2_t src, const int lane);
+int64x1x2_t	vld2_lane_s64	(int64_t const * ptr, int64x1x2_t src, const int lane);
+uint64x1x2_t	vld2_lane_u64	(uint64_t const * ptr, uint64x1x2_t src, const int lane);
+float64x1x2_t	vld2_lane_f64	(float64_t const * ptr, float64x1x2_t src, const int lane);
+
 // vld2q_lane_type:
+int16x8x2_t	vld2q_lane_s16	(int16_t const * ptr, int16x8x2_t src, const int lane);
+int32x4x2_t	vld2q_lane_s32	(int32_t const * ptr, int32x4x2_t src, const int lane);
+uint16x8x2_t	vld2q_lane_u16	(uint16_t const * ptr, uint16x8x2_t src, const int lane);
+uint32x4x2_t	vld2q_lane_u32	(uint32_t const * ptr, uint32x4x2_t src, const int lane);
+float32x4x2_t	vld2q_lane_f32	(float32_t const * ptr, float32x4x2_t src, const int lane);
+int8x16x2_t	vld2q_lane_s8	(int8_t const * ptr, int8x16x2_t src, const int lane);
+uint8x16x2_t	vld2q_lane_u8	(uint8_t const * ptr, uint8x16x2_t src, const int lane);
+int64x2x2_t	vld2q_lane_s64	(int64_t const * ptr, int64x2x2_t src, const int lane);
+uint64x2x2_t	vld2q_lane_u64	(uint64_t const * ptr, uint64x2x2_t src, const int lane);
+float64x2x2_t	vld2q_lane_f64	(float64_t const * ptr, float64x2x2_t src, const int lane);
+
 // vld2_dup_type:
+int8x8x2_t	vld2_dup_s8	(int8_t const * ptr);
+int16x4x2_t	vld2_dup_s16	(int16_t const * ptr);
+int32x2x2_t	vld2_dup_s32	(int32_t const * ptr);
+uint8x8x2_t	vld2_dup_u8	(uint8_t const * ptr);
+uint16x4x2_t	vld2_dup_u16	(uint16_t const * ptr);
+uint32x2x2_t	vld2_dup_u32	(uint32_t const * ptr);
+float32x2x2_t	vld2_dup_f32	(float32_t const * ptr);
+int64x1x2_t	vld2_dup_s64	(int64_t const * ptr);
+uint64x1x2_t	vld2_dup_u64	(uint64_t const * ptr);
+float64x1x2_t	vld2_dup_f64	(float64_t const * ptr);
 
 // vld3_type
 int8x8x3_t	vld3_s8	(int8_t const * ptr);
@@ -562,8 +594,40 @@ uint64x2x3_t	vld3q_u64	(uint64_t const * ptr);
 float64x2x3_t	vld3q_f64	(float64_t const * ptr);
 
 // vld3_lane_type:
+int16x4x3_t	vld3_lane_s16	(int16_t const * ptr, int16x4x3_t src, const int lane);
+int32x2x3_t	vld3_lane_s32	(int32_t const * ptr, int32x2x3_t src, const int lane);
+uint16x4x3_t	vld3_lane_u16	(uint16_t const * ptr, uint16x4x3_t src, const int lane);
+uint32x2x3_t	vld3_lane_u32	(uint32_t const * ptr, uint32x2x3_t src, const int lane);
+float32x2x3_t	vld3_lane_f32	(float32_t const * ptr, float32x2x3_t src, const int lane);
+int8x8x3_t	vld3_lane_s8	(int8_t const * ptr, int8x8x3_t src, const int lane);
+uint8x8x3_t	vld3_lane_u8	(uint8_t const * ptr, uint8x8x3_t src, const int lane);
+int64x1x3_t	vld3_lane_s64	(int64_t const * ptr, int64x1x3_t src, const int lane);
+uint64x1x3_t	vld3_lane_u64	(uint64_t const * ptr, uint64x1x3_t src, const int lane);
+float64x1x3_t	vld3_lane_f64	(float64_t const * ptr, float64x1x3_t src, const int lane);
+
 // vld3q_lane_type:
+int16x8x3_t	vld3q_lane_s16	(int16_t const * ptr, int16x8x3_t src, const int lane);
+int32x4x3_t	vld3q_lane_s32	(int32_t const * ptr, int32x4x3_t src, const int lane);
+uint16x8x3_t	vld3q_lane_u16	(uint16_t const * ptr, uint16x8x3_t src, const int lane);
+uint32x4x3_t	vld3q_lane_u32	(uint32_t const * ptr, uint32x4x3_t src, const int lane);
+float32x4x3_t	vld3q_lane_f32	(float32_t const * ptr, float32x4x3_t src, const int lane);
+int8x16x3_t	vld3q_lane_s8	(int8_t const * ptr, int8x16x3_t src, const int lane);
+uint8x16x3_t	vld3q_lane_u8	(uint8_t const * ptr, uint8x16x3_t src, const int lane);
+int64x2x3_t	vld3q_lane_s64	(int64_t const * ptr, int64x2x3_t src, const int lane);
+uint64x2x3_t	vld3q_lane_u64	(uint64_t const * ptr, uint64x2x3_t src, const int lane);
+float64x2x3_t	vld3q_lane_f64	(float64_t const * ptr, float64x2x3_t src, const int lane);
+
 // vld3_dup_type:
+int8x8x3_t	vld3_dup_s8	(int8_t const * ptr);
+int16x4x3_t	vld3_dup_s16	(int16_t const * ptr);
+int32x2x3_t	vld3_dup_s32	(int32_t const * ptr);
+uint8x8x3_t	vld3_dup_u8	(uint8_t const * ptr);
+uint16x4x3_t	vld3_dup_u16	(uint16_t const * ptr);
+uint32x2x3_t	vld3_dup_u32	(uint32_t const * ptr);
+float32x2x3_t	vld3_dup_f32	(float32_t const * ptr);
+int64x1x3_t	vld3_dup_s64	(int64_t const * ptr);
+uint64x1x3_t	vld3_dup_u64	(uint64_t const * ptr);
+float64x1x3_t	vld3_dup_f64	(float64_t const * ptr);
 
 // vld4_type
 int8x8x4_t	vld4_s8	(int8_t const * ptr);
@@ -590,9 +654,40 @@ uint64x2x4_t	vld4q_u64	(uint64_t const * ptr);
 float64x2x4_t	vld4q_f64	(float64_t const * ptr);
 
 // vld4_lane_type:
-// vld4q_lane_type:
-// vld4q_dup_type: 
+int16x4x4_t	vld4_lane_s16	(int16_t const * ptr, int16x4x4_t src, const int lane);
+int32x2x4_t	vld4_lane_s32	(int32_t const * ptr, int32x2x4_t src, const int lane);
+uint16x4x4_t	vld4_lane_u16	(uint16_t const * ptr, uint16x4x4_t src, const int lane);
+uint32x2x4_t	vld4_lane_u32	(uint32_t const * ptr, uint32x2x4_t src, const int lane);
+float32x2x4_t	vld4_lane_f32	(float32_t const * ptr, float32x2x4_t src, const int lane);
+int8x8x4_t	vld4_lane_s8	(int8_t const * ptr, int8x8x4_t src, const int lane);
+uint8x8x4_t	vld4_lane_u8	(uint8_t const * ptr, uint8x8x4_t src, const int lane);
+int64x1x4_t	vld4_lane_s64	(int64_t const * ptr, int64x1x4_t src, const int lane);
+uint64x1x4_t	vld4_lane_u64	(uint64_t const * ptr, uint64x1x4_t src, const int lane);
+float64x1x4_t	vld4_lane_f64	(float64_t const * ptr, float64x1x4_t src, const int lane);
 
+// vld4q_lane_type:
+int16x8x4_t	vld4q_lane_s16	(int16_t const * ptr, int16x8x4_t src, const int lane);
+int32x4x4_t	vld4q_lane_s32	(int32_t const * ptr, int32x4x4_t src, const int lane);
+uint16x8x4_t	vld4q_lane_u16	(uint16_t const * ptr, uint16x8x4_t src, const int lane);
+uint32x4x4_t	vld4q_lane_u32	(uint32_t const * ptr, uint32x4x4_t src, const int lane);
+float32x4x4_t	vld4q_lane_f32	(float32_t const * ptr, float32x4x4_t src, const int lane);
+int8x16x4_t	vld4q_lane_s8	(int8_t const * ptr, int8x16x4_t src, const int lane);
+uint8x16x4_t	vld4q_lane_u8	(uint8_t const * ptr, uint8x16x4_t src, const int lane);
+int64x2x4_t	vld4q_lane_s64	(int64_t const * ptr, int64x2x4_t src, const int lane);
+uint64x2x4_t	vld4q_lane_u64	(uint64_t const * ptr, uint64x2x4_t src, const int lane);
+float64x2x4_t	vld4q_lane_f64	(float64_t const * ptr, float64x2x4_t src, const int lane);
+
+// vld4q_dup_type: 
+int8x16x4_t	vld4q_dup_s8	(int8_t const * ptr);
+int16x8x4_t	vld4q_dup_s16	(int16_t const * ptr);
+int32x4x4_t	vld4q_dup_s32	(int32_t const * ptr);
+uint8x16x4_t	vld4q_dup_u8	(uint8_t const * ptr);
+uint16x8x4_t	vld4q_dup_u16	(uint16_t const * ptr);
+uint32x4x4_t	vld4q_dup_u32	(uint32_t const * ptr);
+float32x4x4_t	vld4q_dup_f32	(float32_t const * ptr);
+int64x2x4_t	vld4q_dup_s64	(int64_t const * ptr);
+uint64x2x4_t	vld4q_dup_u64	(uint64_t const * ptr);
+float64x2x4_t	vld4q_dup_f64	(float64_t const * ptr);
 
 // vst1_type
 void	vst1_s8	(int8_t * ptr, int8x8_t val);
@@ -606,42 +701,6 @@ void	vst1_u64	(uint64_t * ptr, uint64x1_t val);
 void	vst1_f32	(float32_t * ptr, float32x2_t val);
 void	vst1_f64	(float64_t * ptr, float64x1_t val);
 
-// vst2_type
-void	vst2_s8	(int8_t * ptr, int8x8x2_t val);
-void	vst2_s16	(int16_t * ptr, int16x4x2_t val);
-void	vst2_s32	(int32_t * ptr, int32x2x2_t val);
-void	vst2_u8	(uint8_t * ptr, uint8x8x2_t val);
-void	vst2_u16	(uint16_t * ptr, uint16x4x2_t val);
-void	vst2_u32	(uint32_t * ptr, uint32x2x2_t val);
-void	vst2_f32	(float32_t * ptr, float32x2x2_t val);
-void	vst2_s64	(int64_t * ptr, int64x1x2_t val);
-void	vst2_u64	(uint64_t * ptr, uint64x1x2_t val);
-void	vst2_f64	(float64_t * ptr, float64x1x2_t val);
-
-// vst3_type
-void	vst3_s8	(int8_t * ptr, int8x8x3_t val);
-void	vst3_s16	(int16_t * ptr, int16x4x3_t val);
-void	vst3_s32	(int32_t * ptr, int32x2x3_t val);
-void	vst3_u8	(uint8_t * ptr, uint8x8x3_t val);
-void	vst3_u16	(uint16_t * ptr, uint16x4x3_t val);
-void	vst3_u32	(uint32_t * ptr, uint32x2x3_t val);
-void	vst3_f32	(float32_t * ptr, float32x2x3_t val);
-void	vst3_s64	(int64_t * ptr, int64x1x3_t val);
-void	vst3_u64	(uint64_t * ptr, uint64x1x3_t val);
-void	vst3_f64	(float64_t * ptr, float64x1x3_t val);
-
-// vst4_type
-void	vst4_s8	(int8_t * ptr, int8x8x4_t val);
-void	vst4_s16	(int16_t * ptr, int16x4x4_t val);
-void	vst4_s32	(int32_t * ptr, int32x2x4_t val);
-void	vst4_u8	(uint8_t * ptr, uint8x8x4_t val);
-void	vst4_u16	(uint16_t * ptr, uint16x4x4_t val);
-void	vst4_u32	(uint32_t * ptr, uint32x2x4_t val);
-void	vst4_f32	(float32_t * ptr, float32x2x4_t val);
-void	vst4_s64	(int64_t * ptr, int64x1x4_t val);
-void	vst4_u64	(uint64_t * ptr, uint64x1x4_t val);
-void	vst4_f64	(float64_t * ptr, float64x1x4_t val);
-
 // vst1q_type
 void	vst1q_s8	(int8_t * ptr, int8x16_t val);
 void	vst1q_s16	(int16_t * ptr, int16x8_t val);
@@ -654,7 +713,43 @@ void	vst1q_u64	(uint64_t * ptr, uint64x2_t val);
 void	vst1q_f32	(float32_t * ptr, float32x4_t val);
 void	vst1q_f64	(float64_t * ptr, float64x2_t val);
 
-// vst2q_type
+// vst1_lane_type
+void	vst1_lane_s8	(int8_t * ptr, int8x8_t val, const int lane);
+void	vst1_lane_s16	(int16_t * ptr, int16x4_t val, const int lane);
+void	vst1_lane_s32	(int32_t * ptr, int32x2_t val, const int lane);
+void	vst1_lane_s64	(int64_t * ptr, int64x1_t val, const int lane);
+void	vst1_lane_u8	(uint8_t * ptr, uint8x8_t val, const int lane);
+void	vst1_lane_u16	(uint16_t * ptr, uint16x4_t val, const int lane);
+void	vst1_lane_u32	(uint32_t * ptr, uint32x2_t val, const int lane);
+void	vst1_lane_u64	(uint64_t * ptr, uint64x1_t val, const int lane);
+void	vst1_lane_f32	(float32_t * ptr, float32x2_t val, const int lane);
+void	vst1_lane_f64	(float64_t * ptr, float64x1_t val, const int lane);
+
+// vst1q_lane_type
+void	vst1q_lane_s8	(int8_t * ptr, int8x16_t val, const int lane);
+void	vst1q_lane_s16	(int16_t * ptr, int16x8_t val, const int lane);
+void	vst1q_lane_s32	(int32_t * ptr, int32x4_t val, const int lane);
+void	vst1q_lane_s64	(int64_t * ptr, int64x2_t val, const int lane);
+void	vst1q_lane_u8	(uint8_t * ptr, uint8x16_t val, const int lane);
+void	vst1q_lane_u16	(uint16_t * ptr, uint16x8_t val, const int lane);
+void	vst1q_lane_u32	(uint32_t * ptr, uint32x4_t val, const int lane);
+void	vst1q_lane_u64	(uint64_t * ptr, uint64x2_t val, const int lane);
+void	vst1q_lane_f32	(float32_t * ptr, float32x4_t val, const int lane);
+void	vst1q_lane_f64	(float64_t * ptr, float64x2_t val, const int lane);
+
+// vst2_type:
+void	vst2_s8	(int8_t * ptr, int8x8x2_t val);
+void	vst2_s16	(int16_t * ptr, int16x4x2_t val);
+void	vst2_s32	(int32_t * ptr, int32x2x2_t val);
+void	vst2_u8	(uint8_t * ptr, uint8x8x2_t val);
+void	vst2_u16	(uint16_t * ptr, uint16x4x2_t val);
+void	vst2_u32	(uint32_t * ptr, uint32x2x2_t val);
+void	vst2_f32	(float32_t * ptr, float32x2x2_t val);
+void	vst2_s64	(int64_t * ptr, int64x1x2_t val);
+void	vst2_u64	(uint64_t * ptr, uint64x1x2_t val);
+void	vst2_f64	(float64_t * ptr, float64x1x2_t val);
+
+// vst2q_type:
 void	vst2q_s8	(int8_t * ptr, int8x16x2_t val);
 void	vst2q_s16	(int16_t * ptr, int16x8x2_t val);
 void	vst2q_s32	(int32_t * ptr, int32x4x2_t val);
@@ -665,6 +760,43 @@ void	vst2q_f32	(float32_t * ptr, float32x4x2_t val);
 void	vst2q_s64	(int64_t * ptr, int64x2x2_t val);
 void	vst2q_u64	(uint64_t * ptr, uint64x2x2_t val);
 void	vst2q_f64	(float64_t * ptr, float64x2x2_t val);
+
+
+// vst2_lane_type:
+void	vst2_lane_s8	(int8_t * ptr, int8x8x2_t val, const int lane);
+void	vst2_lane_u8	(uint8_t * ptr, uint8x8x2_t val, const int lane);
+void	vst2_lane_s16	(int16_t * ptr, int16x4x2_t val, const int lane);
+void	vst2_lane_s32	(int32_t * ptr, int32x2x2_t val, const int lane);
+void	vst2_lane_u16	(uint16_t * ptr, uint16x4x2_t val, const int lane);
+void	vst2_lane_u32	(uint32_t * ptr, uint32x2x2_t val, const int lane);
+void	vst2_lane_f32	(float32_t * ptr, float32x2x2_t val, const int lane);
+void	vst2_lane_s64	(int64_t * ptr, int64x1x2_t val, const int lane);
+void	vst2_lane_u64	(uint64_t * ptr, uint64x1x2_t val, const int lane);
+void	vst2_lane_f64	(float64_t * ptr, float64x1x2_t val, const int lane);
+
+// vst2q_lane_type:
+void	vst2q_lane_s16	(int16_t * ptr, int16x8x2_t val, const int lane);
+void	vst2q_lane_s32	(int32_t * ptr, int32x4x2_t val, const int lane);
+void	vst2q_lane_u16	(uint16_t * ptr, uint16x8x2_t val, const int lane);
+void	vst2q_lane_u32	(uint32_t * ptr, uint32x4x2_t val, const int lane);
+void	vst2q_lane_f32	(float32_t * ptr, float32x4x2_t val, const int lane);
+void	vst2q_lane_s8	(int8_t * ptr, int8x16x2_t val, const int lane);
+void	vst2q_lane_u8	(uint8_t * ptr, uint8x16x2_t val, const int lane);
+void	vst2q_lane_s64	(int64_t * ptr, int64x2x2_t val, const int lane);
+void	vst2q_lane_u64	(uint64_t * ptr, uint64x2x2_t val, const int lane);
+void	vst2q_lane_f64	(float64_t * ptr, float64x2x2_t val, const int lane);
+
+// vst3_type:
+void	vst3_s8	(int8_t * ptr, int8x8x3_t val);
+void	vst3_s16	(int16_t * ptr, int16x4x3_t val);
+void	vst3_s32	(int32_t * ptr, int32x2x3_t val);
+void	vst3_u8	(uint8_t * ptr, uint8x8x3_t val);
+void	vst3_u16	(uint16_t * ptr, uint16x4x3_t val);
+void	vst3_u32	(uint32_t * ptr, uint32x2x3_t val);
+void	vst3_f32	(float32_t * ptr, float32x2x3_t val);
+void	vst3_s64	(int64_t * ptr, int64x1x3_t val);
+void	vst3_u64	(uint64_t * ptr, uint64x1x3_t val);
+void	vst3_f64	(float64_t * ptr, float64x1x3_t val);
 
 // vst3q_type
 void	vst3q_s8	(int8_t * ptr, int8x16x3_t val);
@@ -678,6 +810,42 @@ void	vst3q_s64	(int64_t * ptr, int64x2x3_t val);
 void	vst3q_u64	(uint64_t * ptr, uint64x2x3_t val);
 void	vst3q_f64	(float64_t * ptr, float64x2x3_t val);
 
+// vst3_lane_type:
+void	vst3_lane_s8	(int8_t * ptr, int8x8x3_t val, const int lane);
+void	vst3_lane_u8	(uint8_t * ptr, uint8x8x3_t val, const int lane);
+void	vst3_lane_s16	(int16_t * ptr, int16x4x3_t val, const int lane);
+void	vst3_lane_s32	(int32_t * ptr, int32x2x3_t val, const int lane);
+void	vst3_lane_u16	(uint16_t * ptr, uint16x4x3_t val, const int lane);
+void	vst3_lane_u32	(uint32_t * ptr, uint32x2x3_t val, const int lane);
+void	vst3_lane_f32	(float32_t * ptr, float32x2x3_t val, const int lane);
+void	vst3_lane_s64	(int64_t * ptr, int64x1x3_t val, const int lane);
+void	vst3_lane_u64	(uint64_t * ptr, uint64x1x3_t val, const int lane);
+void	vst3_lane_f64	(float64_t * ptr, float64x1x3_t val, const int lane);
+
+// vst3q_lane_type:
+void	vst3q_lane_s16	(int16_t * ptr, int16x8x3_t val, const int lane);
+void	vst3q_lane_s32	(int32_t * ptr, int32x4x3_t val, const int lane);
+void	vst3q_lane_u16	(uint16_t * ptr, uint16x8x3_t val, const int lane);
+void	vst3q_lane_u32	(uint32_t * ptr, uint32x4x3_t val, const int lane);
+void	vst3q_lane_f32	(float32_t * ptr, float32x4x3_t val, const int lane);
+void	vst3q_lane_s8	(int8_t * ptr, int8x16x3_t val, const int lane);
+void	vst3q_lane_u8	(uint8_t * ptr, uint8x16x3_t val, const int lane);
+void	vst3q_lane_s64	(int64_t * ptr, int64x2x3_t val, const int lane);
+void	vst3q_lane_u64	(uint64_t * ptr, uint64x2x3_t val, const int lane);
+void	vst3q_lane_f64	(float64_t * ptr, float64x2x3_t val, const int lane);
+
+// vst4_type
+void	vst4_s8	(int8_t * ptr, int8x8x4_t val);
+void	vst4_s16	(int16_t * ptr, int16x4x4_t val);
+void	vst4_s32	(int32_t * ptr, int32x2x4_t val);
+void	vst4_u8	(uint8_t * ptr, uint8x8x4_t val);
+void	vst4_u16	(uint16_t * ptr, uint16x4x4_t val);
+void	vst4_u32	(uint32_t * ptr, uint32x2x4_t val);
+void	vst4_f32	(float32_t * ptr, float32x2x4_t val);
+void	vst4_s64	(int64_t * ptr, int64x1x4_t val);
+void	vst4_u64	(uint64_t * ptr, uint64x1x4_t val);
+void	vst4_f64	(float64_t * ptr, float64x1x4_t val);
+
 // vst4q_type
 void	vst4q_s8	(int8_t * ptr, int8x16x4_t val);
 void	vst4q_s16	(int16_t * ptr, int16x8x4_t val);
@@ -689,6 +857,30 @@ void	vst4q_f32	(float32_t * ptr, float32x4x4_t val);
 void	vst4q_s64	(int64_t * ptr, int64x2x4_t val);
 void	vst4q_u64	(uint64_t * ptr, uint64x2x4_t val);
 void	vst4q_f64	(float64_t * ptr, float64x2x4_t val);
+
+// vst4_lane_type:
+void	vst4_lane_s8	(int8_t * ptr, int8x8x4_t val, const int lane);
+void	vst4_lane_u8	(uint8_t * ptr, uint8x8x4_t val, const int lane);
+void	vst4_lane_s16	(int16_t * ptr, int16x4x4_t val, const int lane);
+void	vst4_lane_s32	(int32_t * ptr, int32x2x4_t val, const int lane);
+void	vst4_lane_u16	(uint16_t * ptr, uint16x4x4_t val, const int lane);
+void	vst4_lane_u32	(uint32_t * ptr, uint32x2x4_t val, const int lane);
+void	vst4_lane_f32	(float32_t * ptr, float32x2x4_t val, const int lane);
+void	vst4_lane_s64	(int64_t * ptr, int64x1x4_t val, const int lane);
+void	vst4_lane_u64	(uint64_t * ptr, uint64x1x4_t val, const int lane);
+void	vst4_lane_f64	(float64_t * ptr, float64x1x4_t val, const int lane);
+
+// vst4q_lane_type:
+void	vst4q_lane_s16	(int16_t * ptr, int16x8x4_t val, const int lane);
+void	vst4q_lane_s32	(int32_t * ptr, int32x4x4_t val, const int lane);
+void	vst4q_lane_u16	(uint16_t * ptr, uint16x8x4_t val, const int lane);
+void	vst4q_lane_u32	(uint32_t * ptr, uint32x4x4_t val, const int lane);
+void	vst4q_lane_f32	(float32_t * ptr, float32x4x4_t val, const int lane);
+void	vst4q_lane_s8	(int8_t * ptr, int8x16x4_t val, const int lane);
+void	vst4q_lane_u8	(uint8_t * ptr, uint8x16x4_t val, const int lane);
+void	vst4q_lane_s64	(int64_t * ptr, int64x2x4_t val, const int lane);
+void	vst4q_lane_u64	(uint64_t * ptr, uint64x2x4_t val, const int lane);
+void	vst4q_lane_f64	(float64_t * ptr, float64x2x4_t val, const int lane);
 
 //----------------------------------------------------------------------
 // 3. Add & Sub
