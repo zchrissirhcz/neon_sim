@@ -1,4 +1,3 @@
-#include <ios>
 #include <iostream>
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
@@ -13,50 +12,60 @@
 #endif
 
 
-//void threshold_gray(unsigned char* input_gray, size_t height, size_t width, unsigned char* output_gray, unsigned char thresh, unsigned char minval, unsigned char maxval)
-void threshold_gray(const cv::Mat& gray, cv::Mat& res, int thresh, int minval, int maxval)
+void threshold_gray(const cv::Mat& src, cv::Mat& dst, int thresh, int minval, int maxval)
 {
-    cv::Size ssize = gray.size();
-    const int width = ssize.width;
-    const int height = ssize.height;
-
-    if (gray.type() != CV_8UC1) {
+    if (src.type() != CV_8UC1)
+    {
         abort();
     }
 
-    res.create(ssize, CV_8UC1);
-    const uchar* input_gray = gray.data;
-    uchar* output_gray = res.data;
-
-    if (minval > maxval) {
+    if (minval > maxval)
+    {
         std::swap(minval, maxval);
     }
 
-    size_t total_len = height * width;
-    size_t done = 0;
+    cv::Size size = src.size();
+    const int w = size.width;
+    const int h = size.height;
+    dst.create(size, CV_8UC1);
+
+    const int sstep = src.step1();
+    const int dstep = dst.step1();
 
 #if __ARM_NEON
-    size_t step = 16;
-    size_t vec_size = total_len - total_len % step;
-    uint8x16_t v1;
-    uint8x16_t vmask_gt;
     uint8x16_t vthresh = vdupq_n_u8(thresh);
     uint8x16_t vmaxval = vdupq_n_u8(maxval);
     uint8x16_t vminval = vdupq_n_u8(minval);
-    for (size_t i=0; i<vec_size; i+=step) {
-        v1 = vld1q_u8(input_gray);
-        input_gray += step;
-        vmask_gt = vcgtq_u8(v1, vthresh);
-        v1 = vbslq_u8(vmask_gt, vmaxval, vminval);
-        vst1q_u8(output_gray, v1);
-        output_gray += step;
-    }
-    done = vec_size;
+#endif // __ARM_NEON
+
+    for (int y = 0; y < h; y++)
+    {
+        const uchar* sp = src.data + y * sstep;
+        uchar* dp = dst.data + y * dstep;
+
+#if __ARM_NEON
+        int nn = w >> 4;
+        int remain = w - (nn << 4);
+#else
+        int remain = w;
 #endif
-    for (; done<total_len; done++) {
-        *output_gray = (input_gray[0]>thresh) ? maxval : minval;
-        input_gray++;
-        output_gray++;
+
+#if __ARM_NEON
+        for (int j = 0; j < nn; j++)
+        {
+            uint8x16_t v1 = vld1q_u8(sp);
+            uint8x16_t vmask_gt = vcgtq_u8(v1, vthresh);
+            v1 = vbslq_u8(vmask_gt, vmaxval, vminval);
+            vst1q_u8(dp, v1);
+            sp += 16;
+            dp += 16;
+        }
+#endif // __ARM_NEON
+
+        for (; remain > 0; remain--)
+        {
+            *dp++ = ( (*sp++) > thresh) ? maxval : minval;
+        }
     }
 }
 

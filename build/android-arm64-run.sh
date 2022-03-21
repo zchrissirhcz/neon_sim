@@ -160,7 +160,7 @@ test_threshold()
 #test_ex8
 #test_ex9
 #test_ex10
-test_ex11
-#test_rgb2gray
+#test_ex11
+test_rgb2gray
 #test_rgb2bgr
 #test_threshold

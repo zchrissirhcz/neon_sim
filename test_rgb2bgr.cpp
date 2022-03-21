@@ -13,49 +13,53 @@
 #endif
 
 
-//void rgb2bgr(unsigned char* src_buf, size_t height, size_t width, unsigned char* dst_buf)
-void rgb2gray(const cv::Mat& rgb, cv::Mat& bgr)
+void rgb2bgr(const cv::Mat& src, cv::Mat& dst)
 {
-    cv::Size ssize = rgb.size();
-    bgr.create(ssize, rgb.type());
-    if (rgb.type() != CV_8UC3) {
+    if (src.type() != CV_8UC3) {
         abort();
     }
 
-    const int width = ssize.width;
-    const int height = ssize.height;
+    cv::Size size = src.size();
+    dst.create(size, src.type());
+    const int w = size.width;
+    const int h = size.height;
     const int channels = 3;
-    const uchar* src_buf = rgb.data;
-    uchar* dst_buf = bgr.data;
+    const int sstep = src.step1();
+    const int dstep = dst.step1();
 
-    size_t done = 0;
-    size_t total_len = width * height * channels;
+    for (int y = 0; y < h; y++)
+    {
+        const uchar* sp = src.data + y * sstep;
+        uchar* dp = dst.data + y * dstep;
+
 #if __ARM_NEON
-    size_t step = 24;
-    size_t vec_size = total_len - total_len % step;
-
-    uint8x8x3_t v;
-    uint8x8_t tmp;
-
-    for (size_t i=0; i<vec_size; i+=step) {
-        v = vld3_u8(src_buf);
-        src_buf += step;
-        tmp = v.val[0];
-        v.val[0] = v.val[2];
-        v.val[2] = tmp;
-        vst3_u8(dst_buf, v);
-        dst_buf += step;
-    }
-
-    done = vec_size;
+        int nn = w >> 3;
+        int remain = w - (nn << 3);
+#else
+        int remain = w;
 #endif // __ARM_NEON
 
-    for ( ; done<total_len; done+=3) {
-        dst_buf[2] = src_buf[0];
-        dst_buf[1] = src_buf[1];
-        dst_buf[0] = src_buf[2];
-        dst_buf += 3;
-        src_buf += 3;
+#if __ARM_NEON
+        for (int j = 0; j < nn; j++)
+        {
+            uint8x8x3_t v_pixel = vld3_u8(sp);
+            uint8x8_t tmp = v_pixel.val[0];
+            v_pixel.val[0] = v_pixel.val[2];
+            v_pixel.val[2] = tmp;
+            vst3_u8(dp, v_pixel);
+            sp += 24;
+            dp += 24;
+        }
+#endif // __ARM_NEON
+
+        for (; remain > 0; remain--)
+        {
+            dp[2] = sp[0];
+            dp[1] = sp[1];
+            dp[0] = sp[2];
+            dp += 3;
+            sp += 3;
+        }
     }
 }
 
@@ -81,7 +85,7 @@ int main()
     cv::imwrite("bgr_cv.png", bgr_cv);
 
     cv::Mat bgr_my;
-    rgb2gray(rgb, bgr_my);
+    rgb2bgr(rgb, bgr_my);
     cv::imwrite("bgr_my.png", bgr_my);
 
     cv::Mat diff;

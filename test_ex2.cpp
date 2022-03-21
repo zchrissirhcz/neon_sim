@@ -25,7 +25,7 @@ int main()
 #endif
 
 
-    size_t gx, gy;		//Var für Bild 图像尺寸  size_t = unsigned char
+    size_t gx, gy;		//图像尺寸  size_t = unsigned char
     png_bytep gbild_;	//图像数据首地址 unsigned char *
     std::string image_path = load_prefix + "/ggray.png";
     readImageData(image_path.c_str(), &gbild_,&gx,&gy);	//Bild lesen 读图
@@ -60,13 +60,3 @@ int main()
     }
     writeImageData("out.png", gbild_out_, gx, gy, 8);	//制作PNG图
 }
-//struct timespec start, end;							//Var für Zeitmessung
-//clock_gettime(CLOCK_REALTIME, &start);				//Zeitmessung - Start
-//clock_gettime(CLOCK_REALTIME, &end);					//Zeitmessung - End
-//float delta_ms = (end.tv_sec - start.tv_sec) * 1E3+ (float) (end.tv_nsec - start.tv_nsec) / 1E6;
-//printf("\ndiff_time=%fms\n", delta_ms);
-
-/*
-mitt = vdupq_n_u8(50);
-regin = vqsubq_u8(regin, mitt);
-*/
