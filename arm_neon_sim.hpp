@@ -975,6 +975,16 @@ int8x8_t vld1_lane_s8(int8_t const * ptr, int8x8_t src, const int lane)
     return r;
 }
 
+uint8x8_t vld1_lane_u8(uint8_t const * ptr, uint8x8_t src, const int lane)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = src[i];
+    }
+    r[lane] = ptr[0];
+    return r;
+}
+
 ////// Store
 
 // vst1
@@ -2098,12 +2108,124 @@ int32x4_t vqdmull_s16(int16x4_t M, int16x4_t N)
     return D;
 }
 
+// vmlal_type
+int16x8_t vmlal_s8(int16x8_t N, int8x8_t M, int8x8_t P)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
+int32x4_t vmlal_s16(int32x4_t N, int16x4_t M, int16x4_t P)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
+int64x2_t vmlal_s32(int64x2_t N, int32x2_t M, int32x2_t P)
+{
+    int64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
 uint16x8_t vmlal_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
 {
     uint16x8_t D;
     for (int i=0; i<8; i++)
     {
         D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
+uint32x4_t vmlal_u16(uint32x4_t N, uint16x4_t M, uint16x4_t P)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
+uint64x2_t vmlal_u32(uint64x2_t N, uint32x2_t M, uint32x2_t P)
+{
+    uint64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] + (M[i] * P[i]);
+    }
+    return D;
+}
+
+// vmlsl_type
+int16x8_t vmlsl_s8(int16x8_t N, int8x8_t M, int8x8_t P)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
+    }
+    return D;
+}
+
+int32x4_t vmlsl_s16(int32x4_t N, int16x4_t M, int16x4_t P)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
+    }
+    return D;
+}
+
+int64x2_t vmlsl_s32(int64x2_t N, int32x2_t M, int32x2_t P)
+{
+    int64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
+    }
+    return D;
+}
+
+uint16x8_t vmlsl_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
+    }
+    return D;
+}
+
+uint32x4_t vmlsl_u16(uint32x4_t N, uint16x4_t M, uint16x4_t P)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
+    }
+    return D;
+}
+
+uint64x2_t vmlsl_u32(uint64x2_t N, uint32x2_t M, uint32x2_t P)
+{
+    uint64x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] - (M[i] * P[i]);
     }
     return D;
 }
@@ -2370,6 +2492,16 @@ float32x2_t vget_low_f32(float32x4_t a)
     return r;
 }
 
+int32x2_t vget_low_s32(int32x4_t a)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
 uint32x2_t vget_low_u32(uint32x4_t a)
 {
     uint32x2_t r;
@@ -2404,6 +2536,17 @@ uint16x4_t vget_low_u16(uint16x8_t a)
 float32x4_t vget_high_f32(float32x4_t a)
 {
     float32x2_t r;
+    int mid = 4 / 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
+int32x2_t vget_high_s32(int32x4_t a)
+{
+    int32x2_t r;
     int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
@@ -2573,7 +2716,6 @@ float32x4_t vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
 }
 
 // shift right
-
 int8x8_t vshrn_n_s16(int16x8_t a, const int n)
 {
     if (n<1 || n>8) {
@@ -2724,6 +2866,15 @@ uint8x8_t vrshrn_n_u16(uint16x8_t a, const int n)
     return r;
 }
 
+int32x4_t vsraq_n_s32(int32x4_t a, int32x4_t b, const int n)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++) {
+        r[i] = (a[i] >> n) + (b[i] >> n);
+    }
+    return r;
+}
+
 // shift left
 int32x4_t vshlq_n_s32(int32x4_t M, const int n)
 {
@@ -2732,6 +2883,15 @@ int32x4_t vshlq_n_s32(int32x4_t M, const int n)
         D[i] = M[i] << n;
     }
     return D;
+}
+
+uint16x8_t vshll_n_u8(uint8x8_t a, const int n)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++) {
+        r[i] = (uint16_t)a[i] << n;
+    }
+    return r;
 }
 
 // type conversion
@@ -2771,6 +2931,16 @@ uint32x2_t vreinterpret_u32_u8(uint8x8_t a)
 }
 
 int8x8_t vreinterpret_s8_u8(uint8x8_t a)
+{
+    return a;
+}
+
+int32x2_t vreinterpret_s32_s16(int16x4_t a)
+{
+    return a;
+}
+
+int16x4_t vreinterpret_s16_s32(int32x2_t a)
 {
     return a;
 }
@@ -3028,6 +3198,22 @@ int16x8x2_t vtrnq_s16(int16x8_t a, int16x8_t b)
     return r;
 }
 
+// zip
+int16x4x2_t vzip_s16(int16x4_t a, int16x4_t b)
+{
+    int16x4x2_t r;
+    const int n = 2;
+    for (int i = 0; i < n; i++) {
+        r.val[0][2*i] = a[i];
+        r.val[0][2*i+1] = b[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r.val[1][2*i] = a[n + i];
+        r.val[1][2*i+1] = b[n + i];
+    }
+    return r;
+}
+
 // combine
 uint8x16_t vcombine_u8(uint8x8_t low, uint8x8_t high)
 {
@@ -3198,10 +3384,12 @@ uint8x8_t vqmovn_u16(uint16x8_t a)
 
 uint8x8_t vqmovun_s16(int16x8_t a)
 {
-    //TODO: verify this
     uint8x8_t r;
     for (int i = 0; i < 8; i++) {
-        if (a[i] > UINT8_MAX) {
+        if (a[i] < 0) {
+            r[i] = 0;
+        }
+        else if (a[i] > UINT8_MAX) {
             r[i] = UINT8_MAX;
         } else {
             r[i] = a[i];
@@ -3268,6 +3456,23 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
     return r;
 }
 
+int16x4_t vext_s16(int16x4_t a, int16x4_t b, const int n)
+{
+    int16x4_t r;
+    int len = 4;
+    if (n > 3 || n < 0) {
+        fprintf(stderr, "%s: param n is not in range [0, 4]\n", __FUNCTION__);
+        abort();
+    }
+    for (int i = 0; i < len - n; i++) {
+        r[i] = a[i];
+    }
+    for (int i = 0; i < n; i++) {
+        r[i + len - n] = b[i];
+    }
+    return r;
+}
+
 // vextq
 uint16x8_t vextq_u16(uint16x8_t a, uint16x8_t b, const int n)
 {
@@ -3320,10 +3525,14 @@ uint8x16_t vbslq_u8(uint8x16_t mask, uint8x16_t src1, uint8x16_t src2)
 // vtbl1
 uint8x8_t vtbl1_u8(uint8x8_t a, uint8x8_t idx)
 {
-    // TODO: verify this
     uint8x8_t r;
     for (int i = 0; i < 8; i++) {
-        r[i] = a.val[idx.val[i]];
+        int index = idx.val[i];
+        if (index < 0 || index > 7) {
+            r[i] = 0;
+        } else {
+            r[i] = a.val[index];
+        }
     }
     return r;
 }
@@ -3331,10 +3540,37 @@ uint8x8_t vtbl1_u8(uint8x8_t a, uint8x8_t idx)
 // vtbl4
 uint8x8_t vtbl4_u8(uint8x8x4_t a, uint8x8_t idx)
 {
-    // TODO: verify this
     uint8x8_t r;
     for (int i = 0; i < 8; i++) {
-        r[i] = a.val[idx.val[i]][i];
+        int index = idx.val[i];
+        if (index < 0 || index > 31) {
+            r[i] = 0;
+        } else if (index < 8) { // [0, 7]
+            r[i] = a.val[0][index];
+        } else if (index < 16) { // [8, 15]
+            r[i] = a.val[1][index - 8];
+        } else if (index < 24) { // [16, 23]
+            r[i] = a.val[2][index - 16];
+        } else { // [24, 31]
+            r[i] = a.val[3][index - 24];
+        }
+    }
+    return r;
+}
+
+// vtbl2
+uint8x8_t vtbl2_u8(uint8x8x2_t a, uint8x8_t idx)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++) {
+        int index = idx.val[i];
+        if (index < 0 || index > 15) {
+            r[i] = 0;
+        } else if (index < 8) {
+            r[i] = a.val[0][index];
+        } else { // index in [8, 15]
+            r[i] = a.val[1][index - 8];
+        }
     }
     return r;
 }
@@ -3346,26 +3582,32 @@ uint8x8_t vtbl4_u8(uint8x8x4_t a, uint8x8_t idx)
 /////// print register arrays
 
 // u8
+static
 std::ostream& operator <<(std::ostream& os, uint8x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+static
 std::ostream& operator <<(std::ostream& os, uint8x8x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+static
 std::ostream& operator <<(std::ostream& os, uint8x8x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+static
 std::ostream& operator <<(std::ostream& os, uint8x16x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+static
 std::ostream& operator <<(std::ostream& os, uint8x16x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+static
 std::ostream& operator <<(std::ostream& os, uint8x16x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
@@ -3373,208 +3615,296 @@ std::ostream& operator <<(std::ostream& os, uint8x16x4_t v_data)
 
 
 // s8
+static
 std::ostream& operator <<(std::ostream& os, int8x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int8x8x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int8x8x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int8x16x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int8x16x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int8x16x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // u16
+static
 std::ostream& operator <<(std::ostream& os, uint16x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint16x4x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint16x4x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint16x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint16x8x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint16x8x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // s16
+static
 std::ostream& operator <<(std::ostream& os, int16x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int16x4x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int16x4x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int16x8x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int16x8x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int16x8x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // u32
+static
 std::ostream& operator <<(std::ostream& os, uint32x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint32x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint32x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint32x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint32x4x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint32x4x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // s32
+static
 std::ostream& operator <<(std::ostream& os, int32x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int32x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int32x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int32x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int32x4x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int32x4x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // f32
+static
 std::ostream& operator <<(std::ostream& os, float32x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float32x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float32x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float32x4x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float32x4x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float32x4x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // u64
+static
 std::ostream& operator <<(std::ostream& os, uint64x1x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint64x1x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint64x1x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint64x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint64x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, uint64x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
 
 // s64
+static
 std::ostream& operator <<(std::ostream& os, int64x1x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int64x1x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int64x1x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int64x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int64x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, int64x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
@@ -3582,26 +3912,37 @@ std::ostream& operator <<(std::ostream& os, int64x2x4_t v_data)
 
 // f64
 #if __aarch64__
+static
 std::ostream& operator <<(std::ostream& os, float64x1x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float64x1x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float64x1x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float64x2x2_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float64x2x3_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2];
 }
+
+static
 std::ostream& operator <<(std::ostream& os, float64x2x4_t v_data)
 {
     return os << v_data.val[0] << std::endl << v_data.val[1] << std::endl << v_data.val[2] << std::endl << v_data.val[3];

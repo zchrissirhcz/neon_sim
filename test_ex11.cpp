@@ -334,18 +334,53 @@ void test_vbslq()
     std::cout << "dest is:" << dest << std::endl;
 }
 
+void test_vtb1()
+{
+    // 如:src1 = {1,2,3,4,5,6,7,8}
+    // src2 = {0,0,1,1,2,2,7,8}
+    // dst = vtbl1_u8(src1,src2)时,则 dst = {1,1,2,2,3,3,8,0}
+    uint8x8_t src1 = {1,2,3,4,5,6,7,8};
+    uint8x8_t src2 = {0,0,1,1,2,2,7,8};
+    uint8x8_t dst = vtbl1_u8(src1,src2);
+    std::cout << "dst: " << dst << std::endl;
+}
+
+void test_vtbl2()
+{
+    // 如:src.val[0] = {1,2,3,4,5,6,7,8}
+    // src.val[1] = {9,10,11,12,13,14,15,16}
+    // src2 = {0,0,1,1,2,2,8,10}
+    // dst = vtbl2_u8(src,src2)时,则 dst = {1,1,2,2,3,3,9,11}
+    uint8x8x2_t src;
+    src.val[0] = {1,2,3,4,5,6,7,8};
+    src.val[1] = {9,10,11,12,13,14,15,16};
+    uint8x8_t src2 = {0,0,1,1,2,2,8,10};
+    uint8x8_t dst = vtbl2_u8(src,src2);
+    std::cout << "dst: " << dst << std::endl;
+}
+
+void test_vqmovun()
+{
+    int16x8_t src = {-1, -2, -3, -4, 2, 32767, 255, 256};
+    uint8x8_t res = vqmovun_s16(src);
+    std::cout << "res: " << res << std::endl;
+}
+
 int main()
 {
-    test_vext();
-    test_vpaddl();
-    test_shift_right();
-    test_sub();
-    test_vrsubhn();
-    test_vqdmull();
-    test_vld_lane();
-    test_transpose8x8();
-    test_vcltq();
-    test_vbslq();
+    // test_vext();
+    // test_vpaddl();
+    // test_shift_right();
+    // test_sub();
+    // test_vrsubhn();
+    // test_vqdmull();
+    // test_vld_lane();
+    // test_transpose8x8();
+    // test_vcltq();
+    // test_vbslq();
+    // test_vtb1();
+    // test_vtbl2();
+    test_vqmovun();
 
     return 0;
 }
