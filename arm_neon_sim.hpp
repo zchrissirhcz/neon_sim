@@ -2560,6 +2560,325 @@ int64x2_t	vqdmlsl_n_s32	(int64x2_t a, int32x2_t b, int32_t c);
 int32x4_t	vqdmlsl_lane_s16	(int32x4_t a, int16x4_t b, int16x4_t v, const int lane);
 int64x2_t	vqdmlsl_lane_s32	(int64x2_t a, int32x2_t b, int32x2_t v, const int lane);
 
+//----------------------------------------------------------------------
+// 12. Max-Min
+//----------------------------------------------------------------------
+
+// vmax_type: ri = ai >= bi ? ai : bi
+int8x8_t	vmax_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vmax_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vmax_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vmax_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vmax_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vmax_u32	(uint32x2_t a, uint32x2_t b);
+float32x2_t	vmax_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vmax_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vmax_f16	(float16x4_t a, float16x4_t b);
+
+// vmaxq_type:
+int8x16_t	vmaxq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	vmaxq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	vmaxq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vmaxq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vmaxq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vmaxq_u32	(uint32x4_t a, uint32x4_t b);
+float32x4_t	vmaxq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vmaxq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vmaxq_f16	(float16x8_t a, float16x8_t b);
+
+// vpmax_type: r0 = a0 >= a1 ? a0 : a1, ..., r4 = b0 >= b1 ? b0 : b1, ...
+int8x8_t	vpmax_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vpmax_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vpmax_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vpmax_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vpmax_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vpmax_u32	(uint32x2_t a, uint32x2_t b);
+float32x2_t	vpmax_f32	(float32x2_t a, float32x2_t b);
+float16x4_t	vpmax_f16	(float16x4_t a, float16x4_t b);
+
+// vmin_type: ri = ai <= bi ? ai : bi
+int8x8_t	vmin_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vmin_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vmin_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vmin_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vmin_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vmin_u32	(uint32x2_t a, uint32x2_t b);
+float32x2_t	vmin_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vmin_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vmin_f16	(float16x4_t a, float16x4_t b);
+
+// vminq_type:
+int8x16_t	vminq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	vminq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	vminq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vminq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vminq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vminq_u32	(uint32x4_t a, uint32x4_t b);
+float32x4_t	vminq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vminq_f64	(float64x2_t a, float64x2_t b);
+
+// vpmin_type: r0 = a0 <= a1 ? a0 : a1, ..., r4 = b0 <= b1 ? b0 : b1, ...
+int8x8_t	vpmin_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vpmin_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vpmin_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vpmin_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vpmin_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vpmin_u32	(uint32x2_t a, uint32x2_t b);
+float32x2_t	vpmin_f32	(float32x2_t a, float32x2_t b);
+
+// vmaxv_type:
+int8_t	vmaxv_s8	(int8x8_t a);
+int16_t	vmaxv_s16	(int16x4_t a);
+int32_t	vmaxv_s32	(int32x2_t a);
+uint8_t	vmaxv_u8	(uint8x8_t a);
+uint16_t	vmaxv_u16	(uint16x4_t a);
+uint32_t	vmaxv_u32	(uint32x2_t a);
+float32_t	vmaxv_f32	(float32x2_t a);
+
+// vmaxvq_type:
+int8_t	vmaxvq_s8	(int8x16_t a);
+int16_t	vmaxvq_s16	(int16x8_t a);
+int32_t	vmaxvq_s32	(int32x4_t a);
+uint8_t	vmaxvq_u8	(uint8x16_t a);
+uint16_t	vmaxvq_u16	(uint16x8_t a);
+uint32_t	vmaxvq_u32	(uint32x4_t a);
+float32_t	vmaxvq_f32	(float32x4_t a);
+float64_t	vmaxvq_f64	(float64x2_t a);
+
+// vmaxnm_type:
+float32x2_t	vmaxnm_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vmaxnm_f64	(float64x1_t a, float64x1_t b);
+
+// vmaxnmq_type:
+float32x4_t	vmaxnmq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vmaxnmq_f64	(float64x2_t a, float64x2_t b);
+
+// vmaxnmv_type:
+float32_t	vmaxnmv_f32	(float32x2_t a);
+
+// vmaxnmq_type:
+float32x4_t	vmaxnmq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vmaxnmq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vmaxnmq_f16	(float16x8_t a, float16x8_t b);
+
+// vmaxnmh_type:
+//float16_t	vmaxnmh_f16	(float16_t a, float16_t b);
+
+// vminv_type:
+int8_t	vminv_s8	(int8x8_t a);
+int16_t	vminv_s16	(int16x4_t a);
+int32_t	vminv_s32	(int32x2_t a);
+uint8_t	vminv_u8	(uint8x8_t a);
+uint16_t	vminv_u16	(uint16x4_t a);
+uint32_t	vminv_u32	(uint32x2_t a);
+float32_t	vminv_f32	(float32x2_t a);
+
+// vminvq_type:
+int8_t	vminvq_s8	(int8x16_t a);
+int16_t	vminvq_s16	(int16x8_t a);
+int32_t	vminvq_s32	(int32x4_t a);
+uint8_t	vminvq_u8	(uint8x16_t a);
+uint16_t	vminvq_u16	(uint16x8_t a);
+uint32_t	vminvq_u32	(uint32x4_t a);
+float32_t	vminvq_f32	(float32x4_t a);
+float64_t	vminvq_f64	(float64x2_t a);
+
+// vminnm_type:
+float32x2_t	vminnm_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vminnm_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vminnm_f16	(float16x4_t a, float16x4_t b);
+
+// vminnmq_type:
+float32x4_t	vminnmq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vminnmq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vminnmq_f16	(float16x8_t a, float16x8_t b);
+
+// vminnmv_type:
+float32_t	vminnmv_f32	(float32x2_t a);
+
+// vminnmq_type:
+float32x4_t	vminnmq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vminnmq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vminnmq_f16	(float16x8_t a, float16x8_t b);
+
+// vminnmh_type:
+//float16_t	vminnmh_f16	(float16_t a, float16_t b);
+
+//----------------------------------------------------------------------
+// 13. Comparison and Test
+//----------------------------------------------------------------------
+
+// vceq_type: ri = ai == bi ? 1...1 : 0...0
+uint8x8_t	vceq_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vceq_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vceq_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vceq_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vceq_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vceq_u32	(uint32x2_t a, uint32x2_t b);
+uint32x2_t	vceq_f32	(float32x2_t a, float32x2_t b);
+uint64x1_t	vceq_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vceq_u64	(uint64x1_t a, uint64x1_t b);
+uint64x1_t	vceq_f64	(float64x1_t a, float64x1_t b);
+
+// vceqq_type:
+uint8x16_t	vceqq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vceqq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vceqq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vceqq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vceqq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vceqq_u32	(uint32x4_t a, uint32x4_t b);
+uint32x4_t	vceqq_f32	(float32x4_t a, float32x4_t b);
+uint64x2_t	vceqq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vceqq_u64	(uint64x2_t a, uint64x2_t b);
+uint64x2_t	vceqq_f64	(float64x2_t a, float64x2_t b);
+
+// vcge_type: ri = ai >= bi ? 1...1:0...0
+uint8x8_t	vcge_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vcge_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vcge_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vcge_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vcge_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vcge_u32	(uint32x2_t a, uint32x2_t b);
+uint32x2_t	vcge_f32	(float32x2_t a, float32x2_t b);
+uint64x1_t	vcge_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vcge_u64	(uint64x1_t a, uint64x1_t b);
+uint64x1_t	vcge_f64	(float64x1_t a, float64x1_t b);
+uint16x4_t	vcge_f16	(float16x4_t a, float16x4_t b);
+
+// vcgeq_type:
+uint8x16_t	vcgeq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vcgeq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vcgeq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vcgeq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vcgeq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vcgeq_u32	(uint32x4_t a, uint32x4_t b);
+uint32x4_t	vcgeq_f32	(float32x4_t a, float32x4_t b);
+uint64x2_t	vcgeq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vcgeq_u64	(uint64x2_t a, uint64x2_t b);
+uint64x2_t	vcgeq_f64	(float64x2_t a, float64x2_t b);
+uint16x8_t	vcgeq_f16	(float16x8_t a, float16x8_t b);
+
+// vcle_type: ri = ai <= bi ? 1...1:0...0
+uint8x8_t	vcle_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vcle_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vcle_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vcle_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vcle_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vcle_u32	(uint32x2_t a, uint32x2_t b);
+uint32x2_t	vcle_f32	(float32x2_t a, float32x2_t b);
+uint64x1_t	vcle_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vcle_u64	(uint64x1_t a, uint64x1_t b);
+uint64x1_t	vcle_f64	(float64x1_t a, float64x1_t b);
+uint16x4_t	vcle_f16	(float16x4_t a, float16x4_t b);
+
+// vcleq_type:
+uint8x16_t	vcleq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vcleq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vcleq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vcleq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vcleq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vcleq_u32	(uint32x4_t a, uint32x4_t b);
+uint32x4_t	vcleq_f32	(float32x4_t a, float32x4_t b);
+uint64x2_t	vcleq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vcleq_u64	(uint64x2_t a, uint64x2_t b);
+uint64x2_t	vcleq_f64	(float64x2_t a, float64x2_t b);
+uint16x8_t	vcleq_f16	(float16x8_t a, float16x8_t b);
+
+// vcgt_type: ri = ai > bi ? 1...1:0...0
+uint8x8_t	vcgt_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vcgt_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vcgt_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vcgt_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vcgt_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vcgt_u32	(uint32x2_t a, uint32x2_t b);
+uint32x2_t	vcgt_f32	(float32x2_t a, float32x2_t b);
+uint64x1_t	vcgt_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vcgt_u64	(uint64x1_t a, uint64x1_t b);
+uint64x1_t	vcgt_f64	(float64x1_t a, float64x1_t b);
+uint16x4_t	vcgt_f16	(float16x4_t a, float16x4_t b);
+
+// vcgtq_type:
+uint8x16_t	vcgtq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vcgtq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vcgtq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vcgtq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vcgtq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vcgtq_u32	(uint32x4_t a, uint32x4_t b);
+uint32x4_t	vcgtq_f32	(float32x4_t a, float32x4_t b);
+uint64x2_t	vcgtq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vcgtq_u64	(uint64x2_t a, uint64x2_t b);
+uint64x2_t	vcgtq_f64	(float64x2_t a, float64x2_t b);
+uint16x8_t	vcgtq_f16	(float16x8_t a, float16x8_t b);
+
+// vclt_type: ri = ai < bi ? 1...1:0...0
+uint8x8_t	vclt_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vclt_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vclt_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vclt_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vclt_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vclt_u32	(uint32x2_t a, uint32x2_t b);
+uint32x2_t	vclt_f32	(float32x2_t a, float32x2_t b);
+uint64x1_t	vclt_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vclt_u64	(uint64x1_t a, uint64x1_t b);
+uint64x1_t	vclt_f64	(float64x1_t a, float64x1_t b);
+uint16x4_t	vclt_f16	(float16x4_t a, float16x4_t b);
+
+// vcltq_type:
+uint8x16_t	vcltq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vcltq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vcltq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vcltq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vcltq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vcltq_u32	(uint32x4_t a, uint32x4_t b);
+uint32x4_t	vcltq_f32	(float32x4_t a, float32x4_t b);
+uint64x2_t	vcltq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vcltq_u64	(uint64x2_t a, uint64x2_t b);
+uint64x2_t	vcltq_f64	(float64x2_t a, float64x2_t b);
+uint16x8_t	vcltq_f16	(float16x8_t a, float16x8_t b);
+
+// vcage_f32: ri = |ai| >= |bi| ? 1...1:0...0
+uint32x2_t	vcage_f32	(float32x2_t a, float32x2_t b);
+
+// vcageq_f32:
+uint32x4_t	vcageq_f32	(float32x4_t a, float32x4_t b);
+
+// vcale_f32: ri = |ai| <= |bi| ? 1...1:0...0
+uint32x2_t	vcale_f32	(float32x2_t a, float32x2_t b);
+
+// vcaleq_f32:
+uint32x4_t	vcaleq_f32	(float32x4_t a, float32x4_t b);
+
+// vcagt_f32: ri = |ai| > |bi| ? 1...1:0...0
+uint32x2_t	vcagt_f32	(float32x2_t a, float32x2_t b);
+
+// vcagtq_f32:
+uint32x4_t	vcagtq_f32	(float32x4_t a, float32x4_t b);
+
+// vcalt_f32: ri = |ai| < |bi| ? 1...1:0...0
+uint32x2_t	vcalt_f32	(float32x2_t a, float32x2_t b);
+
+// vcaltq_f32:
+uint32x4_t	vcaltq_f32	(float32x4_t a, float32x4_t b);
+
+// vtst_type: ri = (ai & bi != 0) ? 1...1:0...0
+uint8x8_t	vtst_s8	(int8x8_t a, int8x8_t b);
+uint16x4_t	vtst_s16	(int16x4_t a, int16x4_t b);
+uint32x2_t	vtst_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vtst_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vtst_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vtst_u32	(uint32x2_t a, uint32x2_t b);
+uint64x1_t	vtst_s64	(int64x1_t a, int64x1_t b);
+uint64x1_t	vtst_u64	(uint64x1_t a, uint64x1_t b);
+
+// vtstq_type:
+uint8x16_t	vtstq_s8	(int8x16_t a, int8x16_t b);
+uint16x8_t	vtstq_s16	(int16x8_t a, int16x8_t b);
+uint32x4_t	vtstq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vtstq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vtstq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vtstq_u32	(uint32x4_t a, uint32x4_t b);
+uint64x2_t	vtstq_s64	(int64x2_t a, int64x2_t b);
+uint64x2_t	vtstq_u64	(uint64x2_t a, uint64x2_t b);
 
 #if defined(NEON_SIM_IMPLEMENTATION)
 
