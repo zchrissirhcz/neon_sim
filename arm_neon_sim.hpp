@@ -1687,6 +1687,30 @@ int64_t	vgetq_lane_s64	(int64x2_t v, const int lane);
 float32_t	vgetq_lane_f32	(float32x4_t v, const int lane);
 float64_t	vgetq_lane_f64	(float64x2_t v, const int lane);
 
+// vset_lane_type:
+uint8x8_t	vset_lane_u8	(uint8_t a, uint8x8_t v, const int lane);
+uint16x4_t	vset_lane_u16	(uint16_t a, uint16x4_t v, const int lane);
+uint32x2_t	vset_lane_u32	(uint32_t a, uint32x2_t v, const int lane);
+uint64x1_t	vset_lane_u64	(uint64_t a, uint64x1_t v, const int lane);
+int8x8_t	vset_lane_s8	(int8_t a, int8x8_t v, const int lane);
+int16x4_t	vset_lane_s16	(int16_t a, int16x4_t v, const int lane);
+int32x2_t	vset_lane_s32	(int32_t a, int32x2_t v, const int lane);
+int64x1_t	vset_lane_s64	(int64_t a, int64x1_t v, const int lane);
+float32x2_t	vset_lane_f32	(float32_t a, float32x2_t v, const int lane);
+float64x1_t	vset_lane_f64	(float64_t a, float64x1_t v, const int lane);
+
+// vsetq_lane_type:
+uint8x16_t	vsetq_lane_u8	(uint8_t a, uint8x16_t v, const int lane);
+uint16x8_t	vsetq_lane_u16	(uint16_t a, uint16x8_t v, const int lane);
+uint32x4_t	vsetq_lane_u32	(uint32_t a, uint32x4_t v, const int lane);
+uint64x2_t	vsetq_lane_u64	(uint64_t a, uint64x2_t v, const int lane);
+int8x16_t	vsetq_lane_s8	(int8_t a, int8x16_t v, const int lane);
+int16x8_t	vsetq_lane_s16	(int16_t a, int16x8_t v, const int lane);
+int32x4_t	vsetq_lane_s32	(int32_t a, int32x4_t v, const int lane);
+int64x2_t	vsetq_lane_s64	(int64_t a, int64x2_t v, const int lane);
+float32x4_t	vsetq_lane_f32	(float32_t a, float32x4_t v, const int lane);
+float64x2_t	vsetq_lane_f64	(float64_t a, float64x2_t v, const int lane);
+
 //----------------------------------------------------------------------
 // 7. Vector Registers Manipulation
 //----------------------------------------------------------------------
@@ -2879,6 +2903,216 @@ uint16x8_t	vtstq_u16	(uint16x8_t a, uint16x8_t b);
 uint32x4_t	vtstq_u32	(uint32x4_t a, uint32x4_t b);
 uint64x2_t	vtstq_s64	(int64x2_t a, int64x2_t b);
 uint64x2_t	vtstq_u64	(uint64x2_t a, uint64x2_t b);
+
+//----------------------------------------------------------------------
+// 14. Rounding
+//----------------------------------------------------------------------
+
+// vrndn_type:
+float32x2_t	vrndn_f32	(float32x2_t a);
+float64x1_t	vrndn_f64	(float64x1_t a);
+float16x4_t	vrndn_f16	(float16x4_t a);
+
+// vrndnq_type:
+float32x4_t	vrndnq_f32	(float32x4_t a);
+float64x2_t	vrndnq_f64	(float64x2_t a);
+float16x8_t	vrndnq_f16	(float16x8_t a);
+
+// vrnda_type:
+float32x2_t	vrnda_f32	(float32x2_t a);
+float64x1_t	vrnda_f64	(float64x1_t a);
+float16x4_t	vrnda_f16	(float16x4_t a);
+
+// vrndaq_type:
+float32x4_t	vrndaq_f32	(float32x4_t a);
+float64x2_t	vrndaq_f64	(float64x2_t a);
+float16x8_t	vrndaq_f16	(float16x8_t a);
+
+// vrndp_type:
+float32x2_t	vrndp_f32	(float32x2_t a);
+float64x1_t	vrndp_f64	(float64x1_t a);
+float16x4_t	vrndp_f16	(float16x4_t a);
+
+// vrndpq_type:
+float32x4_t	vrndpq_f32	(float32x4_t a);
+float64x2_t	vrndpq_f64	(float64x2_t a);
+float16x8_t	vrndpq_f16	(float16x8_t a);
+
+// vrndm_type:
+float32x2_t	vrndm_f32	(float32x2_t a);
+float64x1_t	vrndm_f64	(float64x1_t a);
+float16x4_t	vrndm_f16	(float16x4_t a);
+
+// vrndmq_type:
+float32x4_t	vrndmq_f32	(float32x4_t a);
+float64x2_t	vrndmq_f64	(float64x2_t a);
+float16x8_t	vrndmq_f16	(float16x8_t a);
+
+// vrnd_type:
+float32x2_t	vrnd_f32	(float32x2_t a);
+float64x1_t	vrnd_f64	(float64x1_t a);
+float16x4_t	vrnd_f16	(float16x4_t a);
+
+// vrndq_type:
+float32x4_t	vrndq_f32	(float32x4_t a);
+float64x2_t	vrndq_f64	(float64x2_t a);
+float16x8_t	vrndq_f16	(float16x8_t a);
+
+//----------------------------------------------------------------------
+// 15. Absolute Values
+//----------------------------------------------------------------------
+
+// vabs_type: ri = |ai|
+int8x8_t	vabs_s8	(int8x8_t a);
+int16x4_t	vabs_s16	(int16x4_t a);
+int32x2_t	vabs_s32	(int32x2_t a);
+float32x2_t	vabs_f32	(float32x2_t a);
+int64x1_t	vabs_s64	(int64x1_t a);
+float64x1_t	vabs_f64	(float64x1_t a);
+float16x4_t	vabs_f16	(float16x4_t a);
+
+// vabsq_type:
+int8x16_t	vabsq_s8	(int8x16_t a);
+int16x8_t	vabsq_s16	(int16x8_t a);
+int32x4_t	vabsq_s32	(int32x4_t a);
+float32x4_t	vabsq_f32	(float32x4_t a);
+int64x2_t	vabsq_s64	(int64x2_t a);
+float64x2_t	vabsq_f64	(float64x2_t a);
+float16x8_t	vabsq_f16	(float16x8_t a);
+
+// vqabs_type: ri = sat(|ai|)
+int8x8_t	vqabs_s8	(int8x8_t a);
+int16x4_t	vqabs_s16	(int16x4_t a);
+int32x2_t	vqabs_s32	(int32x2_t a);
+int64x1_t	vqabs_s64	(int64x1_t a);
+
+// vqabsq_type:
+int8x16_t	vqabsq_s8	(int8x16_t a);
+int16x8_t	vqabsq_s16	(int16x8_t a);
+int32x4_t	vqabsq_s32	(int32x4_t a);
+int64x2_t	vqabsq_s64	(int64x2_t a);
+
+// vabd_type: ri = |ai - bi|
+int8x8_t	vabd_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vabd_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vabd_s32	(int32x2_t a, int32x2_t b);
+uint8x8_t	vabd_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vabd_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vabd_u32	(uint32x2_t a, uint32x2_t b);
+float32x2_t	vabd_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vabd_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vabd_f16	(float16x4_t a, float16x4_t b);
+
+// vabdq_type:
+int8x16_t	vabdq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	vabdq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	vabdq_s32	(int32x4_t a, int32x4_t b);
+uint8x16_t	vabdq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vabdq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vabdq_u32	(uint32x4_t a, uint32x4_t b);
+float32x4_t	vabdq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vabdq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vabdq_f16	(float16x8_t a, float16x8_t b);
+
+// vabdl_type: 长指令
+int16x8_t	vabdl_s8	(int8x8_t a, int8x8_t b);
+int32x4_t	vabdl_s16	(int16x4_t a, int16x4_t b);
+int64x2_t	vabdl_s32	(int32x2_t a, int32x2_t b);
+uint16x8_t	vabdl_u8	(uint8x8_t a, uint8x8_t b);
+uint32x4_t	vabdl_u16	(uint16x4_t a, uint16x4_t b);
+uint64x2_t	vabdl_u32	(uint32x2_t a, uint32x2_t b);
+
+// vabdl_high_type:
+int16x8_t	vabdl_high_s8	(int8x16_t a, int8x16_t b);
+int32x4_t	vabdl_high_s16	(int16x8_t a, int16x8_t b);
+int64x2_t	vabdl_high_s32	(int32x4_t a, int32x4_t b);
+uint16x8_t	vabdl_high_u8	(uint8x16_t a, uint8x16_t b);
+uint32x4_t	vabdl_high_u16	(uint16x8_t a, uint16x8_t b);
+uint64x2_t	vabdl_high_u32	(uint32x4_t a, uint32x4_t b);
+
+// vaba_type: ri = ai + |bi - ci|
+int8x8_t	vaba_s8	(int8x8_t a, int8x8_t b, int8x8_t c);
+int16x4_t	vaba_s16	(int16x4_t a, int16x4_t b, int16x4_t c);
+int32x2_t	vaba_s32	(int32x2_t a, int32x2_t b, int32x2_t c);
+uint8x8_t	vaba_u8	(uint8x8_t a, uint8x8_t b, uint8x8_t c);
+uint16x4_t	vaba_u16	(uint16x4_t a, uint16x4_t b, uint16x4_t c);
+uint32x2_t	vaba_u32	(uint32x2_t a, uint32x2_t b, uint32x2_t c);
+
+// vabaq_type:
+int8x16_t	vabaq_s8	(int8x16_t a, int8x16_t b, int8x16_t c);
+int16x8_t	vabaq_s16	(int16x8_t a, int16x8_t b, int16x8_t c);
+int32x4_t	vabaq_s32	(int32x4_t a, int32x4_t b, int32x4_t c);
+uint8x16_t	vabaq_u8	(uint8x16_t a, uint8x16_t b, uint8x16_t c);
+uint16x8_t	vabaq_u16	(uint16x8_t a, uint16x8_t b, uint16x8_t c);
+uint32x4_t	vabaq_u32	(uint32x4_t a, uint32x4_t b, uint32x4_t c);
+
+// vabal_type: 长指令
+int16x8_t	vabal_s8	(int16x8_t a, int8x8_t b, int8x8_t c);
+int32x4_t	vabal_s16	(int32x4_t a, int16x4_t b, int16x4_t c);
+int64x2_t	vabal_s32	(int64x2_t a, int32x2_t b, int32x2_t c);
+uint16x8_t	vabal_u8	(uint16x8_t a, uint8x8_t b, uint8x8_t c);
+uint32x4_t	vabal_u16	(uint32x4_t a, uint16x4_t b, uint16x4_t c);
+uint64x2_t	vabal_u32	(uint64x2_t a, uint32x2_t b, uint32x2_t c);
+
+// vabal_high_type:
+int16x8_t	vabal_high_s8	(int16x8_t a, int8x16_t b, int8x16_t c);
+int32x4_t	vabal_high_s16	(int32x4_t a, int16x8_t b, int16x8_t c);
+int64x2_t	vabal_high_s32	(int64x2_t a, int32x4_t b, int32x4_t c);
+uint16x8_t	vabal_high_u8	(uint16x8_t a, uint8x16_t b, uint8x16_t c);
+uint32x4_t	vabal_high_u16	(uint32x4_t a, uint16x8_t b, uint16x8_t c);
+uint64x2_t	vabal_high_u32	(uint64x2_t a, uint32x4_t b, uint32x4_t c);
+
+//----------------------------------------------------------------------
+// 16. Reciprocal Estimation
+//----------------------------------------------------------------------
+
+// vrecpe_type:
+uint32x2_t	vrecpe_u32	(uint32x2_t a);
+float32x2_t	vrecpe_f32	(float32x2_t a);
+float64x1_t	vrecpe_f64	(float64x1_t a);
+float16x4_t	vrecpe_f16	(float16x4_t a);
+
+// vrecpeq_type:
+uint32x4_t	vrecpeq_u32	(uint32x4_t a);
+float32x4_t	vrecpeq_f32	(float32x4_t a);
+float64x2_t	vrecpeq_f64	(float64x2_t a);
+float16x8_t	vrecpeq_f16	(float16x8_t a);
+
+// vrecps_type:
+float32x2_t	vrecps_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vrecps_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vrecps_f16	(float16x4_t a, float16x4_t b);
+
+// vrecpsq_type:
+float32x4_t	vrecpsq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vrecpsq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vrecpsq_f16	(float16x8_t a, float16x8_t b);
+
+//----------------------------------------------------------------------
+// 17. Reciprocal Square Root Estimation
+//----------------------------------------------------------------------
+
+// vrsqrte_type:
+uint32x2_t	vrsqrte_u32	(uint32x2_t a);
+float32x2_t	vrsqrte_f32	(float32x2_t a);
+float64x1_t	vrsqrte_f64	(float64x1_t a);
+float16x4_t	vrsqrte_f16	(float16x4_t a);
+
+// vrsqrteq_type:
+uint32x4_t	vrsqrteq_u32	(uint32x4_t a);
+float32x4_t	vrsqrteq_f32	(float32x4_t a);
+float64x2_t	vrsqrteq_f64	(float64x2_t a);
+float16x8_t	vrsqrteq_f16	(float16x8_t a);
+
+// vrsqrts_type:
+float32x2_t	vrsqrts_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vrsqrts_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vrsqrts_f16	(float16x4_t a, float16x4_t b);
+
+// vrsqrtsq_type:
+float32x4_t	vrsqrtsq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vrsqrtsq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vrsqrtsq_f16	(float16x8_t a, float16x8_t b);
 
 #if defined(NEON_SIM_IMPLEMENTATION)
 
