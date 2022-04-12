@@ -4375,7 +4375,7 @@ uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
 uint16x4_t vpaddl_u8(uint8x8_t a)
 {
     uint16x4_t r;
-    for (int i = 0; i < 2; i++){
+    for (int i = 0; i < 4; i++){
         r[i] = a[2*i] + a[2*i+1];
     }
     return r;
@@ -4384,7 +4384,7 @@ uint16x4_t vpaddl_u8(uint8x8_t a)
 uint16x8_t vpaddlq_u8(uint8x16_t a)
 {
     uint16x8_t r;
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 8; i++){
         r[i] = a[2*i] + a[2*i+1];
     }
     return r;
@@ -4393,7 +4393,7 @@ uint16x8_t vpaddlq_u8(uint8x16_t a)
 uint32x4_t vpaddlq_u16(uint16x8_t a)
 {
     uint32x4_t r;
-    for (int i = 0; i < 2; i++){
+    for (int i = 0; i < 4; i++){
         r[i] = a[2*i] + a[2*i+1];
     }
     return r;
