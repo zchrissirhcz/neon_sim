@@ -35,3 +35,5 @@ build/log.txt
 
 build/*.png
 build/*.txt
+
+.xmake/
