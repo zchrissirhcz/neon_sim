@@ -4238,12 +4238,62 @@ uint16x8_t vaddl_u8(uint8x8_t a, uint8x8_t b)
     return D;
 }
 
+int16x8_t vaddw_s8(int16x8_t a, int8x8_t b)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] + b[i];
+    }
+    return r;
+}
+
+int32x4_t	vaddw_s16	(int32x4_t a, int16x4_t b)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] + b[i];
+    }
+    return r;
+}
+
+int64x2_t	vaddw_s32	(int64x2_t a, int32x2_t b)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] + b[i];
+    }
+    return r;
+}
+
 uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
 {
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] + (uint16_t)(b[i]);
+        r[i] = a[i] + b[i];
+    }
+    return r;
+}
+
+uint32x4_t	vaddw_u16	(uint32x4_t a, uint16x4_t b)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] + b[i];
+    }
+    return r;
+}
+
+uint64x2_t	vaddw_u32	(uint64x2_t a, uint32x2_t b)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] + b[i];
     }
     return r;
 }
