@@ -149,6 +149,15 @@ test_threshold()
     adb pull /data/local/tmp/res_my.png ./
 }
 
+test_transpose()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_transpose
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
+
 #testbed
 #test_ex1
 #test_ex2
@@ -161,6 +170,7 @@ test_threshold()
 #test_ex9
 #test_ex10
 #test_ex11
-test_rgb2gray
+#test_rgb2gray
+test_transpose
 #test_rgb2bgr
 #test_threshold

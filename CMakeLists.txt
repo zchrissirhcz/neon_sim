@@ -5,6 +5,7 @@ project(hello)
 set(CMAKE_CXX_STANDARD 11)
 
 include("deps.cmake")
+include("sleek.cmake")
 
 add_library(neon_sim INTERFACE
   arm_neon_sim.hpp
@@ -38,3 +39,4 @@ neon_sim_add_test(ex11)
 neon_sim_add_test(rgb2gray ${OpenCV_LIBS})
 neon_sim_add_test(rgb2bgr ${OpenCV_LIBS})
 neon_sim_add_test(threshold ${OpenCV_LIBS})
+neon_sim_add_test(transpose ncnn)
