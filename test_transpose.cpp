@@ -15,7 +15,20 @@
 
 const int g_loop_count = 1;//00000;
 
-void dump(uint8x8_t d0, uint8x8_t d1, uint8x8_t d2, uint8x8_t d3, uint8x8_t d4, uint8x8_t d5, uint8x8_t d6, uint8x8_t d7, const std::string& msg)
+void dump(const uint8x8_t& d0, const uint8x8_t& d1, const uint8x8_t& d2, const uint8x8_t& d3, const uint8x8_t& d4, const uint8x8_t& d5, const uint8x8_t& d6, const uint8x8_t& d7, const std::string& msg)
+{
+    std::cout << "\n=== " << msg << " ===" << std::endl;
+    std::cout << d0 << std::endl;
+    std::cout << d1 << std::endl;
+    std::cout << d2 << std::endl;
+    std::cout << d3 << std::endl;
+    std::cout << d4 << std::endl;
+    std::cout << d5 << std::endl;
+    std::cout << d6 << std::endl;
+    std::cout << d7 << std::endl;
+}
+
+void dump(const uint16x8_t& d0, const uint16x8_t& d1, const uint16x8_t& d2, const uint16x8_t& d3, const uint16x8_t& d4, const uint16x8_t& d5, const uint16x8_t& d6, const uint16x8_t& d7, const std::string& msg)
 {
     std::cout << "\n=== " << msg << " ===" << std::endl;
     std::cout << d0 << std::endl;
@@ -176,14 +189,84 @@ void transpose_plain()
     dump(d0, d1, d2, d3, d4, d5, d6, d7, "plain, end");
 }
 
+// u16 类型的 8x8 方阵 的转置。 用于 carotene 的 linear resize 的改写
+void transpose_u16_8x8()
+{
+    uint16_t buf[64];
+
+    uint16x8_t d0 = {11, 12, 13, 14, 15, 16, 17, 18};
+    uint16x8_t d1 = {21, 22, 23, 24, 25, 26, 27, 28};
+    uint16x8_t d2 = {31, 32, 33, 34, 35, 36, 37, 38};
+    uint16x8_t d3 = {41, 42, 43, 44, 45, 46, 47, 48};
+    uint16x8_t d4 = {51, 52, 53, 54, 55, 56, 57, 58};
+    uint16x8_t d5 = {61, 62, 63, 64, 65, 66, 67, 68};
+    uint16x8_t d6 = {71, 72, 73, 74, 75, 76, 77, 78};
+    uint16x8_t d7 = {81, 82, 83, 84, 85, 86, 87, 88};
+
+    dump(d0, d1, d2, d3, d4, d5, d6, d7, "transpose_u16_8x8, int");
+
+    // phase1
+    uint16x8x2_t d01 = vtrnq_u16(d0, d1);
+    uint16x8x2_t d23 = vtrnq_u16(d2, d3);
+    uint16x8x2_t d45 = vtrnq_u16(d4, d5);
+    uint16x8x2_t d67 = vtrnq_u16(d6, d7);
+
+    // phase2
+    uint32x4_t v0 = vreinterpretq_u32_u16(d01.val[0]);
+    uint32x4_t v1 = vreinterpretq_u32_u16(d01.val[1]);
+    uint32x4_t v2 = vreinterpretq_u32_u16(d23.val[0]);
+    uint32x4_t v3 = vreinterpretq_u32_u16(d23.val[1]);
+    uint32x4_t v4 = vreinterpretq_u32_u16(d45.val[0]);
+    uint32x4_t v5 = vreinterpretq_u32_u16(d45.val[1]);
+    uint32x4_t v6 = vreinterpretq_u32_u16(d67.val[0]);
+    uint32x4_t v7 = vreinterpretq_u32_u16(d67.val[1]);
+
+    uint32x4x2_t v_tmp;
+    v_tmp = vtrnq_u32(v0, v2); v0 = v_tmp.val[0]; v2 = v_tmp.val[1];
+    v_tmp = vtrnq_u32(v1, v3); v1 = v_tmp.val[0]; v3 = v_tmp.val[1];
+    v_tmp = vtrnq_u32(v4, v6); v4 = v_tmp.val[0]; v6 = v_tmp.val[1];
+    v_tmp = vtrnq_u32(v5, v7); v5 = v_tmp.val[0]; v7 = v_tmp.val[1];
+
+    // phase3
+    uint64x2_t w0 = vreinterpretq_u64_u32(v0);
+    uint64x2_t w1 = vreinterpretq_u64_u32(v1);
+    uint64x2_t w2 = vreinterpretq_u64_u32(v2);
+    uint64x2_t w3 = vreinterpretq_u64_u32(v3);
+    uint64x2_t w4 = vreinterpretq_u64_u32(v4);
+    uint64x2_t w5 = vreinterpretq_u64_u32(v5);
+    uint64x2_t w6 = vreinterpretq_u64_u32(v6);
+    uint64x2_t w7 = vreinterpretq_u64_u32(v7);
+
+    d0 = vreinterpretq_u16_u64(vcombine_u64(vget_low_u64(w0), vget_low_u64(w4)));
+    d1 = vreinterpretq_u16_u64(vcombine_u64(vget_low_u64(w1), vget_low_u64(w5)));
+    d2 = vreinterpretq_u16_u64(vcombine_u64(vget_low_u64(w2), vget_low_u64(w6)));
+    d3 = vreinterpretq_u16_u64(vcombine_u64(vget_low_u64(w3), vget_low_u64(w7)));
+    d4 = vreinterpretq_u16_u64(vcombine_u64(vget_high_u64(w0), vget_high_u64(w4)));
+    d5 = vreinterpretq_u16_u64(vcombine_u64(vget_high_u64(w1), vget_high_u64(w5)));
+    d6 = vreinterpretq_u16_u64(vcombine_u64(vget_high_u64(w2), vget_high_u64(w6)));
+    d7 = vreinterpretq_u16_u64(vcombine_u64(vget_high_u64(w3), vget_high_u64(w7)));
+
+    vst1q_u16(buf +  0, d0);
+    vst1q_u16(buf +  8, d1);
+    vst1q_u16(buf + 16, d2);
+    vst1q_u16(buf + 24, d3);
+    vst1q_u16(buf + 32, d4);
+    vst1q_u16(buf + 40, d5);
+    vst1q_u16(buf + 48, d6);
+    vst1q_u16(buf + 56, d7);
+
+    dump(d0, d1, d2, d3, d4, d5, d6, d7, "transpose_u16_8x8, end");
+}
+
 int main()
 {
     int powersave = 1; // small cores
-    //ncnn::set_cpu_powersave(powersave);
+    ncnn::set_cpu_powersave(powersave);
     // 测试表明， 两种方法的结果是一样的。
     // 新能测试结果不太稳定， 两者基本相当。
-    transpose_carotene();
+    //transpose_carotene();
     //transpose_plain();
+    transpose_u16_8x8();
 
     return 0;
 }
