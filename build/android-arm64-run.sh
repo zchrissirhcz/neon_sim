@@ -158,6 +158,16 @@ test_transpose()
     adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
 }
 
+test_vld_lane()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_vld_lane
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
+
+
 #testbed
 #test_ex1
 #test_ex2
@@ -171,6 +181,7 @@ test_transpose()
 #test_ex10
 #test_ex11
 #test_rgb2gray
-test_transpose
+#test_transpose
+test_vld_lane
 #test_rgb2bgr
 #test_threshold

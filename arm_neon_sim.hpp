@@ -3678,6 +3678,84 @@ uint8x8_t vld1_lane_u8(uint8_t const * ptr, uint8x8_t src, const int lane)
     return r;
 }
 
+/// vldX_lane_type, X > 1
+uint8x8x2_t vld2_lane_u8(uint8_t const* ptr, uint8x8x2_t src, const int lane)
+{
+    uint8x8x2_t res;
+    if ( ! (lane >= 0 && lane <=7) )
+    {
+        fprintf(stderr, "only support [0, 7] for param lane\n");
+        abort();
+    }
+    for (int j = 0; j < 2; j++)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (i == lane)
+            {
+                res.val[j][i] = ptr[j];
+            }
+            else
+            {
+                res.val[j][i] = src.val[j][i];
+            }
+        }
+    }
+    return res;
+}
+
+uint8x8x3_t vld3_lane_u8(uint8_t const* ptr, uint8x8x3_t src, const int lane)
+{
+    if ( ! (lane >= 0 && lane <=7) )
+    {
+        fprintf(stderr, "only support [0, 7] for param lane\n");
+        abort();
+    }
+    uint8x8x3_t res;
+    for (int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (i == lane)
+            {
+                res.val[j][i] = ptr[j];
+            }
+            else
+            {
+                res.val[j][i] = src.val[j][i];
+            }
+        }
+    }
+    return res;
+}
+
+uint8x8x4_t vld4_lane_u8(uint8_t const* ptr, uint8x8x4_t src, const int lane)
+{
+    if ( ! (lane >= 0 && lane <=7) )
+    {
+        fprintf(stderr, "only support [0, 7] for param lane\n");
+        abort();
+    }
+    uint8x8x4_t res;
+    for (int j = 0; j < 4; j++)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (i == lane)
+            {
+                res.val[j][i] = ptr[j];
+            }
+            else
+            {
+                res.val[j][i] = src.val[j][i];
+            }
+        }
+    }
+    return res;
+}
+
+
+
 ////// Store
 
 // vst1
