@@ -9,10 +9,9 @@ cd $BUILD_DIR
 
 cmake -G Ninja \
     -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN \
-    -DANDROID_LD=lld \
     -DANDROID_ABI="arm64-v8a" \
     -DANDROID_PLATFORM=android-24 \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=Debug \
     ../..
 
 #ninja

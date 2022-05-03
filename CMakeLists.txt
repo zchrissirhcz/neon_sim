@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD 11)
 include("cmake/deps.cmake")
 include("cmake/sleek.cmake")
 
+sleek_add_debug_symbol()
+
 add_library(neon_sim INTERFACE
   arm_neon_sim.hpp
 )
@@ -43,3 +45,4 @@ neon_sim_add_test(threshold ${OpenCV_LIBS})
 #neon_sim_add_test(transpose ncnn)
 neon_sim_add_test(NEON_2_SSE)
 neon_sim_add_test(vld_lane)
+neon_sim_add_test(load_save)
