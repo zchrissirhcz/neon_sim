@@ -4,19 +4,20 @@ project(hello)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include("deps.cmake")
-include("sleek.cmake")
+include("cmake/deps.cmake")
+include("cmake/sleek.cmake")
 
 add_library(neon_sim INTERFACE
   arm_neon_sim.hpp
 )
 target_compile_definitions(neon_sim INTERFACE -DNEON_SIM_IMPLEMENTATION)
+target_include_directories(neon_sim INTERFACE ${CMAKE_SOURCE_DIR})
 
 enable_testing()
 
 
 macro(neon_sim_add_test name)
-  add_executable(test_${name} ${CMAKE_CURRENT_SOURCE_DIR}/test_${name}.cpp)
+  add_executable(test_${name} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_${name}.cpp)
   set(dep_libs neon_sim ${ARGN} GTest::gtest GTest::gtest_main)
   if(ANDROID)
     list(APPEND dep_libs log)
