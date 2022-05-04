@@ -1,4 +1,5 @@
 #include <iostream>
+#include <opencv2/core/types.hpp>
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 
@@ -86,8 +87,20 @@ int main()
     cv::Mat src = cv::imread(image_path);
     cv::Mat gray;
     cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
+    cv::Size ssize = src.size();
 
     const int thresh = 60;
+    cv::Point p(2, 3);
+    cv::Rect rect(1, 2, 4, 5);
+    cv::Matx<int, 3, 3> mat =  // Matx33f
+    {
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9
+    };
+
+    std::cout << mat(0, 0) << std::endl;
+    std::cout << mat.rows << std::endl;
 
     cv::Mat res_cv;
     cv::threshold(gray, res_cv, thresh, 255, 0);

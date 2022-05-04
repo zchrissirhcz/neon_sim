@@ -8,6 +8,7 @@ include("cmake/deps.cmake")
 include("cmake/sleek.cmake")
 
 sleek_add_debug_symbol()
+sleek_add_flags("-fstandalone-debug")
 
 add_library(neon_sim INTERFACE
   arm_neon_sim.hpp
