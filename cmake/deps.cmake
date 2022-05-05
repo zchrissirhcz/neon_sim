@@ -10,7 +10,8 @@ if(ANDROID)
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(GTest_DIR "${ARTIFACTS_DIR}/googletest/1.11.0/linux-x64/lib/cmake/GTest" CACHE PATH "Directory that contains GTestConfig.cmake")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
-  set(GTest_DIR "${ARTIFACTS_DIR}/googletest/1.11.0/windows/vs2019-x64/lib/cmake/GTest" CACHE PATH "Directory that contains GTestConfig.cmake")
+  #set(GTest_DIR "${ARTIFACTS_DIR}/googletest/1.11.0/windows/vs2019-x64/lib/cmake/GTest" CACHE PATH "Directory that contains GTestConfig.cmake")
+  set(GTest_DIR "${ARTIFACTS_DIR}/googletest/1.11.0/windows/vs2022-x64/lib/cmake/GTest" CACHE PATH "Directory that contains GTestConfig.cmake")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
   set(GTest_DIR "${ARTIFACTS_DIR}/googletest/1.11.0/mac-x64/lib/cmake/GTest" CACHE PATH "Directory that contains GTestConfig.cmake")
 else()
@@ -32,13 +33,13 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(libpng_install_dir "/home/zz/artifacts/libpng/1.6.38-dev/linux-x64")
 endif()
 
-include("${libpng_install_dir}/lib/libpng/libpng16.cmake")
-set_target_properties(png
-  PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${libpng_install_dir}/include/libpng16
-)
-set_target_properties(png_static
-  PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${libpng_install_dir}/include/libpng16
-)
+#include("${libpng_install_dir}/lib/libpng/libpng16.cmake")
+# set_target_properties(png
+#   PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${libpng_install_dir}/include/libpng16
+# )
+# set_target_properties(png_static
+#   PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${libpng_install_dir}/include/libpng16
+# )
 
 #find_package(libpng16 REQUIRED)
 
@@ -73,4 +74,4 @@ else()
   message(WARNING "ncnn_DIR not set yet")
 endif()
 message(STATUS ">>> ncnn_DIR: ${ncnn_DIR}")
-find_package(ncnn REQUIRED)
+#find_package(ncnn REQUIRED)
