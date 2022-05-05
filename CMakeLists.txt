@@ -30,7 +30,7 @@ macro(neon_sim_add_test name)
 endmacro()
 
 neon_sim_add_test(ex1)
-neon_sim_add_test(ex2 png_static)
+#neon_sim_add_test(ex2 png_static)
 neon_sim_add_test(ex3)
 neon_sim_add_test(ex4)
 neon_sim_add_test(ex5)
