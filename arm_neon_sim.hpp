@@ -122,6 +122,14 @@ struct TxN
     }
 };
 
+#ifndef __fp16
+class __fp16
+{
+    // TODO: simulate fp16
+private:
+    uint16_t data;
+};
+#endif // __fp16
 
 //typedef unsigned short __fp16; // from ncnn.
 
@@ -3162,10 +3170,26 @@ uint32x2_t vld1_u32(uint32_t const * ptr)
     }
     return r;
 }
+uint64x1_t vld1_u64(uint64_t const* ptr)
+{
+    uint64x1_t r;
+    for (int i = 0; i < 1; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
 int32x2_t vld1_s32(int32_t const * ptr)
 {
     int32x2_t r;
     for (int i = 0; i < 2; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+int64x1_t vld1_s64(int64_t const* ptr)
+{
+    int64x1_t r;
+    for (int i = 0; i < 1; i++) {
         r[i] = ptr[i];
     }
     return r;
@@ -3230,6 +3254,22 @@ int32x4_t vld1q_s32(int32_t const* ptr)
 {
     int32x4_t r;
     for (int i = 0; i < 4; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+int64x2_t vld1q_s64(int64_t const* ptr)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++) {
+        r[i] = ptr[i];
+    }
+    return r;
+}
+uint64x2_t vld1q_u64(uint64_t const* ptr)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++) {
         r[i] = ptr[i];
     }
     return r;
@@ -3795,6 +3835,18 @@ void vst1_s32(int32_t * ptr, int32x2_t val)
         ptr[i] = val[i];
     }
 }
+void vst1_s64(int64_t * ptr, int64x1_t val)
+{
+    for (int i = 0; i < 1; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1_u64(uint64_t * ptr, uint64x1_t val)
+{
+    for (int i = 0; i < 1; i++) {
+        ptr[i] = val[i];
+    }
+}
 
 // vst1q
 void vst1q_u8(uint8_t* ptr, uint8x16_t val)
@@ -3830,6 +3882,18 @@ void vst1q_u32(uint32_t* ptr, uint32x4_t val)
 void vst1q_s32(int32_t* ptr, int32x4_t val)
 {
     for (int i = 0; i < 4; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1q_s64(int64_t* ptr, int64x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
+        ptr[i] = val[i];
+    }
+}
+void vst1q_u64(uint64_t* ptr, uint64x2_t val)
+{
+    for (int i = 0; i < 2; i++) {
         ptr[i] = val[i];
     }
 }
