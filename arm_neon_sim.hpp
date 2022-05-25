@@ -2,7 +2,7 @@
 
 //
 // usage:
-// #define NEON_SIM_IMPLEMENTATION
+#define NEON_SIM_IMPLEMENTATION
 //
 // #if __ARM_NEON
 // #include <arm_neon.h>
@@ -5500,6 +5500,30 @@ uint16x4_t vget_low_u16(uint16x8_t a)
     return r;
 }
 
+
+
+// vget_low_type: 获取 128bit vector 的低半部分元素,输出的是元素类型相同的 64bit vector。
+int8x8_t vget_low_s8 (int8x16_t a)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+uint8x8_t vget_low_u8 (uint8x16_t a)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i];
+    }
+    return r;
+}
+
+
 // vget_high
 float32x2_t vget_high_f32(float32x4_t a)
 {
@@ -5555,6 +5579,30 @@ uint32x2_t vget_high_u32(uint32x4_t a)
     }
     return r;
 }
+
+int8x8_t vget_high_s8 (int8x16_t a)
+{
+    int8x8_t r;
+    int mid = 16 / 2;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
+
+uint8x8_t vget_high_u8 (uint8x16_t a)
+{
+    uint8x8_t r;
+    int mid = 16 / 2;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[mid + i];
+    }
+    return r;
+}
+
 
 
 float32x2_t vpmax_f32(float32x2_t a, float32x2_t b)
@@ -6919,7 +6967,6 @@ uint32x2_t vqshrn_n_u64 (uint64x2_t a, const int n)
     }
     return r;
 }
-
 
 
 //----------------------------------------------------------------------
