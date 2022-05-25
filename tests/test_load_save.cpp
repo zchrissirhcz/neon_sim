@@ -84,26 +84,26 @@ void test_vld1q_type(std::function<VT(T*)> vld1_type, std::function<void(T*, VT)
     }
 }
 
-TEST(LoadSave, vld1)
-{
-    test_vld1_type<int8_t, int8x8_t>(vld1_s8, vst1_s8);
-    test_vld1_type<uint8_t, uint8x8_t>(vld1_u8, vst1_u8);
-    test_vld1_type<int16_t, int16x4_t>(vld1_s16, vst1_s16);
-    test_vld1_type<uint16_t, uint16x4_t>(vld1_u16, vst1_u16);
-    test_vld1_type<int32_t, int32x2_t>(vld1_s32, vst1_s32);
-    test_vld1_type<uint32_t, uint32x2_t>(vld1_u32, vst1_u32);
-    test_vld1_type<int64_t, int64x1_t>(vld1_s64, vst1_s64);
-    test_vld1_type<uint64_t, uint64x1_t>(vld1_u64, vst1_u64);
+// TEST(LoadSave, vld1)
+// {
+//     test_vld1_type<int8_t, int8x8_t>(vld1_s8, vst1_s8);
+//     test_vld1_type<uint8_t, uint8x8_t>(vld1_u8, vst1_u8);
+//     test_vld1_type<int16_t, int16x4_t>(vld1_s16, vst1_s16);
+//     test_vld1_type<uint16_t, uint16x4_t>(vld1_u16, vst1_u16);
+//     test_vld1_type<int32_t, int32x2_t>(vld1_s32, vst1_s32);
+//     test_vld1_type<uint32_t, uint32x2_t>(vld1_u32, vst1_u32);
+//     test_vld1_type<int64_t, int64x1_t>(vld1_s64, vst1_s64);
+//     test_vld1_type<uint64_t, uint64x1_t>(vld1_u64, vst1_u64);
 
-    test_vld1q_type<int8_t, int8x16_t>(vld1q_s8, vst1q_s8);
-    test_vld1q_type<uint8_t, uint8x16_t>(vld1q_u8, vst1q_u8);
-    test_vld1q_type<int16_t, int16x8_t>(vld1q_s16, vst1q_s16);
-    test_vld1q_type<uint16_t, uint16x8_t>(vld1q_u16, vst1q_u16);
-    test_vld1q_type<int32_t, int32x4_t>(vld1q_s32, vst1q_s32);
-    test_vld1q_type<uint32_t, uint32x4_t>(vld1q_u32, vst1q_u32);
-    test_vld1q_type<int64_t, int64x2_t>(vld1q_s64, vst1q_s64);
-    test_vld1q_type<uint64_t, uint64x2_t>(vld1q_u64, vst1q_u64);
-}
+//     test_vld1q_type<int8_t, int8x16_t>(vld1q_s8, vst1q_s8);
+//     test_vld1q_type<uint8_t, uint8x16_t>(vld1q_u8, vst1q_u8);
+//     test_vld1q_type<int16_t, int16x8_t>(vld1q_s16, vst1q_s16);
+//     test_vld1q_type<uint16_t, uint16x8_t>(vld1q_u16, vst1q_u16);
+//     test_vld1q_type<int32_t, int32x4_t>(vld1q_s32, vst1q_s32);
+//     test_vld1q_type<uint32_t, uint32x4_t>(vld1q_u32, vst1q_u32);
+//     test_vld1q_type<int64_t, int64x2_t>(vld1q_s64, vst1q_s64);
+//     test_vld1q_type<uint64_t, uint64x2_t>(vld1q_u64, vst1q_u64);
+// }
 
 // TEST(Save_Q_Reg, int8x16)
 // {

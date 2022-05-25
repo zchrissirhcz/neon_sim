@@ -176,6 +176,14 @@ test_load_save()
     adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
 }
 
+test_and()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_and
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
 
 #testbed
 #test_ex1
@@ -194,4 +202,5 @@ test_load_save()
 #test_vld_lane
 #test_rgb2bgr
 #test_threshold
-test_load_save
+#test_load_save
+test_and

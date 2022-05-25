@@ -123,12 +123,12 @@ struct TxN
 };
 
 #ifndef __fp16
-class __fp16
-{
-    // TODO: simulate fp16
-private:
-    uint16_t data;
-};
+// class __fp16
+// {
+//     // TODO: simulate fp16
+// private:
+//     uint16_t data;
+// };
 #endif // __fp16
 
 //typedef unsigned short __fp16; // from ncnn.
@@ -3122,6 +3122,29 @@ float32x4_t	vrsqrtsq_f32	(float32x4_t a, float32x4_t b);
 float64x2_t	vrsqrtsq_f64	(float64x2_t a, float64x2_t b);
 float16x8_t	vrsqrtsq_f16	(float16x8_t a, float16x8_t b);
 
+
+
+// Logical / AND
+// vand_type:
+int8x8_t	vand_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vand_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vand_s32	(int32x2_t a, int32x2_t b);
+int64x1_t	vand_s64	(int64x1_t a, int64x1_t b);
+uint8x8_t	vand_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vand_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vand_u32	(uint32x2_t a, uint32x2_t b);
+uint64x1_t	vand_u64	(uint64x1_t a, uint64x1_t b);
+// vandq_type:
+int8x16_t	vandq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	vandq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	vandq_s32	(int32x4_t a, int32x4_t b);
+int64x2_t	vandq_s64	(int64x2_t a, int64x2_t b);
+uint8x16_t	vandq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vandq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vandq_u32	(uint32x4_t a, uint32x4_t b);
+uint64x2_t	vandq_u64	(uint64x2_t a, uint64x2_t b);
+
+
 #if defined(NEON_SIM_IMPLEMENTATION)
 
 //----------------------------------------------------------------------
@@ -5565,6 +5588,52 @@ float32_t vgetq_lane_f32(float32x4_t v, int lane)
     return v[lane];
 }
 
+// vgetq_lane_type:
+uint8_t	vgetq_lane_u8(uint8x16_t v, const int lane)
+{
+    return v[lane];
+}
+
+uint16_t	vgetq_lane_u16	(uint16x8_t v, const int lane)
+{
+    return v[lane];
+}
+
+uint32_t	vgetq_lane_u32	(uint32x4_t v, const int lane)
+{
+    return v[lane];
+}
+
+uint64_t	vgetq_lane_u64	(uint64x2_t v, const int lane)
+{
+    return v[lane];
+}
+
+int8_t	vgetq_lane_s8	(int8x16_t v, const int lane)
+{
+    return v[lane];
+}
+
+int16_t	vgetq_lane_s16	(int16x8_t v, const int lane)
+{
+    return v[lane];
+}
+
+int32_t	vgetq_lane_s32	(int32x4_t v, const int lane)
+{
+    return v[lane];
+}
+
+int64_t	vgetq_lane_s64	(int64x2_t v, const int lane)
+{
+    return v[lane];
+}
+
+float64_t	vgetq_lane_f64	(float64x2_t v, const int lane)
+{
+    return v[lane];
+}
+
 // vminq_type
 int8x16_t vminq_s8(int8x16_t N, int8x16_t M)
 {
@@ -5886,6 +5955,109 @@ int32x2_t vreinterpret_s32_s16(int16x4_t a)
 }
 
 int16x4_t vreinterpret_s16_s32(int32x2_t a)
+{
+    return a;
+}
+
+// vreinterpretq_u8_type
+uint8x16_t	vreinterpretq_u8_s8	(int8x16_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_s16	(int16x8_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_s32	(int32x4_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_f32	(float32x4_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_u16	(uint16x8_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_u32	(uint32x4_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_u64	(uint64x2_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_s64	(int64x2_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_f16	(float16x8_t a)
+{
+    return a;
+}
+
+uint8x16_t	vreinterpretq_u8_f64	(float64x2_t a)
+{
+    return a;
+}
+
+
+// vreinterpretq_u32_type
+uint32x4_t	vreinterpretq_u32_s8	(int8x16_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_s16	(int16x8_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_s32	(int32x4_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_f32	(float32x4_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_u8	(uint8x16_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_u16	(uint16x8_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_u64	(uint64x2_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_s64	(int64x2_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_f16	(float16x8_t a)
+{
+    return a;
+}
+
+uint32x4_t	vreinterpretq_u32_f64	(float64x2_t a)
 {
     return a;
 }
@@ -6520,8 +6692,238 @@ uint8x8_t vtbl2_u8(uint8x8x2_t a, uint8x8_t idx)
     return r;
 }
 
+
+// vand_type:
+int8x8_t vand_s8(int8x8_t a, int8x8_t b)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int16x4_t vand_s16(int16x4_t a, int16x4_t b)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int32x2_t vand_s32 (int32x2_t a, int32x2_t b)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int64x1_t vand_s64 (int64x1_t a, int64x1_t b)
+{
+    int64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint8x8_t vand_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint16x4_t vand_u16(uint16x4_t a, uint16x4_t b)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint32x2_t vand_u32 (uint32x2_t a, uint32x2_t b)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint64x1_t vand_u64 (uint64x1_t a, uint64x1_t b)
+{
+    uint64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+
+// vandq_type:
+int8x16_t vandq_s8 (int8x16_t a, int8x16_t b)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int16x8_t vandq_s16 (int16x8_t a, int16x8_t b)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int32x4_t vandq_s32 (int32x4_t a, int32x4_t b)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+int64x2_t vandq_s64 (int64x2_t a, int64x2_t b)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+
+uint8x16_t vandq_u8 (uint8x16_t a, uint8x16_t b)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint16x8_t vandq_u16 (uint16x8_t a, uint16x8_t b)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint32x4_t vandq_u32 (uint32x4_t a, uint32x4_t b)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+uint64x2_t vandq_u64 (uint64x2_t a, uint64x2_t b)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] & b[i];
+    }
+    return r;
+}
+
+
+
+// saturated shift right and narrow
+int8x8_t vqshrn_n_s16 (int16x8_t a, const int n)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = std::min(std::max(a[i] >> n, INT8_MIN), INT8_MAX);
+    }
+    return r;
+}
+
+int16x4_t vqshrn_n_s32 (int32x4_t a, const int n)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = std::min(std::max(a[i] >> n, INT16_MIN), INT16_MAX);
+    }
+    return r;
+}
+
+int32x2_t vqshrn_n_s64 (int64x2_t a, const int n)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = std::min<int32_t>(std::max<int64_t>(a[i] >> n, INT32_MIN), INT32_MAX);
+    }
+    return r;
+}
+
+uint8x8_t vqshrn_n_u16 (uint16x8_t a, const int n)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = std::min(a[i] >> n, UINT8_MAX);
+    }
+    return r;
+}
+
+uint16x4_t vqshrn_n_u32 (uint32x4_t a, const int n)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = std::min<uint32_t>(a[i] >> n, UINT16_MAX);
+    }
+    return r;
+}
+
+uint32x2_t vqshrn_n_u64 (uint64x2_t a, const int n)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = std::min<uint64_t>(a[i] >> n, UINT32_MAX);
+    }
+    return r;
+}
+
+
+
 //----------------------------------------------------------------------
-// 5. Helper functions
+// 6. Helper functions
 //----------------------------------------------------------------------
 
 /////// print register arrays
