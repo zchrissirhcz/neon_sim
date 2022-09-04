@@ -1,4 +1,26 @@
-# NEON 模拟库： C++ 重新实现 Intrinsics
+# neon_sim
+
+ARM NEON Intrinsics implementation in C++, for accurate understanding of each "neon function".
+
+## Usage
+Replace
+```c++
+#if __ARM_NEON
+#include <arm_neon.h>
+#endif // __ARM_NEON
+```
+with
+```c++
+#define NEON_SIM_IMPLEMENTATION
+
+#if __ARM_NEON
+#include <arm_neon.h>
+#include "arm_neon_helper.hpp"
+#else
+#include "arm_neon_sim.hpp"
+#endif // __ARM_NEON
+```
+
 
 ## Features
 0. 良好的跨平台支持： 不依赖 SSE， 完全由 C++ 11 实现
