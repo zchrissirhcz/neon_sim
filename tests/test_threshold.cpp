@@ -79,6 +79,8 @@ int main()
     std::string load_prefix = "/home/zz/data";
 #elif _MSC_VER
     std::string load_prefix = "d:/data";
+#elif __APPLE__
+    std::string load_prefix = "/Users/zz/data";
 #else
 #pragma error
 #endif
