@@ -19,16 +19,16 @@ find_package(GTest REQUIRED)
 
 
 # opencv
-if(ANDROID)
-  set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/android-arm64/4.5.4/sdk/native/jni" CACHE PATH "")
-elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
-  set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/linux-x64/4.5.5/lib/cmake/opencv4" CACHE PATH "")
-elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
-  message(WARNING "OpenCV_DIR not set yet")
-else()
-  message(WARNING "OpenCV_DIR not set yet")
-endif()
-message(STATUS ">>> OpenCV_DIR is: ${OpenCV_DIR}")
-find_package(OpenCV REQUIRED)
+# if(ANDROID)
+#   set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/android-arm64/4.5.4/sdk/native/jni" CACHE PATH "")
+# elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+#   set(OpenCV_DIR "${ARTIFACTS_DIR}/opencv/linux-x64/4.5.5/lib/cmake/opencv4" CACHE PATH "")
+# elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
+#   message(WARNING "OpenCV_DIR not set yet")
+# else()
+#   message(WARNING "OpenCV_DIR not set yet")
+# endif()
+# message(STATUS ">>> OpenCV_DIR is: ${OpenCV_DIR}")
+# find_package(OpenCV REQUIRED)
 
 
