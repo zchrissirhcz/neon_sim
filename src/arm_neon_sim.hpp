@@ -6848,7 +6848,7 @@ uint8x8_t vext_u8(uint8x8_t a, uint8x8_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[i];
+        r[i] = a[i + n];
     }
     for (int i = 0; i < n; i++) {
         r[i + len - n] = b[i];
@@ -6865,7 +6865,7 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[i];
+        r[i] = a[i + n];
     }
     for (int i = 0; i < n; i++) {
         r[i + len - n] = b[i];
@@ -6882,7 +6882,7 @@ int16x4_t vext_s16(int16x4_t a, int16x4_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[i];
+        r[i] = a[i + n];
     }
     for (int i = 0; i < n; i++) {
         r[i + len - n] = b[i];
@@ -6900,7 +6900,7 @@ uint16x8_t vextq_u16(uint16x8_t a, uint16x8_t b, const int n)
         abort();
     }
     for (int i = 0; i < len - n; i++) {
-        r[i] = a[i];
+        r[i] = a[i + n];
     }
     for (int i = 0; i < n; i++) {
         r[i + len - n] = b[i];

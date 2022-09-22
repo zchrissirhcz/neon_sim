@@ -194,6 +194,15 @@ test_vget()
     adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
 }
 
+test_vext()
+{
+    DST_DIR=/data/local/tmp
+    EXE_FILE=test_vext
+
+    adb push $BUILD_DIR/$EXE_FILE $DST_DIR
+    adb shell "cd $DST_DIR; chmod +x $DST_DIR/$EXE_FILE; ./$EXE_FILE"
+}
+
 #testbed
 #test_ex1
 #test_ex2
@@ -213,4 +222,5 @@ test_vget()
 #test_threshold
 #test_load_save
 #test_and
-test_vget
+#test_vget
+test_vext
