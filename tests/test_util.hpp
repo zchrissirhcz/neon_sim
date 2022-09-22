@@ -55,3 +55,20 @@ static bool almostEqual(const float32x4_t& expected, const float32x4_t& actual, 
     }
     return true;
 }
+
+
+static bool almostEqual(const std::vector<float>& expected, const std::vector<float>& actual, double eps=0)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        const double diff = std::fabs((double)expected[i] - (double)actual[i]);
+        if (diff > eps)
+        {
+            std::cerr << "array[" << i << "] (" << (int)actual[i] << ") != expected[" << i << "] (" << (int)expected[i] 
+                      << "), diff = " << diff << ", EPS = " << eps << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
