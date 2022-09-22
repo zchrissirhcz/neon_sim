@@ -7622,6 +7622,26 @@ int8x8x2_t	vzip_s8	(int8x8_t a, int8x8_t b)
     return r;
 }
 
+uint8x8x2_t	vzip_u8	(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8x2_t r;
+    const int vlen = 8;
+    for (int i = 0; i < 8; i++)
+    {
+        if (i % 2 == 0)
+        {
+            r.val[0][i] = a[i / 2];
+            r.val[1][i] = a[i / 2 + vlen/2];
+        }
+        else
+        {
+            r.val[0][i] = b[i / 2];
+            r.val[1][i] = b[i / 2 + vlen/2];
+        }
+    }
+    return r;
+}
+
 
 // vrev16_type:
 int8x8_t	vrev16_s8	(int8x8_t vec)
