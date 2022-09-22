@@ -1,38 +1,21 @@
 macro(neon_sim_add_test name)
-  add_executable(test_${name} ${CMAKE_CURRENT_SOURCE_DIR}/test_${name}.cpp)
+  add_executable(${name} ${CMAKE_CURRENT_SOURCE_DIR}/${name}.cpp)
   set(dep_libs neon_sim ${ARGN} GTest::gtest GTest::gtest_main)
   if(ANDROID)
     list(APPEND dep_libs log)
   endif()
-  target_link_libraries(test_${name} PRIVATE ${dep_libs})
-  #gtest_add_tests(TARGET test_${name})
+  target_link_libraries(${name} PRIVATE ${dep_libs})
+  #gtest_add_tests(TARGET ${name})
   if((NOT ANDROID) AND CMAKE_SYSTEM_NAME MATCHES "Linux" AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
-    gtest_add_tests(TARGET test_${name}
+    gtest_add_tests(TARGET ${name}
       COMMAND ${CMAKE_COMMAND} -DTEST_EXECUTABLE=$<TARGET_FILE:${name}> -P ${CMAKE_SOURCE_DIR}/cmake/qemu_run_test.cmake
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     )
   else()
-    gtest_add_tests(TARGET test_${name}
+    gtest_add_tests(TARGET ${name}
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     )
   endif()
 endmacro()
 
-neon_sim_add_test(add)
-#neon_sim_add_test(ex2 png_static)
-neon_sim_add_test(ex3)
-neon_sim_add_test(ex4)
-neon_sim_add_test(ex5)
-neon_sim_add_test(ex6)
-neon_sim_add_test(ex7)
-neon_sim_add_test(ex8)
-neon_sim_add_test(ex10 ${OpenCV_LIBS})
-neon_sim_add_test(ex11)
-neon_sim_add_test(rgb2gray ${OpenCV_LIBS})
-neon_sim_add_test(rgb2bgr ${OpenCV_LIBS})
-neon_sim_add_test(threshold ${OpenCV_LIBS})
-#neon_sim_add_test(transpose ncnn)
-neon_sim_add_test(NEON_2_SSE)
-neon_sim_add_test(load_save)
-neon_sim_add_test(and)
-neon_sim_add_test(vget)
+neon_sim_add_test(test_vext)
