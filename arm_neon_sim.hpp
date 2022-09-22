@@ -166,7 +166,7 @@ using float64x2_t = TxN<double, 2>;
 
 
 //-------
-//vector register arary types
+//vector register array types
 //-------
 typedef struct int8x8x2_t {
   int8x8_t val[2];
