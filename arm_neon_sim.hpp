@@ -3145,6 +3145,27 @@ uint32x4_t	vandq_u32	(uint32x4_t a, uint32x4_t b);
 uint64x2_t	vandq_u64	(uint64x2_t a, uint64x2_t b);
 
 
+// Logical / OR
+// vorr_type
+int8x8_t	vorr_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	vorr_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	vorr_s32	(int32x2_t a, int32x2_t b);
+int64x1_t	vorr_s64	(int64x1_t a, int64x1_t b);
+uint8x8_t	vorr_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	vorr_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	vorr_u32	(uint32x2_t a, uint32x2_t b);
+uint64x1_t	vorr_u64	(uint64x1_t a, uint64x1_t b);
+// vorrq_type
+int8x16_t	vorrq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	vorrq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	vorrq_s32	(int32x4_t a, int32x4_t b);
+int64x2_t	vorrq_s64	(int64x2_t a, int64x2_t b);
+uint8x16_t	vorrq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	vorrq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	vorrq_u32	(uint32x4_t a, uint32x4_t b);
+uint64x2_t	vorrq_u64	(uint64x2_t a, uint64x2_t b);
+
+
 #if defined(NEON_SIM_IMPLEMENTATION)
 
 //----------------------------------------------------------------------
@@ -6905,6 +6926,170 @@ uint64x2_t vandq_u64 (uint64x2_t a, uint64x2_t b)
     return r;
 }
 
+
+// vorr_type:
+int8x8_t vorr_s8(int8x8_t a, int8x8_t b)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int16x4_t vorr_s16(int16x4_t a, int16x4_t b)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int32x2_t vorr_s32 (int32x2_t a, int32x2_t b)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int64x1_t vorr_s64 (int64x1_t a, int64x1_t b)
+{
+    int64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint8x8_t vorr_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint16x4_t vorr_u16(uint16x4_t a, uint16x4_t b)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint32x2_t vorr_u32 (uint32x2_t a, uint32x2_t b)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint64x1_t vorr_u64 (uint64x1_t a, uint64x1_t b)
+{
+    uint64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+
+// vorrq_type:
+int8x16_t vorrq_s8 (int8x16_t a, int8x16_t b)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int16x8_t vorrq_s16 (int16x8_t a, int16x8_t b)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int32x4_t vorrq_s32 (int32x4_t a, int32x4_t b)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+int64x2_t vorrq_s64 (int64x2_t a, int64x2_t b)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+
+uint8x16_t vorrq_u8 (uint8x16_t a, uint8x16_t b)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint16x8_t vorrq_u16 (uint16x8_t a, uint16x8_t b)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint32x4_t vorrq_u32 (uint32x4_t a, uint32x4_t b)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
+
+uint64x2_t vorrq_u64 (uint64x2_t a, uint64x2_t b)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] | b[i];
+    }
+    return r;
+}
 
 
 // saturated shift right and narrow
