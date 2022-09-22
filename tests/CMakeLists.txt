@@ -24,3 +24,4 @@ macro(neon_sim_add_test name)
 endmacro()
 
 neon_sim_add_test(test_vext)
+neon_sim_add_test(test_vtbl)

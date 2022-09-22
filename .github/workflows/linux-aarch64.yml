@@ -21,7 +21,7 @@ jobs:
       uses: actions/cache@v3.0.8
       with:
         path: qemu-install
-        key: qemu-aarch64-install-1
+        key: qemu-aarch64-install-aarch64
     - name: checkout-qemu
       if: steps.cache-qemu.outputs.cache-hit != 'true'
       uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
       uses: actions/cache@v3.0.8
       with:
         path: googletest-install
-        key: googletest-install-1
+        key: googletest-install-aarch64
     - name: googletest
       if: steps.cache-googletest.outputs.cache-hit != 'true'
       run: |
@@ -68,7 +68,7 @@ jobs:
     #   uses: actions/cache@v3.0.8
     #   with:
     #     path: opencv-install
-    #     key: opencv-install-1
+    #     key: opencv-install-aarch64
     # - name: opencv
     #   if: steps.cache-opencv.outputs.cache-hit != 'true'
     #   run: |
