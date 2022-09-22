@@ -1,5 +1,12 @@
 # neon_sim
 
+<img alt="GitHub" src="https://img.shields.io/github/license/zchrissirhcz/neon_sim"> 
+
+[![linux-x64](https://github.com/zchrissirhcz/neon_sim/actions/workflows/linux-x64.yml/badge.svg)](https://github.com/zchrissirhcz/neon_sim/actions/workflows/x64.yml)
+
+[![linux-aarch64](https://github.com/zchrissirhcz/neon_sim/actions/workflows/linux-aarch64.yml/badge.svg)](https://github.com/zchrissirhcz/neon_sim/actions/workflows/aarch64.yml)
+
+
 ARM NEON Intrinsics implementation in C++, for accurate understanding of each "neon function".
 
 ## Usage
