@@ -80,19 +80,19 @@ jobs:
     #     cmake --build . -j 2
     #     cmake --install .
 
-    - name: build
-      run: |
-        mkdir build-aarch64 && cd build-aarch64
-        cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/aarch64-linux-gnu.toolchain.cmake -DGTest_DIR=$GITHUB_WORKSPACE/googletest-install/lib/cmake/GTest -Dbenchmark_DIR=$GITHUB_WORKSPACE/benchmark-install/lib/cmake/benchmark -DOpenCV_DIR=$GITHUB_WORKSPACE/opencv-install/lib/cmake/opencv4 ..
-        cmake --build . -j 2
-    - name: test
-      run: |
-        export PATH=$GITHUB_WORKSPACE/qemu-install/bin:$PATH
-        echo "pwd: `pwd`"
-        cd build-aarch64
-        echo "pwd: `pwd`"
-        echo "`which qemu-aarch64`"
-        # https://github.com/google/sanitizers/issues/723
-        # https://github.com/google/sanitizers/issues/1322
-        # https://github.com/google/sanitizers/issues/1321
-        LSAN_OPTIONS=verbosity=1:log_threads=1 ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
+    # - name: build
+    #   run: |
+    #     mkdir build-aarch64 && cd build-aarch64
+    #     cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/aarch64-linux-gnu.toolchain.cmake -DGTest_DIR=$GITHUB_WORKSPACE/googletest-install/lib/cmake/GTest -Dbenchmark_DIR=$GITHUB_WORKSPACE/benchmark-install/lib/cmake/benchmark -DOpenCV_DIR=$GITHUB_WORKSPACE/opencv-install/lib/cmake/opencv4 ..
+    #     cmake --build . -j 2
+    # - name: test
+    #   run: |
+    #     export PATH=$GITHUB_WORKSPACE/qemu-install/bin:$PATH
+    #     echo "pwd: `pwd`"
+    #     cd build-aarch64
+    #     echo "pwd: `pwd`"
+    #     echo "`which qemu-aarch64`"
+    #     # https://github.com/google/sanitizers/issues/723
+    #     # https://github.com/google/sanitizers/issues/1322
+    #     # https://github.com/google/sanitizers/issues/1321
+    #     LSAN_OPTIONS=verbosity=1:log_threads=1 ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
