@@ -3165,6 +3165,17 @@ uint16x8_t	vorrq_u16	(uint16x8_t a, uint16x8_t b);
 uint32x4_t	vorrq_u32	(uint32x4_t a, uint32x4_t b);
 uint64x2_t	vorrq_u64	(uint64x2_t a, uint64x2_t b);
 
+// Vector arithmetic / Division
+#if __aarch64__
+// vdiv_type
+float32x2_t	vdiv_f32	(float32x2_t a, float32x2_t b);
+float64x1_t	vdiv_f64	(float64x1_t a, float64x1_t b);
+float16x4_t	vdiv_f16	(float16x4_t a, float16x4_t b);
+// vdivq_type
+float32x4_t	vdivq_f32	(float32x4_t a, float32x4_t b);
+float64x2_t	vdivq_f64	(float64x2_t a, float64x2_t b);
+float16x8_t	vdivq_f16	(float16x8_t a, float16x8_t b);
+#endif // __aarch64__
 
 #if defined(NEON_SIM_IMPLEMENTATION)
 
@@ -7091,6 +7102,55 @@ uint64x2_t vorrq_u64 (uint64x2_t a, uint64x2_t b)
     return r;
 }
 
+
+// Vector arithmetic / Division
+#if __aarch64__
+// vdiv_type
+float32x2_t	vdiv_f32	(float32x2_t a, float32x2_t b)
+{
+    float32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] / b[i];
+    }
+    return r;
+}
+
+float64x1_t	vdiv_f64	(float64x1_t a, float64x1_t b)
+{
+    float64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] / b[i];
+    }
+    return r;
+}
+
+//float16x4_t	vdiv_f16	(float16x4_t a, float16x4_t b);
+
+// vdivq_type
+float32x4_t	vdivq_f32	(float32x4_t a, float32x4_t b)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] / b[i];
+    }
+    return r;
+}
+
+float64x2_t	vdivq_f64	(float64x2_t a, float64x2_t b)
+{
+    float64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] / b[i];
+    }
+    return r;
+}
+
+//float16x8_t	vdivq_f16	(float16x8_t a, float16x8_t b);
+#endif // __aarch64__
 
 // saturated shift right and narrow
 int8x8_t vqshrn_n_s16 (int16x8_t a, const int n)
