@@ -6827,17 +6827,6 @@ uint8x8_t vqtbl1_u8(uint8x16_t t, uint8x8_t idx)
     return r;
 }
 
-int32x2_t vrev64_s32(int32x2_t vec)
-{
-    int32x2_t r;
-    const int n = 2;
-    for (int i = 0; i < n; i++)
-    {
-        r[i] = vec[n - 1 - i];
-    }
-    return r;
-}
-
 // vext
 uint8x8_t vext_u8(uint8x8_t a, uint8x8_t b, const int n)
 {
@@ -7629,6 +7618,339 @@ int8x8x2_t	vzip_s8	(int8x8_t a, int8x8_t b)
             r.val[0][i] = b[i / 2];
             r.val[1][i] = b[i / 2 + vlen/2];
         }
+    }
+    return r;
+}
+
+
+// vrev16_type:
+int8x8_t	vrev16_s8	(int8x8_t vec)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i+=2)
+    {
+        r[i    ] = vec[i + 1];
+        r[i + 1] = vec[i];
+    }
+    return r;
+}
+
+uint8x8_t	vrev16_u8	(uint8x8_t vec)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i+=2)
+    {
+        r[i    ] = vec[i + 1];
+        r[i + 1] = vec[i];
+    }
+    return r;
+}
+
+// vrev16q_type:
+int8x16_t	vrev16q_s8	(int8x16_t vec)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i+=2)
+    {
+        r[i    ] = vec[i + 1];
+        r[i + 1] = vec[i];
+    }
+    return r;
+}
+
+uint8x16_t	vrev16q_u8	(uint8x16_t vec)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i+=2)
+    {
+        r[i    ] = vec[i + 1];
+        r[i + 1] = vec[i];
+    }
+    return r;
+}
+
+// vrev32_type:
+int8x8_t	vrev32_s8	(int8x8_t vec)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+int16x4_t	vrev32_s16	(int16x4_t vec)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+uint8x8_t	vrev32_u8	(uint8x8_t vec)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+uint16x4_t	vrev32_u16	(uint16x4_t vec)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+// vrev32q_type:
+int8x16_t	vrev32q_s8	(int8x16_t vec)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+int16x8_t	vrev32q_s16	(int16x8_t vec)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+uint8x16_t	vrev32q_u8	(uint8x16_t vec)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+uint16x8_t	vrev32q_u16	(uint16x8_t vec)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+// vrev64_type:
+int8x8_t	vrev64_s8	(int8x8_t vec)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i+=8)
+    {
+        r[i + 0] = vec[i + 7];
+        r[i + 1] = vec[i + 6];
+        r[i + 2] = vec[i + 5];
+        r[i + 3] = vec[i + 4];
+        r[i + 4] = vec[i + 3];
+        r[i + 5] = vec[i + 2];
+        r[i + 6] = vec[i + 1];
+        r[i + 7] = vec[i + 0];
+    }
+    return r;
+}
+
+int16x4_t	vrev64_s16	(int16x4_t vec)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+int32x2_t	vrev64_s32	(int32x2_t vec)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+uint8x8_t	vrev64_u8	(uint8x8_t vec)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i+=8)
+    {
+        r[i + 0] = vec[i + 7];
+        r[i + 1] = vec[i + 6];
+        r[i + 2] = vec[i + 5];
+        r[i + 3] = vec[i + 4];
+        r[i + 4] = vec[i + 3];
+        r[i + 5] = vec[i + 2];
+        r[i + 6] = vec[i + 1];
+        r[i + 7] = vec[i + 0];
+    }
+    return r;
+}
+
+uint16x4_t	vrev64_u16	(uint16x4_t vec)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+uint32x2_t	vrev64_u32	(uint32x2_t vec)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+float32x2_t	vrev64_f32	(float32x2_t vec)
+{
+    float32x2_t r;
+    for (int i = 0; i < 2; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+// vrev64q_type:
+int8x16_t	vrev64q_s8	(int8x16_t vec)
+{
+    int8x16_t r;
+    for (int i = 0; i < 8; i+=8)
+    {
+        r[i + 0] = vec[i + 7];
+        r[i + 1] = vec[i + 6];
+        r[i + 2] = vec[i + 5];
+        r[i + 3] = vec[i + 4];
+        r[i + 4] = vec[i + 3];
+        r[i + 5] = vec[i + 2];
+        r[i + 6] = vec[i + 1];
+        r[i + 7] = vec[i + 0];
+    }
+    return r;
+}
+
+int16x8_t	vrev64q_s16	(int16x8_t vec)
+{
+    int16x8_t r;
+    for (int i = 0; i < 4; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+int32x4_t	vrev64q_s32	(int32x4_t vec)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+uint8x16_t	vrev64q_u8	(uint8x16_t vec)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i+=8)
+    {
+        r[i + 0] = vec[i + 7];
+        r[i + 1] = vec[i + 6];
+        r[i + 2] = vec[i + 5];
+        r[i + 3] = vec[i + 4];
+        r[i + 4] = vec[i + 3];
+        r[i + 5] = vec[i + 2];
+        r[i + 6] = vec[i + 1];
+        r[i + 7] = vec[i + 0];
+    }
+    return r;
+}
+
+uint16x8_t	vrev64q_u16	(uint16x8_t vec)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i+=4)
+    {
+        r[i + 0] = vec[i + 3];
+        r[i + 1] = vec[i + 2];
+        r[i + 2] = vec[i + 1];
+        r[i + 3] = vec[i + 0];
+    }
+    return r;
+}
+
+uint32x4_t	vrev64q_u32	(uint32x4_t vec)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
+    }
+    return r;
+}
+
+float32x4_t	vrev64q_f32	(float32x4_t vec)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i+=2)
+    {
+        r[i + 0] = vec[i + 1];
+        r[i + 1] = vec[i + 0];
     }
     return r;
 }
