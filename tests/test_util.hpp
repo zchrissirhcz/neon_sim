@@ -28,3 +28,15 @@ static bool almostEqual(const uint8x8_t& expected, const uint8x8_t& actual, doub
     }
     return true;
 }
+
+static bool almostEqual(const uint8x8x2_t& expected, const uint8x8x2_t& actual)
+{
+    for (int i = 0; i < 2; i++)
+    {
+        if (!almostEqual(expected.val[i], actual.val[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
