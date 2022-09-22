@@ -12,6 +12,7 @@
 #include "arm_neon_sim.hpp"
 #endif
 
+using namespace och;
 
 void threshold_gray(const cv::Mat& src, cv::Mat& dst, int thresh, int minval, int maxval)
 {

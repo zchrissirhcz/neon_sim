@@ -7432,6 +7432,28 @@ uint32x4_t vmvnq_u32 (uint32x4_t a)
 }
 
 
+// vzip_type:
+int8x8x2_t	vzip_s8	(int8x8_t a, int8x8_t b)
+{
+    int8x8x2_t r;
+    const int vlen = 8;
+    for (int i = 0; i < 8; i++)
+    {
+        if (i % 2 == 0)
+        {
+            r.val[0][i] = a[i / 2];
+            r.val[1][i] = a[i / 2 + vlen/2];
+        }
+        else
+        {
+            r.val[0][i] = b[i / 2];
+            r.val[1][i] = b[i / 2 + vlen/2];
+        }
+    }
+    return r;
+}
+
+
 // Vector arithmetic / Division
 #if __aarch64__
 // vdiv_type

@@ -12,6 +12,8 @@
 #include "arm_neon_sim.hpp"
 #endif
 
+using namespace och;
+
 void rgb2gray(const cv::Mat& src, cv::Mat& gray)
 {
     if (src.type() != CV_8UC3) {

@@ -12,6 +12,7 @@
 #include "arm_neon_sim.hpp"
 #endif
 
+using namespace och;
 
 void rgb2bgr(const cv::Mat& src, cv::Mat& dst)
 {
