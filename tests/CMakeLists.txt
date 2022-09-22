@@ -9,6 +9,7 @@ macro(neon_sim_add_test name)
   endif()
 
   target_link_libraries(${name} PRIVATE ${dep_libs})
+  target_include_directories(${name} PUBLIC ${CMAKE_SOURCE_DIR}/src)
   #gtest_add_tests(TARGET ${name})
   if((NOT ANDROID) AND CMAKE_SYSTEM_NAME MATCHES "Linux" AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
     gtest_add_tests(TARGET ${name}
