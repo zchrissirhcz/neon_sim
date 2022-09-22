@@ -3186,6 +3186,25 @@ uint32x4_t	veorq_u32	(uint32x4_t a, uint32x4_t b);
 uint64x2_t	veorq_u64	(uint64x2_t a, uint64x2_t b);
 
 
+// Logical / Bitwise NOT
+// vmvn_type
+int8x8_t	vmvn_s8	(int8x8_t a);
+int16x4_t	vmvn_s16	(int16x4_t a);
+int32x2_t	vmvn_s32	(int32x2_t a);
+uint8x8_t	vmvn_u8	(uint8x8_t a);
+uint16x4_t	vmvn_u16	(uint16x4_t a);
+uint32x2_t	vmvn_u32	(uint32x2_t a);
+//poly8x8_t	vmvn_p8	(poly8x8_t a)
+// vmvnq_type
+int8x16_t	vmvnq_s8	(int8x16_t a);
+int16x8_t	vmvnq_s16	(int16x8_t a);
+int32x4_t	vmvnq_s32	(int32x4_t a);
+uint8x16_t	vmvnq_u8	(uint8x16_t a);
+uint16x8_t	vmvnq_u16	(uint16x8_t a);
+uint32x4_t	vmvnq_u32	(uint32x4_t a);
+//poly8x16_t	vmvnq_p8	(poly8x16_t a);
+
+
 // Vector arithmetic / Division
 #if __aarch64__
 // vdiv_type
@@ -7289,6 +7308,128 @@ uint64x2_t veorq_u64 (uint64x2_t a, uint64x2_t b)
     return r;
 }
 
+
+// vmvn_type:
+int8x8_t	vmvn_s8	(int8x8_t a)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+int16x4_t vmvn_s16(int16x4_t a)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+int32x2_t vmvn_s32 (int32x2_t a)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint8x8_t vmvn_u8(uint8x8_t a)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint16x4_t vmvn_u16(uint16x4_t a)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint32x2_t vmvn_u32 (uint32x2_t a)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+// vmvnq_type:
+int8x16_t vmvnq_s8 (int8x16_t a)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+int16x8_t vmvnq_s16 (int16x8_t a)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+int32x4_t vmvnq_s32 (int32x4_t a)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint8x16_t vmvnq_u8 (uint8x16_t a)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint16x8_t vmvnq_u16 (uint16x8_t a)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
+
+uint32x4_t vmvnq_u32 (uint32x4_t a)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = ~a[i];
+    }
+    return r;
+}
 
 
 // Vector arithmetic / Division
