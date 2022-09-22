@@ -3165,6 +3165,27 @@ uint16x8_t	vorrq_u16	(uint16x8_t a, uint16x8_t b);
 uint32x4_t	vorrq_u32	(uint32x4_t a, uint32x4_t b);
 uint64x2_t	vorrq_u64	(uint64x2_t a, uint64x2_t b);
 
+// Logical / Exclusive OR
+// veor_type
+int8x8_t	veor_s8	(int8x8_t a, int8x8_t b);
+int16x4_t	veor_s16	(int16x4_t a, int16x4_t b);
+int32x2_t	veor_s32	(int32x2_t a, int32x2_t b);
+int64x1_t	veor_s64	(int64x1_t a, int64x1_t b);
+uint8x8_t	veor_u8	(uint8x8_t a, uint8x8_t b);
+uint16x4_t	veor_u16	(uint16x4_t a, uint16x4_t b);
+uint32x2_t	veor_u32	(uint32x2_t a, uint32x2_t b);
+uint64x1_t	veor_u64	(uint64x1_t a, uint64x1_t b);
+// veorq_type
+int8x16_t	veorq_s8	(int8x16_t a, int8x16_t b);
+int16x8_t	veorq_s16	(int16x8_t a, int16x8_t b);
+int32x4_t	veorq_s32	(int32x4_t a, int32x4_t b);
+int64x2_t	veorq_s64	(int64x2_t a, int64x2_t b);
+uint8x16_t	veorq_u8	(uint8x16_t a, uint8x16_t b);
+uint16x8_t	veorq_u16	(uint16x8_t a, uint16x8_t b);
+uint32x4_t	veorq_u32	(uint32x4_t a, uint32x4_t b);
+uint64x2_t	veorq_u64	(uint64x2_t a, uint64x2_t b);
+
+
 // Vector arithmetic / Division
 #if __aarch64__
 // vdiv_type
@@ -7101,6 +7122,173 @@ uint64x2_t vorrq_u64 (uint64x2_t a, uint64x2_t b)
     }
     return r;
 }
+
+
+
+// veor_type:
+int8x8_t veor_s8(int8x8_t a, int8x8_t b)
+{
+    int8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int16x4_t veor_s16(int16x4_t a, int16x4_t b)
+{
+    int16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int32x2_t veor_s32 (int32x2_t a, int32x2_t b)
+{
+    int32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int64x1_t veor_s64 (int64x1_t a, int64x1_t b)
+{
+    int64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint8x8_t veor_u8(uint8x8_t a, uint8x8_t b)
+{
+    uint8x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint16x4_t veor_u16(uint16x4_t a, uint16x4_t b)
+{
+    uint16x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint32x2_t ver_u32 (uint32x2_t a, uint32x2_t b)
+{
+    uint32x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint64x1_t veor_u64 (uint64x1_t a, uint64x1_t b)
+{
+    uint64x1_t r;
+    for (int i = 0; i < 1; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+
+// veorq_type:
+int8x16_t veorq_s8 (int8x16_t a, int8x16_t b)
+{
+    int8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int16x8_t veorq_s16 (int16x8_t a, int16x8_t b)
+{
+    int16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int32x4_t veorq_s32 (int32x4_t a, int32x4_t b)
+{
+    int32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+int64x2_t veorq_s64 (int64x2_t a, int64x2_t b)
+{
+    int64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+
+uint8x16_t veorq_u8 (uint8x16_t a, uint8x16_t b)
+{
+    uint8x16_t r;
+    for (int i = 0; i < 16; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint16x8_t veorq_u16 (uint16x8_t a, uint16x8_t b)
+{
+    uint16x8_t r;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint32x4_t veorq_u32 (uint32x4_t a, uint32x4_t b)
+{
+    uint32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+uint64x2_t veorq_u64 (uint64x2_t a, uint64x2_t b)
+{
+    uint64x2_t r;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
 
 
 // Vector arithmetic / Division
