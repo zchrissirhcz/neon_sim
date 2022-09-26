@@ -9,7 +9,7 @@ TEST(vst1q, f32)
     EXPECT_TRUE(almostEqual(expected, actual));
 }
 
-TEST(vst, ss)
+TEST(vst4q_lane, f32)
 {
     float32x4_t v0 = { 1.0, 2.0, 3.0, 4.0 };
     float32x4_t v1 = { 5.0, 6.0, 7.0, 8.0 };

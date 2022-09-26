@@ -8,6 +8,8 @@ TEST(vrecpeq, f32)
     EXPECT_TRUE(almostEqual(expected, actual));
 }
 
+// invert (more accurately): use a Newton-Raphson iteration to refine the estimate
+// http://en.wikipedia.org/wiki/Division_algorithm#Newton.E2.80.93Raphson_division
 TEST(vrecpeq, f32_more_precise)
 {
     float32x4_t v = { 1.0, 2.0, 3.0, 4.0 };

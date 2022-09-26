@@ -935,12 +935,14 @@ int64x2_t	vaddl_s32	(int32x2_t a, int32x2_t b);
 uint16x8_t	vaddl_u8	(uint8x8_t a, uint8x8_t b);
 uint32x4_t	vaddl_u16	(uint16x4_t a, uint16x4_t b);
 uint64x2_t	vaddl_u32	(uint32x2_t a, uint32x2_t b);
+#if __aarch64__
 int16x8_t	vaddl_high_s8	(int8x16_t a, int8x16_t b);
 int32x4_t	vaddl_high_s16	(int16x8_t a, int16x8_t b);
 int64x2_t	vaddl_high_s32	(int32x4_t a, int32x4_t b);
 uint16x8_t	vaddl_high_u8	(uint8x16_t a, uint8x16_t b);
 uint32x4_t	vaddl_high_u16	(uint16x8_t a, uint16x8_t b);
 uint64x2_t	vaddl_high_u32	(uint32x4_t a, uint32x4_t b);
+#endif // __aarch64__
 
 // vaddw_type
 int16x8_t	vaddw_s8	(int16x8_t a, int8x8_t b);
@@ -949,12 +951,14 @@ int64x2_t	vaddw_s32	(int64x2_t a, int32x2_t b);
 uint16x8_t	vaddw_u8	(uint16x8_t a, uint8x8_t b);
 uint32x4_t	vaddw_u16	(uint32x4_t a, uint16x4_t b);
 uint64x2_t	vaddw_u32	(uint64x2_t a, uint32x2_t b);
+#if __aarch64__
 int16x8_t	vaddw_high_s8	(int16x8_t a, int8x16_t b);
 int32x4_t	vaddw_high_s16	(int32x4_t a, int16x8_t b);
 int64x2_t	vaddw_high_s32	(int64x2_t a, int32x4_t b);
 uint16x8_t	vaddw_high_u8	(uint16x8_t a, uint8x16_t b);
 uint32x4_t	vaddw_high_u16	(uint32x4_t a, uint16x8_t b);
 uint64x2_t	vaddw_high_u32	(uint64x2_t a, uint32x4_t b);
+#endif // __aarch64__
 
 // vaddhn_type
 int8x8_t	vaddhn_s16	(int16x8_t a, int16x8_t b);
@@ -963,12 +967,14 @@ int32x2_t	vaddhn_s64	(int64x2_t a, int64x2_t b);
 uint8x8_t	vaddhn_u16	(uint16x8_t a, uint16x8_t b);
 uint16x4_t	vaddhn_u32	(uint32x4_t a, uint32x4_t b);
 uint32x2_t	vaddhn_u64	(uint64x2_t a, uint64x2_t b);
+#if __aarch64__
 int8x16_t	vaddhn_high_s16	(int8x8_t r, int16x8_t a, int16x8_t b);
 int16x8_t	vaddhn_high_s32	(int16x4_t r, int32x4_t a, int32x4_t b);
 int32x4_t	vaddhn_high_s64	(int32x2_t r, int64x2_t a, int64x2_t b);
 uint8x16_t	vaddhn_high_u16	(uint8x8_t r, uint16x8_t a, uint16x8_t b);
 uint16x8_t	vaddhn_high_u32	(uint16x4_t r, uint32x4_t a, uint32x4_t b);
 uint32x4_t	vaddhn_high_u64	(uint32x2_t r, uint64x2_t a, uint64x2_t b);
+#endif // __aarch64__
 
 // vqadd_type
 int8x8_t	vqadd_s8	(int8x8_t a, int8x8_t b);
@@ -4711,6 +4717,139 @@ uint64x2_t	vaddw_u32	(uint64x2_t a, uint32x2_t b)
     return r;
 }
 
+#if __aarch64__
+int16x8_t	vaddw_high_s8	(int16x8_t a, int8x16_t b)
+{
+    int16x8_t r;
+    const int ofs = 8;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+
+int32x4_t	vaddw_high_s16	(int32x4_t a, int16x8_t b)
+{
+    int32x4_t r;
+    const int ofs = 4;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+
+int64x2_t	vaddw_high_s32	(int64x2_t a, int32x4_t b)
+{
+    int64x2_t r;
+    const int ofs = 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint16x8_t	vaddw_high_u8	(uint16x8_t a, uint8x16_t b)
+{
+    uint16x8_t r;
+    const int ofs = 8;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint32x4_t	vaddw_high_u16	(uint32x4_t a, uint16x8_t b)
+{
+    uint32x4_t r;
+    const int ofs = 4;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint64x2_t	vaddw_high_u32	(uint64x2_t a, uint32x4_t b)
+{
+    uint64x2_t r;
+    const int ofs = 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[i] + b[ofs + i];
+    }
+    return r;
+}
+#endif // __aarch64__
+
+
+// vaddhn
+#if __aarch64__
+int8x16_t vaddhn_high_s16(int8x8_t r, int16x8_t a, int16x8_t b)
+{
+    int8x16_t ret;
+    for (int i = 0; i < 8; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 8; i++)
+        ret[i+8] = (int8_t)((a[i] + b[i]) >> 8);
+    return ret;
+}
+
+int16x8_t	vaddhn_high_s32	(int16x4_t r, int32x4_t a, int32x4_t b)
+{
+    int16x8_t ret;
+    for (int i = 0; i < 4; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 4; i++)
+        ret[i+4] = (int16_t)((a[i] + b[i]) >> 4);
+    return ret;
+}
+
+int32x4_t	vaddhn_high_s64	(int32x2_t r, int64x2_t a, int64x2_t b)
+{
+    int32x4_t ret;
+    for (int i = 0; i < 2; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 2; i++)
+        ret[i+2] = (int32_t)((a[i] + b[i]) >> 2);
+    return ret;
+}
+
+uint8x16_t	vaddhn_high_u16	(uint8x8_t r, uint16x8_t a, uint16x8_t b)
+{
+    uint8x16_t ret;
+    for (int i = 0; i < 8; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 8; i++)
+        ret[i+8] = (uint8_t)((a[i] + b[i]) >> 8);
+    return ret;
+}
+
+uint16x8_t	vaddhn_high_u32	(uint16x4_t r, uint32x4_t a, uint32x4_t b)
+{
+    uint16x8_t ret;
+    for (int i = 0; i < 4; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 4; i++)
+        ret[i+4] = (uint16_t)((a[i] + b[i]) >> 4);
+    return ret;
+}
+
+uint32x4_t	vaddhn_high_u64	(uint32x2_t r, uint64x2_t a, uint64x2_t b)
+{
+    uint32x4_t ret;
+    for (int i = 0; i < 2; i++)
+        ret[i] = r[i];
+    for (int i = 0; i < 2; i++)
+        ret[i+2] = (uint32_t)((a[i] + b[i]) >> 2);
+    return ret;
+}
+#endif // __aarch64__
+
+
 // vaddq
 
 int8x16_t vaddq_s8(int8x16_t N, int8x16_t M)
@@ -4817,6 +4956,74 @@ uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
     return r;
 }
 
+// vaddl_high
+#if __aarch64__
+int16x8_t	vaddl_high_s8	(int8x16_t a, int8x16_t b)
+{
+    int16x8_t r;
+    const int ofs = 16 / 2;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+
+int32x4_t	vaddl_high_s16	(int16x8_t a, int16x8_t b)
+{
+    int32x4_t r;
+    const int ofs = 8 / 2;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+
+int64x2_t	vaddl_high_s32	(int32x4_t a, int32x4_t b)
+{
+    int64x2_t r;
+    const int ofs = 4 / 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint16x8_t	vaddl_high_u8	(uint8x16_t a, uint8x16_t b)
+{
+    uint16x8_t r;
+    const int ofs = 16 / 2;
+    for (int i = 0; i < 8; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint32x4_t	vaddl_high_u16	(uint16x8_t a, uint16x8_t b)
+{
+    uint32x4_t r;
+    const int ofs = 8 / 2;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+
+uint64x2_t	vaddl_high_u32	(uint32x4_t a, uint32x4_t b)
+{
+    uint64x2_t r;
+    const int ofs = 4 / 2;
+    for (int i = 0; i < 2; i++)
+    {
+        r[i] = a[ofs + i] + b[ofs + i];
+    }
+    return r;
+}
+#endif // __aarch64__
 
 // vqaddq
 uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
@@ -5132,6 +5339,66 @@ uint32x2_t	vrsubhn_u64	(uint64x2_t N, uint64x2_t M)
     return D;
 }
 
+// vmul
+int8x8_t vmul_s8(int8x8_t N, int8x8_t M)
+{
+    int8x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+int16x4_t vmul_s16(int16x4_t N, int16x4_t M)
+{
+    int16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+int32x2_t vmul_s32(int32x2_t N, int32x2_t M)
+{
+    int32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+uint8x8_t vmul_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint8x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+uint16x4_t vmul_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
+
+uint32x2_t vmul_u32(uint32x2_t N, uint32x2_t M)
+{
+    uint32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M[i];
+    }
+    return D;
+}
 
 // vmulq
 int8x16_t vmulq_s8(int8x16_t N, int8x16_t M)
@@ -5183,7 +5450,110 @@ uint32x4_t vmulq_u32(uint32x4_t N, uint32x4_t M)
     return D;
 }
 
+float32x4_t vmulq_f32(float32x4_t a, float32x4_t b)
+{
+    float32x4_t r;
+    for (int i = 0; i < 4; i++)
+    {
+        r[i] = a[i] * b[i];
+    }
+    return r;
+}
+
+// vmul_n
+int16x4_t vmul_n_s16(int16x4_t N, int16_t M)
+{
+    int16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+int32x2_t vmul_n_s32(int32x2_t N, int32_t M)
+{
+    int32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+uint16x4_t vmul_n_u16(uint16x4_t N, uint16_t M)
+{
+    uint16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+uint32x2_t vmul_n_u32(uint32x2_t N, uint32_t M)
+{
+    uint32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+float32x2_t vmul_n_f32(float32x2_t N, float32_t M)
+{
+    float32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+#if __aarch64__
+float64x1_t vmul_n_f64(float64x1_t N, float64_t M)
+{
+    float64x1_t D;
+    for (int i=0; i<1; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+#endif // __aarch64__
+
 // vmulq_n
+int16x8_t vmulq_n_s16(int16x8_t N, int16_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+int32x4_t vmulq_n_s32(int32x4_t N, int32_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
+uint16x8_t vmulq_n_u16(uint16x8_t N, uint16_t M)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = N[i] * M;
+    }
+    return D;
+}
+
 uint32x4_t vmulq_n_u32(uint32x4_t N, uint32_t M)
 {
     uint32x4_t D;
@@ -5204,15 +5574,17 @@ float32x4_t vmulq_n_f32(float32x4_t N, float32_t M)
     return D;
 }
 
-float32x4_t vmulq_f32(float32x4_t a, float32x4_t b)
+#if __aarch64__
+float64x2_t vmulq_n_f64(float64x2_t N, float64_t M)
 {
-    float32x4_t r;
-    for (int i = 0; i < 4; i++)
+    float64x2_t D;
+    for (int i=0; i<2; i++)
     {
-        r[i] = a[i] * b[i];
+        D[i] = N[i] * M;
     }
-    return r;
+    return D;
 }
+#endif // __aarch64__
 
 // vmull
 uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
@@ -6146,6 +6518,46 @@ uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
     }
     return D;
 }
+
+uint16x4_t vqshrun_n_s32(int32x4_t v, const int n)
+{
+    if (n < 1 || n > 16)
+    {
+        fprintf(stderr, "%s: param n out of range\n", __FUNCTION__);
+        abort();
+    }
+    uint16x4_t D;
+    for (int i=0; i<4; i++) {
+        int32_t temp = ( v[i] + (1<<(n-1) ) ) >> n;
+        if (temp > UINT16_MAX) {
+            temp = UINT16_MAX;
+        } else if (temp < 0) {
+            temp = 0;
+        }
+    }
+    return D;
+}
+
+/// @param n 1-32
+uint32x2_t vqshrun_n_s64(int64x2_t v, const int n)
+{
+    if (n < 1 || n > 32)
+    {
+        fprintf(stderr, "%s: param n out of range\n", __FUNCTION__);
+        abort();
+    }
+    uint32x2_t D;
+    for (int i=0; i<2; i++) {
+        int64_t temp = ( v[i] + (1<<(n-1) ) ) >> n;
+        if (temp > UINT32_MAX) {
+            temp = UINT32_MAX;
+        } else if (temp < 0) {
+            temp = 0;
+        }
+    }
+    return D;
+}
+
 
 uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
 {
