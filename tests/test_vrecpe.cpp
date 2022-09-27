@@ -1,5 +1,6 @@
 #include "test_util.hpp"
 
+//- invert (needed for division): **vrecpeq_f32** or **vrecpeq_f64**
 TEST(vrecpeq, f32)
 {
     float32x4_t v = { 1.0, 2.0, 3.0, 4.0 };

@@ -2,7 +2,7 @@
 
 //
 // usage:
-#define NEON_SIM_IMPLEMENTATION
+//#define NEON_SIM_IMPLEMENTATION
 //
 // #if __ARM_NEON
 // #include <arm_neon.h>

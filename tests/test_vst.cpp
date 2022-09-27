@@ -9,6 +9,7 @@ TEST(vst1q, f32)
     EXPECT_TRUE(almostEqual(expected, actual));
 }
 
+//- store lane of array of vectors: **vst4q_lane_f16** or **vst4q_lane_f32** or **vst4q_lane_f64** (change to **vst1...** / **vst2...** / **vst3...** for other array lengths);
 TEST(vst4q_lane, f32)
 {
     float32x4_t v0 = { 1.0, 2.0, 3.0, 4.0 };
