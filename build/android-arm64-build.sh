@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ANDROID_NDK=~/soft/android-ndk-r21e
+#ANDROID_NDK=~/soft/android-ndk-r23b
 TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 
 BUILD_DIR=android-arm64

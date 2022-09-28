@@ -1,8 +1,11 @@
 #pragma once
 
-#include "gtest/gtest.h"
+//#include "gtest/gtest.h"
+#include "utest.h"
+#define TEST UTEST
 
 #include <iostream>
+#include <vector>
 #include <cmath>
 
 #define NEON_SIM_IMPLEMENTATION
@@ -135,7 +138,7 @@ static bool almostEqual(const std::vector<float>& expected, const std::vector<fl
 {
     for (int i = 0; i < 4; i++)
     {
-        const double diff = std::fabs((double)expected[i] - (double)actual[i]);
+        const double diff = std::fabs(expected[i] - actual[i]);
         if (diff > eps)
         {
             std::cerr << "array[" << i << "] (" << (int)actual[i] << ") != expected[" << i << "] (" << (int)expected[i] 
@@ -146,3 +149,4 @@ static bool almostEqual(const std::vector<float>& expected, const std::vector<fl
     return true;
 }
 
+UTEST_MAIN()
