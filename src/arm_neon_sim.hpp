@@ -5248,6 +5248,397 @@ float32x4_t vsubq_f32(float32x4_t N, float32x4_t M)
 }
 
 
+// vsubhn
+int8x8_t vsubhn_s16(int16x8_t N, int16x8_t M)
+{
+    int8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+
+int16x4_t vsubn_s32(int32x4_t N, int32x4_t M)
+{
+    int16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+
+int32x2_t vsubn_s64(int64x2_t N, int64x2_t M)
+{
+    int32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+uint8x8_t vsubhn_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+uint16x4_t vsubn_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+
+uint32x2_t vsubn_u64(uint64x2_t N, uint64x2_t M)
+{
+    uint32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = (N[i] - M[i]) >> 8;
+    }
+    return D;
+}
+
+int8x8_t vhsub_s8(int8x8_t N, int8x8_t M)
+{
+    int8x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        //D[i] = (N[i] - M[i]) / 2; //not ok: result differs with `>>1`. 说明，移位和除法，是不一样的！
+        D[i] = (N[i] - M[i])>>1; //ok
+    }
+    return D;
+}
+
+int16x4_t vhsub_s16(int16x4_t N, int16x4_t M)
+{
+    int16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+int32x2_t vhsub_s32(int32x2_t N, int32x2_t M)
+{
+    int32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+uint8x8_t vhsub_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint8x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+uint16x4_t vhsub_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint16x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+
+uint32x2_t vhsub_u32(uint32x2_t N, uint32x2_t M)
+{
+    uint32x2_t D;
+    for (int i=0; i<2; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+// vhsubq
+int8x16_t vhsubq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+int16x8_t vhsubq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+int32x4_t vhsubq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+uint8x16_t vhsubq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (int i=0; i<16; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+uint16x8_t vhsubq_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint16x8_t D;
+    for (int i=0; i<8; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+uint32x4_t vhsubq_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint32x4_t D;
+    for (int i=0; i<4; i++)
+    {
+        D[i] = (N[i] - M[i])>>1;
+    }
+    return D;
+}
+
+// vqsub
+int8x8_t vqsub_s8(int8x8_t N, int8x8_t M)
+{
+    int8x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        if (temp > INT8_MAX) {
+            D[i] = INT8_MAX;
+        }
+        else if(temp < INT8_MIN) {
+            D[i] = INT8_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+int16x4_t vqsub_s16(int16x4_t N, int16x4_t M)
+{
+    int16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        if (temp > INT16_MAX) {
+            D[i] = INT16_MAX;
+        }
+        else if(temp < INT16_MIN) {
+            D[i] = INT16_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+int32x2_t vqsub_s32(int32x2_t N, int32x2_t M)
+{
+    int32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        if (temp > INT32_MAX) {
+            D[i] = INT32_MAX;
+        }
+        else if(temp < INT32_MIN) {
+            D[i] = INT32_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+int64x1_t vqsub_s64(int64x1_t N, int64x1_t M)
+{
+    int64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        double temp = (double)N[i] - (double)M[i];
+        if (temp > (double)(INT64_MAX)) {
+            D[i] = INT64_MAX;
+        }
+        else if(temp < INT64_MIN) {
+            D[i] = INT64_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+// vsubl
+int16x8_t vsubl_s8(int8x8_t N, int8x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = (int16_t)(N[i]) - (int16_t)(M[i]);
+    }
+    return D;
+}
+
+int32x4_t vsubl_s16(int16x4_t N, int16x4_t M)
+{
+    int32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = (int32_t)(N[i]) - (int32_t)(M[i]);
+    }
+    return D;
+}
+
+int64x2_t vsubl_s32(int32x4_t N, int32x2_t M)
+{
+    int64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = (int64_t)(N[i]) - (int64_t)(M[i]);
+    }
+    return D;
+}
+
+uint16x8_t vsubl_u8(uint8x8_t N, uint8x8_t M)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = (uint16_t)(N[i]) - (uint16_t)(M[i]);
+    }
+    return D;
+}
+
+
+uint32x4_t vsubl_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = (uint32_t)(N[i]) - (uint32_t)(M[i]);
+    }
+    return D;
+}
+
+uint64x2_t vsubl_u32(uint32x4_t N, uint32x2_t M)
+{
+    uint64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = (uint64_t)(N[i]) - (uint64_t)(M[i]);
+    }
+    return D;
+}
+
+// vsubw
+int16x8_t vsubw_s8(int16x8_t N, int8x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - (int16_t)(M[i]);
+    }
+    return D;
+}
+
+int32x4_t vsubw_s16(int32x4_t N, int16x4_t M)
+{
+    int32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - (int32_t)(M[i]);
+    }
+    return D;
+}
+
+int64x2_t vsubw_s32(int64x2_t N, int32x2_t M)
+{
+    int64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - (int64_t)(M[i]);
+    }
+    return D;
+}
+
+
+uint16x8_t vsubw_u8(uint16x8_t N, uint8x8_t M)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        D[i] = N[i] - (uint16_t)(M[i]);
+    }
+    return D;
+}
+
+uint32x4_t vsubw_u16(uint32x4_t N, uint16x4_t M)
+{
+    uint32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        D[i] = N[i] - (uint32_t)(M[i]);
+    }
+    return D;
+}
+
+uint64x2_t vsubw_u32(uint64x2_t N, uint32x2_t M)
+{
+    uint64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        D[i] = N[i] - (uint64_t)(M[i]);
+    }
+    return D;
+}
+
 uint8x8_t vqsub_u8(uint8x8_t N, uint8x8_t M)
 {
     uint8x8_t D;
@@ -5256,6 +5647,219 @@ uint8x8_t vqsub_u8(uint8x8_t N, uint8x8_t M)
         int16_t temp = (int16_t)N[i] - (int16_t)M[i];
         if (temp > UINT8_MAX) {
             D[i] = UINT8_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint16x4_t vqsub_u16(uint16x4_t N, uint16x4_t M)
+{
+    uint16x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        if (temp > UINT16_MAX) {
+            D[i] = UINT16_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint32x2_t vqsub_u32(uint32x2_t N, uint32x2_t M)
+{
+    uint32x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        if (temp > UINT32_MAX) {
+            D[i] = UINT32_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint64x1_t vqsub_u64(uint64x1_t N, uint64x1_t M)
+{
+    uint64x1_t D;
+    for (size_t i=0; i<1; i++)
+    {
+        double temp = (double)N[i] - (double)M[i];
+        if (temp > (double)(UINT64_MAX)) {
+            D[i] = UINT64_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+// vqsubq
+int8x16_t vqsubq_s8(int8x16_t N, int8x16_t M)
+{
+    int8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        if (temp > INT8_MAX) {
+            D[i] = INT8_MAX;
+        }
+        else if(temp < INT8_MIN) {
+            D[i] = INT8_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+int16x8_t vqsubq_s16(int16x8_t N, int16x8_t M)
+{
+    int16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        if (temp > INT16_MAX) {
+            D[i] = INT16_MAX;
+        }
+        else if(temp < INT16_MIN) {
+            D[i] = INT16_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+int32x4_t vqsubq_s32(int32x4_t N, int32x4_t M)
+{
+    int32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        if (temp > INT32_MAX) {
+            D[i] = INT32_MAX;
+        }
+        else if(temp < INT32_MIN) {
+            D[i] = INT32_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+int64x2_t vqsubq_s64(int64x2_t N, int64x2_t M)
+{
+    int64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        double temp = (double)N[i] - (double)M[i];
+        if (temp > (double)(INT64_MAX)) {
+            D[i] = INT64_MAX;
+        }
+        else if(temp < INT64_MIN) {
+            D[i] = INT64_MIN;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint8x16_t vqsubq_u8(uint8x16_t N, uint8x16_t M)
+{
+    uint8x16_t D;
+    for (size_t i=0; i<16; i++)
+    {
+        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        if (temp > UINT8_MAX) {
+            D[i] = UINT8_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+uint16x8_t vqsubq_u16(uint16x8_t N, uint16x8_t M)
+{
+    uint16x8_t D;
+    for (size_t i=0; i<8; i++)
+    {
+        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        if (temp > UINT16_MAX) {
+            D[i] = UINT16_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+
+uint32x4_t vqsubq_u32(uint32x4_t N, uint32x4_t M)
+{
+    uint32x4_t D;
+    for (size_t i=0; i<4; i++)
+    {
+        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        if (temp > UINT32_MAX) {
+            D[i] = UINT32_MAX;
+        }
+        else if (temp < 0) {
+            D[i] = 0;
+        }
+        else {
+            D[i] = temp;
+        }
+    }
+    return D;
+}
+
+uint64x2_t vqsubq_u64(uint64x2_t N, uint64x2_t M)
+{
+    uint64x2_t D;
+    for (size_t i=0; i<2; i++)
+    {
+        double temp = (double)N[i] - (double)M[i];
+        if (temp > (double)(UINT64_MAX)) {
+            D[i] = UINT64_MAX;
         }
         else if (temp < 0) {
             D[i] = 0;
@@ -6038,25 +6642,6 @@ float32x4_t vdupq_n_f32(float32_t value)
         r[i] = value;
     }
     return r;
-}
-
-uint8x16_t vqsubq_u8(uint8x16_t a, uint8x16_t b)
-{
-    uint8x16_t D;
-    for (size_t i=0; i<16; i++)
-    {
-        int16_t temp = (int16_t)a[i] - (int16_t)b[i];
-        if (temp > UINT8_MAX) {
-            D[i] = UINT8_MAX;
-        }
-        else if (temp < 0) {
-            D[i] = 0;
-        }
-        else {
-            D[i] = temp;
-        }
-    }
-    return D;
 }
 
 float32x4_t vmovq_n_f32(float32_t value)

@@ -23,27 +23,20 @@ TEST(vext, u8)
         uint8x8_t s6 = vext_u8(m, s0, 2);
         uint8x8_t s7 = vext_u8(m, s0, 1);
 
-        std::cout << "s1: " << s1 << std::endl;
-
-        uint8_t s1_data[8];
-        vst1_u8(s1_data, s1);
-
-        // 0, 71, 61, 51, 41, 31, 21, 11,
-        for (int i=0; i<8; i++)
-        {
-            printf("%d, ", s1_data[i]);
-        }
-        printf("\n");
-
-
-        uint8_t s2_data[8];
-        vst1_u8(s2_data, s2);
-
-        uint8x8_t expected = { 0, 71, 61, 51, 41, 31, 21, 11 };
-        for (int i=0; i<8; i++)
-        {
-            printf("%d, ", s2_data[i]);
-        }
-        printf("\n");
+        uint8x8_t expected_s1 = { 0, 71, 61, 51, 41, 31, 21, 11 };        
+        uint8x8_t expected_s2 = { 0, 0, 71, 61, 51, 41, 31, 21 };
+        uint8x8_t expected_s3 = { 0, 0, 0, 71, 61, 51, 41, 31 };
+        uint8x8_t expected_s4 = { 0, 0, 0, 0, 71, 61, 51, 41 };
+        uint8x8_t expected_s5 = { 0, 0, 0, 0, 0, 71, 61, 51 };
+        uint8x8_t expected_s6 = { 0, 0, 0, 0, 0, 0, 71, 61 };
+        uint8x8_t expected_s7 = { 0, 0, 0, 0, 0, 0, 0, 71 };
+        
+        EXPECT_TRUE(almostEqual(expected_s1, s1));
+        EXPECT_TRUE(almostEqual(expected_s2, s2));
+        EXPECT_TRUE(almostEqual(expected_s3, s3));
+        EXPECT_TRUE(almostEqual(expected_s4, s4));
+        EXPECT_TRUE(almostEqual(expected_s5, s5));
+        EXPECT_TRUE(almostEqual(expected_s6, s6));
+        EXPECT_TRUE(almostEqual(expected_s7, s7));
     }
 }

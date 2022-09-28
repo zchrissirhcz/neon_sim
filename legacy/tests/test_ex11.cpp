@@ -8,17 +8,6 @@
 #include "arm_neon_sim.hpp"
 #endif
 
-int test_vext()
-{
-
-#if __ARM_NEON
-
-#endif // __ARM_NEON
-
-    return 0;
-}
-
-
 void test_vpaddl()
 {
 #if __ARM_NEON
