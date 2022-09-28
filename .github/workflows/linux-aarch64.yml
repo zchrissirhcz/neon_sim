@@ -63,36 +63,36 @@ jobs:
         cmake --build . -j 2
         cmake --install .
 
-    # - name: cache-opencv
-    #   id: cache-opencv
-    #   uses: actions/cache@v3.0.8
-    #   with:
-    #     path: opencv-install
-    #     key: opencv-install-aarch64
-    # - name: opencv
-    #   if: steps.cache-opencv.outputs.cache-hit != 'true'
-    #   run: |
-    #     git clone https://github.com/opencv/opencv -b 4.6.0 --depth 1
-    #     cd opencv
-    #     rm -rf modules/gapi
-    #     mkdir build && cd build
-    #     cmake .. -G Ninja -DCMAKE_TOOLCHAIN_FILE=../../cmake/aarch64-linux-gnu.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/opencv-install -DBUILD_LIST='core,imgcodecs,imgproc' -D BUILD_SHARED_LIBS=OFF -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_DOCS=OFF  -D BUILD_opencv_python3=OFF -D WITH_IPP=OFF -D WITH_PROTOBUF=OFF -D WITH_QUIRC=OFF -D WITH_EIGEN=OFF -DWITH_WEBP=OFF -DBUILD_WEBP=OFF -DWITH_OPENCL=OFF -DWITH_JAVA=OFF  -DWITH_OPENEXR=OFF -DBUILD_OPENEXR=OFF -DWITH_JASPER=OFF -D BUILD_JASPER=OFF -DWITH_TIFF=OFF -D BUILD_TIFF=OFF -DWITH_OPENJPEG=OFF -D BUILD_OPENJPEG=OFF -DCV_DISABLE_OPTIMIZATION=OFF
-    #     cmake --build . -j 2
-    #     cmake --install .
+    - name: cache-opencv
+      id: cache-opencv
+      uses: actions/cache@v3.0.8
+      with:
+        path: opencv-install
+        key: opencv-install-aarch64
+    - name: opencv
+      if: steps.cache-opencv.outputs.cache-hit != 'true'
+      run: |
+        git clone https://github.com/opencv/opencv -b 4.6.0 --depth 1
+        cd opencv
+        rm -rf modules/gapi
+        mkdir build && cd build
+        cmake .. -G Ninja -DCMAKE_TOOLCHAIN_FILE=../../cmake/aarch64-linux-gnu.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/opencv-install -DBUILD_LIST='core,imgcodecs,imgproc' -D BUILD_SHARED_LIBS=OFF -D BUILD_TESTS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_DOCS=OFF  -D BUILD_opencv_python3=OFF -D WITH_IPP=OFF -D WITH_PROTOBUF=OFF -D WITH_QUIRC=OFF -D WITH_EIGEN=OFF -DWITH_WEBP=OFF -DBUILD_WEBP=OFF -DWITH_OPENCL=OFF -DWITH_JAVA=OFF  -DWITH_OPENEXR=OFF -DBUILD_OPENEXR=OFF -DWITH_JASPER=OFF -D BUILD_JASPER=OFF -DWITH_TIFF=OFF -D BUILD_TIFF=OFF -DWITH_OPENJPEG=OFF -D BUILD_OPENJPEG=OFF -DCV_DISABLE_OPTIMIZATION=OFF
+        cmake --build . -j 2
+        cmake --install .
 
-    # - name: build
-    #   run: |
-    #     mkdir build-aarch64 && cd build-aarch64
-    #     cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/aarch64-linux-gnu.toolchain.cmake -DGTest_DIR=$GITHUB_WORKSPACE/googletest-install/lib/cmake/GTest -Dbenchmark_DIR=$GITHUB_WORKSPACE/benchmark-install/lib/cmake/benchmark -DOpenCV_DIR=$GITHUB_WORKSPACE/opencv-install/lib/cmake/opencv4 ..
-    #     cmake --build . -j 2
-    # - name: test
-    #   run: |
-    #     export PATH=$GITHUB_WORKSPACE/qemu-install/bin:$PATH
-    #     echo "pwd: `pwd`"
-    #     cd build-aarch64
-    #     echo "pwd: `pwd`"
-    #     echo "`which qemu-aarch64`"
-    #     # https://github.com/google/sanitizers/issues/723
-    #     # https://github.com/google/sanitizers/issues/1322
-    #     # https://github.com/google/sanitizers/issues/1321
-    #     LSAN_OPTIONS=verbosity=1:log_threads=1 ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
+    - name: build
+      run: |
+        mkdir build-aarch64 && cd build-aarch64
+        cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/aarch64-linux-gnu.toolchain.cmake -DGTest_DIR=$GITHUB_WORKSPACE/googletest-install/lib/cmake/GTest -Dbenchmark_DIR=$GITHUB_WORKSPACE/benchmark-install/lib/cmake/benchmark -DOpenCV_DIR=$GITHUB_WORKSPACE/opencv-install/lib/cmake/opencv4 ..
+        cmake --build . -j 2
+    - name: test
+      run: |
+        export PATH=$GITHUB_WORKSPACE/qemu-install/bin:$PATH
+        echo "pwd: `pwd`"
+        cd build-aarch64
+        echo "pwd: `pwd`"
+        echo "`which qemu-aarch64`"
+        # https://github.com/google/sanitizers/issues/723
+        # https://github.com/google/sanitizers/issues/1322
+        # https://github.com/google/sanitizers/issues/1321
+        LSAN_OPTIONS=verbosity=1:log_threads=1 ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
