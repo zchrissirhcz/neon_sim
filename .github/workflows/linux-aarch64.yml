@@ -62,4 +62,4 @@ jobs:
         # https://github.com/google/sanitizers/issues/723
         # https://github.com/google/sanitizers/issues/1322
         # https://github.com/google/sanitizers/issues/1321
-        LSAN_OPTIONS=verbosity=1:log_threads=1 ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
+        ASAN_OPTIONS=intercept_tls_get_addr=0 TESTS_EXECUTABLE_LOADER=qemu-aarch64 TESTS_EXECUTABLE_LOADER_ARGUMENTS="-L;/usr/aarch64-linux-gnu" ctest --output-on-failure -j 2
