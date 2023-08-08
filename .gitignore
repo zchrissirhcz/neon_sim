@@ -1,34 +1,34 @@
-# 所有目录下的build子目录中的任何目录，都忽略
+# Any directory in the build subdirectory under all directories is ignored
 **/build/*/
 
-#images, models, etc
+# images, models, etc
 assets/
 
-#IDE generated folder
+# IDE generated folder
 .vscode/settings.json
 .idea/
 cmake-build-debug/
 
-#c/c++ object files
+# c/c++ object files
 *.out.dSYM
 *.o
 *.out
 
-#python Byte-compiled / optimized / DLL files
+# python Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-#tex
+# tex
 *.aux
 *.log
 *.synctex.gz
 *.toc
 
-#log files
+# log files
 build/log.txt
 
-#clangd cache
+# clangd cache
 **/.cache/
 
 .gdb_history

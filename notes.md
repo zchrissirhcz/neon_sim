@@ -1,5 +1,5 @@
 ## 1. 打印 neon 向量的函数， 是否需要传引用？
-```c++
+```cpp
 #include <arm_neon.h>
 #include <stdio.h>
 #include <iostream>
@@ -118,7 +118,7 @@ carotene: took   0.002 ms
 
 ## 2. 向量寄存器数组类型的元素赋值
 如下写法，在有些编译器上会报错（例如 aarch64-linux-gnu-gcc 9.4.0)
-```c++
+```cpp
     uint8x8x2_t src;
     src.val[0] = uint8x8_t{1, 2, 3, 4, 5, 6, 7, 8};
     src.val[1] = uint8x8_t{9, 10, 11, 12, 13, 14, 15, 16};
@@ -127,7 +127,7 @@ carotene: took   0.002 ms
 > error: cannot convert ‘<brace-enclosed initializer list>’ to ‘uint8x8_t’ {aka ‘__vector(8) unsigned char’} in assignment
 
 解决方法是改为如下两种之一：
-```c++
+```cpp
     uint8x8_t v0 = {1, 2, 3, 4, 5, 6, 7, 8};
     uint8x8_t v1 = {9, 10, 11, 12, 13, 14, 15, 16};
     uint8x8x2_t src;
@@ -135,7 +135,7 @@ carotene: took   0.002 ms
     src.val[1] = v1;
 ```
 
-```c++
+```cpp
     uint8x8x2_t src;
     src.val[0] = uint8x8_t{1, 2, 3, 4, 5, 6, 7, 8};
     src.val[1] = uint8x8_t{9, 10, 11, 12, 13, 14, 15, 16};
