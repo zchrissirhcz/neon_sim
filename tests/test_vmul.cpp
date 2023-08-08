@@ -20,18 +20,18 @@ TEST(vmulq_n, f32)
 
 TEST(vmul, s8)
 {
-    int8x8_t v1 = {1, 2, 3, 4, 5, 6, 7, 8};
-    int8x8_t v2 = {2, 100, -10, -100, 2, 3, 4, 5};
+    int8x8_t v1 = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    int8x8_t v2 = { 2, 100, -10, -100, 2, 3, 4, 5 };
     int8x8_t actual = vmul_s8(v1, v2);
-    int8x8_t expected = {2, -56, -30, 112, 10, 18, 28, 40};
+    int8x8_t expected = { 2, -56, -30, 112, 10, 18, 28, 40 };
     EXPECT_TRUE(almostEqual(expected, actual));
 }
 
 TEST(mul, vmul_n_s16)
 {
-    int16x4_t v1 = {1, 2, 3, 4};
+    int16x4_t v1 = { 1, 2, 3, 4 };
     int16_t s = 2;
     int16x4_t actual = vmul_n_s16(v1, s);
-    int16x4_t expected = {2, 4, 6, 8};
+    int16x4_t expected = { 2, 4, 6, 8 };
     EXPECT_TRUE(almostEqual(expected, actual));
 }

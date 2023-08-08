@@ -3,9 +3,9 @@
 TEST(vst1q, f32)
 {
     float32x4_t v = { 1.0, 2.0, 3.0, 4.0 };
-    std::vector<float> actual = { 0, 0, 0, 0, 0};
+    std::vector<float> actual = { 0, 0, 0, 0, 0 };
     vst1q_f32(actual.data(), v);
-    std::vector<float>expected = { 1.0, 2.0, 3.0, 4.0, 0 };
+    std::vector<float> expected = { 1.0, 2.0, 3.0, 4.0, 0 };
     EXPECT_TRUE(almostEqual(expected, actual));
 }
 
