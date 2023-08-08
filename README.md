@@ -38,7 +38,7 @@ with
         uint8_t b[4] = { 5, 6, 7, 8 };
         uint16x4_t v_b = vld1_u16(b);
         ```
-    - Support same-length-differnt-type conversion(require `-flax-vector-conversions` sometimes)
+    - Support same-length-different-type conversion(require `-flax-vector-conversions` sometimes)
 
 ## Known issues
 1. The correctness of the simulation implementation is not guaranteed. 

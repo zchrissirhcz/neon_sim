@@ -14,12 +14,14 @@
 //----------------------------------------------------------------------
 // 1. vector register type definition
 //----------------------------------------------------------------------
-#include <iostream>
-#include <array>
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>   // fabs
 #include <limits.h> // INT_MAX
+
+#include <iostream>
+#include <array>
 
 #define __ARM_NEON  1
 #define __aarch64__ 1
