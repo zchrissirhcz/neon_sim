@@ -11,14 +11,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include("cmake/output_dir.cmake")
 include("cmake/deps.cmake")
-include("cmake/sleek.cmake")
 include("cmake/asan.cmake")
-
-sleek_add_debug_symbol()
-
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  sleek_add_flags("-fstandalone-debug")
-endif()
+include("cmake/debug_symbols.cmake")
 
 enable_testing()
 add_subdirectory(src)
