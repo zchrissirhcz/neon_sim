@@ -1,27 +1,10 @@
 #pragma once
 
-//
-// usage:
-// #define NEON_SIM_IMPLEMENTATION
-//
-// #if __ARM_NEON
-// #include <arm_neon.h>
-// #include "arm_neon_helper.hpp"
-// #else
-// #include "arm_neon_sim.hpp"
-// #endif
-
 //----------------------------------------------------------------------
 // 1. vector register type definition
 //----------------------------------------------------------------------
 #include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>   // fabs
-#include <limits.h> // INT_MAX
 
-#include <iostream>
-#include <array>
 
 #define __ARM_NEON  1
 #define __aarch64__ 1
@@ -29,150 +12,109 @@
 typedef float float32_t;
 typedef double float64_t;
 
-template<class T, size_t N>
-struct TxN;
-
-template<class T, size_t N>
-std::ostream& operator<<(std::ostream& os, TxN<T, N> const& t);
-
-/// @brief Template class for VectorRegister
-/// https://stackoverflow.com/questions/68427709/use-of-overloaded-operator-is-ambiguous
-template<class T, size_t N>
-struct TxN
-{
-    T val[N];
-
-    TxN()
-    {
-        for (int i = 0; i < N; i++)
-        {
-            val[i] = 0;
-        }
-    }
-
-    //! braced-init-list
-    TxN(std::initializer_list<T> init) //: size_(init.size()), capacity_(init.size())
-    {
-        if (init.size() != N)
-        {
-            abort();
-        }
-        typename std::initializer_list<T>::iterator it = init.begin();
-        for (int i = 0; i < init.size(); i++)
-        {
-            val[i] = *it;
-            it++;
-        }
-    }
-
-    T& operator[](size_t i)
-    {
-        return val[i];
-    }
-
-    T const& operator[](size_t i) const
-    {
-        return val[i];
-    }
-
-    size_t size() const
-    {
-        return N;
-    }
-
-    // type operator
-    template<typename T2, size_t N2>
-    operator TxN<T2, N2>()
-    {
-        if (sizeof(T) * N == sizeof(T2) * N2)
-        {
-            TxN<T2, N2> obj;
-            memcpy(obj.val, val, sizeof(T) * N);
-            return obj;
-        }
-        abort();
-    }
-
-    // there are at least three different ways to do this operator, but
-    //  this is the easiest, so I included below.
-    friend std::ostream& operator<<(std::ostream& os, const TxN<T, N>& t)
-    {
-        if (typeid(t.val[0]) == typeid(int8_t))
-        {
-            os << static_cast<int>(t.val[0]);
-        }
-        else if (typeid(t.val[0]) == typeid(uint8_t))
-        {
-            os << static_cast<unsigned int>(t.val[0]);
-        }
-        else
-        {
-            os << t.val[0];
-        }
-        for (size_t i = 1; i < N; ++i)
-        {
-            if (typeid(t.val[i]) == typeid(int8_t))
-            {
-                os << ", " << static_cast<int>(t.val[i]);
-            }
-            else if (typeid(t.val[i]) == typeid(uint8_t))
-            {
-                os << ", " << static_cast<unsigned int>(t.val[i]);
-            }
-            else
-            {
-                os << ", " << t.val[i];
-            }
-        }
-        return os;
-    }
-};
-
-#ifndef __fp16
-// class __fp16
-// {
-//     // TODO: simulate fp16
-// private:
-//     uint16_t data;
-// };
-#endif // __fp16
-
-//typedef unsigned short __fp16; // from ncnn.
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /// @brief Vector Register DataTypes
 // D Vector Registers. 64 bit long
-using int8x8_t = TxN<int8_t, 8>;
-using int16x4_t = TxN<int16_t, 4>;
-using int32x2_t = TxN<int32_t, 2>;
-using int64x1_t = TxN<int64_t, 1>;
+typedef struct int8x8_t {
+    int8_t val[8];
+} int8x8_t;
 
-using uint8x8_t = TxN<uint8_t, 8>;
-using uint16x4_t = TxN<uint16_t, 4>;
-using uint32x2_t = TxN<uint32_t, 2>;
-using uint64x1_t = TxN<uint64_t, 1>;
+typedef struct int16x4_t {
+    int16_t val[4];
+} int16x4_t;
+
+typedef struct int32x2_t {
+    int32_t val[2];
+} int32x2_t;
+
+typedef struct int64x1_t {
+    int64_t val[1];
+} int64x1_t;
+
+
+
+typedef struct uint8x8_t {
+    uint8_t val[8];
+} uint8x8_t;
+
+typedef struct uint16x4_t {
+    uint16_t val[4];
+} uint16x4_t;
+
+typedef struct uint32x2_t {
+    uint32_t val[2];
+} uint32x2_t;
+
+typedef struct uint64x1_t {
+    uint64_t val[1];
+} uint64x1_t;
+
 
 #ifdef __fp16
-using float16x4_t = TxN<__fp16, 4>;
+typedef struct float16x4_t {
+    __fp16 val[4];
+} float16x4_t;
 #endif // __fp16
-using float32x2_t = TxN<float, 2>;
-using float64x1_t = TxN<double, 1>;
+
+typedef struct float32x2_t {
+    float val[2];
+} float32x2_t;
+
+typedef struct float64x1_t {
+    double val[1];
+} float64x1_t;
+
 
 // Q Vector Registers. 128 bit long
-using int8x16_t = TxN<int8_t, 16>;
-using int16x8_t = TxN<int16_t, 8>;
-using int32x4_t = TxN<int32_t, 4>;
-using int64x2_t = TxN<int64_t, 2>;
+typedef struct int8x16_t {
+    int8_t val[16];
+} int8x16_t;
 
-using uint8x16_t = TxN<uint8_t, 16>;
-using uint16x8_t = TxN<uint16_t, 8>;
-using uint32x4_t = TxN<uint32_t, 4>;
-using uint64x2_t = TxN<uint64_t, 2>;
+typedef struct int16x8_t {
+    int16_t val[8];
+} int16x8_t;
+
+typedef struct int32x4_t {
+    int32_t val[4];
+} int32x4_t;
+
+typedef struct int64x2_t {
+    int64_t val[2];
+} int64x2_t;
+
+
+typedef struct uint8x16_t {
+    uint8_t val[16];
+} uint8x16_t;
+
+typedef struct uint16x8_t {
+    uint16_t val[8];
+} uint16x8_t;
+
+typedef struct uint32x4_t {
+    uint32_t val[4];
+} uint32x4_t;
+
+typedef struct uint64x2_t {
+    uint64_t val[2];
+} uint64x2_t;
 
 #if __fp16
-using float16x8_t = TxN<__fp16, 8>;
+typedef struct float16x8_t {
+    __fp16 val[8];
+} float16x8_t;
 #endif // __fp16
-using float32x4_t = TxN<float, 4>;
-using float64x2_t = TxN<double, 2>;
+
+typedef struct float32x4_t {
+    float val[4];
+} float32x4_t;
+
+typedef struct float64x2_t {
+    double val[2];
+} float64x2_t;
 
 //-------
 //vector register array types
@@ -3464,3 +3406,6 @@ float16x8_t vdivq_f16(float16x8_t a, float16x8_t b);
 #endif // __fp16
 #endif // __aarch64__
 
+#ifdef __cplusplus
+}
+#endif

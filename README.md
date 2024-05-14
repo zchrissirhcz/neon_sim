@@ -1,6 +1,6 @@
 # neon_sim
 
-ARM NEON Intrinsics implementation in C++, for accurate understanding of each "neon function".
+ARM NEON Intrinsics implementation in C, for accurate understanding of each "neon function".
 
 ## Usage
 
@@ -12,7 +12,7 @@ Replace
 ```
 with
 ```cpp
-#include "neon_sim.hpp"
+#include "neon_sim.h"
 ```
 
 

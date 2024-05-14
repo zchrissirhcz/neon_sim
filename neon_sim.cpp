@@ -1,4 +1,13 @@
-#include "neon_sim.hpp"
+#include "neon_sim.h"
+
+#include <limits.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include <algorithm>
+#include <string>
 
 ////// Load
 // vld1
@@ -7,7 +16,7 @@ uint8x8_t vld1_u8(uint8_t const* ptr)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -16,7 +25,7 @@ int8x8_t vld1_s8(int8_t const* ptr)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -25,7 +34,7 @@ uint16x4_t vld1_u16(uint16_t const* ptr)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -34,7 +43,7 @@ int16x4_t vld1_s16(int16_t const* ptr)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -43,7 +52,7 @@ uint32x2_t vld1_u32(uint32_t const* ptr)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -52,7 +61,7 @@ uint64x1_t vld1_u64(uint64_t const* ptr)
     uint64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -61,7 +70,7 @@ int32x2_t vld1_s32(int32_t const* ptr)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -70,7 +79,7 @@ int64x1_t vld1_s64(int64_t const* ptr)
     int64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -79,14 +88,14 @@ float32x2_t vld1_f32(float32_t const* ptr)
     float32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
 float64x1_t vld1_f64(float64_t const* ptr)
 {
     float64x1_t r;
-    r[0] = ptr[0];
+    r.val[0] = ptr[0];
     return r;
 }
 
@@ -96,7 +105,7 @@ uint8x16_t vld1q_u8(uint8_t const* ptr)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -105,7 +114,7 @@ int8x16_t vld1q_s8(int8_t const* ptr)
     int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -114,7 +123,7 @@ uint16x8_t vld1q_u16(uint16_t const* ptr)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -123,7 +132,7 @@ int16x8_t vld1q_s16(int16_t const* ptr)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -132,7 +141,7 @@ uint32x4_t vld1q_u32(uint32_t const* ptr)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -141,7 +150,7 @@ int32x4_t vld1q_s32(int32_t const* ptr)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -150,7 +159,7 @@ int64x2_t vld1q_s64(int64_t const* ptr)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -159,7 +168,7 @@ uint64x2_t vld1q_u64(uint64_t const* ptr)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -168,7 +177,7 @@ float32x4_t vld1q_f32(float32_t const* ptr)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[i];
+        r.val[i] =  ptr[i];
     }
     return r;
 }
@@ -179,8 +188,8 @@ uint8x8x2_t vld2_u8(uint8_t const* ptr)
     uint8x8x2_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -189,8 +198,8 @@ int8x8x2_t vld2_s8(int8_t const* ptr)
     int8x8x2_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -199,8 +208,8 @@ uint16x4x2_t vld2_u16(uint16_t const* ptr)
     uint16x4x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -209,8 +218,8 @@ int16x4x2_t vld2_s16(int16_t const* ptr)
     int16x4x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -219,8 +228,8 @@ uint32x2x2_t vld2_u32(uint32_t const* ptr)
     uint32x2x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -229,8 +238,8 @@ int32x2x2_t vld_s32(int32_t const* ptr)
     int32x2x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -239,8 +248,8 @@ float32x2x2_t vld2_f32(float const* ptr)
     float32x2x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -251,8 +260,8 @@ uint8x16x2_t vld2q_u8(uint8_t const* ptr)
     uint8x16x2_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -261,8 +270,8 @@ int8x16x2_t vld2q_s8(int8_t const* ptr)
     int8x16x2_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -271,8 +280,8 @@ uint16x8x2_t vld2q_u16(uint16_t const* ptr)
     uint16x8x2_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -281,8 +290,8 @@ int16x8x2_t vld2q_s16(int16_t const* ptr)
     int16x8x2_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -291,8 +300,8 @@ uint32x4x2_t vld2q_u32(uint32_t const* ptr)
     uint32x4x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -301,8 +310,8 @@ int32x4x2_t vld2q_s32(int32_t const* ptr)
     int32x4x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[2 * i + 0];
-        r.val[1][i] = ptr[2 * i + 1];
+        r.val[0].val[i] = ptr[2 * i + 0];
+        r.val[1].val[i] = ptr[2 * i + 1];
     }
     return r;
 }
@@ -313,9 +322,9 @@ uint8x8x3_t vld3_u8(uint8_t const* ptr)
     uint8x8x3_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -324,9 +333,9 @@ int8x8x3_t vld3_s8(int8_t const* ptr)
     int8x8x3_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -335,9 +344,9 @@ uint16x4x3_t vld3_u16(uint16_t const* ptr)
     uint16x4x3_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -346,9 +355,9 @@ int16x4x3_t vld3_s16(int16_t const* ptr)
     int16x4x3_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -357,9 +366,9 @@ uint32x2x3_t vld3_u32(uint32_t const* ptr)
     uint32x2x3_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -368,9 +377,9 @@ int32x2x3_t vld3_s32(int32_t const* ptr)
     int32x2x3_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -379,9 +388,9 @@ float32x2x3_t vld3_f32(float const* ptr)
     float32x2x3_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -392,9 +401,9 @@ uint8x16x3_t vld3q_u8(uint8_t const* ptr)
     uint8x16x3_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -403,9 +412,9 @@ int8x16x3_t vld3q_s8(int8_t const* ptr)
     int8x16x3_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -414,9 +423,9 @@ uint16x8x3_t vld3q_u16(uint16_t const* ptr)
     uint16x8x3_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -425,9 +434,9 @@ int16x8x3_t vld3q_s16(int16_t const* ptr)
     int16x8x3_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -436,9 +445,9 @@ uint32x4x3_t vld3q_u32(uint32_t const* ptr)
     uint32x4x3_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -447,9 +456,9 @@ int32x4x3_t vld3q_s32(int32_t const* ptr)
     int32x4x3_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[3 * i + 0];
-        r.val[1][i] = ptr[3 * i + 1];
-        r.val[2][i] = ptr[3 * i + 2];
+        r.val[0].val[i] = ptr[3 * i + 0];
+        r.val[1].val[i] = ptr[3 * i + 1];
+        r.val[2].val[i] = ptr[3 * i + 2];
     }
     return r;
 }
@@ -461,10 +470,10 @@ uint8x8x4_t vld4_u8(uint8_t const* ptr)
     uint8x8x4_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -473,10 +482,10 @@ int8x8x4_t vld4_s8(int8_t const* ptr)
     int8x8x4_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -485,10 +494,10 @@ uint16x4x4_t vld4_u16(uint16_t const* ptr)
     uint16x4x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -497,10 +506,10 @@ int16x4x4_t vld4_s16(int16_t const* ptr)
     int16x4x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -509,10 +518,10 @@ uint32x2x4_t vld4_u32(uint32_t const* ptr)
     uint32x2x4_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -521,10 +530,10 @@ int32x2x4_t vld4_s32(int32_t const* ptr)
     int32x2x4_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -533,10 +542,10 @@ float32x2x4_t vld4_f32(float const* ptr)
     float32x2x4_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -547,10 +556,10 @@ uint8x16x4_t vld4q_u8(uint8_t const* ptr)
     uint8x16x4_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -559,10 +568,10 @@ int8x16x4_t vld4q_s8(int8_t const* ptr)
     int8x16x4_t r;
     for (int i = 0; i < 16; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -571,10 +580,10 @@ uint16x8x4_t vld4q_u16(uint16_t const* ptr)
     uint16x8x4_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -583,10 +592,10 @@ int16x8x4_t vld4q_s16(int16_t const* ptr)
     int16x8x4_t r;
     for (int i = 0; i < 8; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -595,10 +604,10 @@ uint32x4x4_t vld4q_u32(uint32_t const* ptr)
     uint32x4x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -607,10 +616,10 @@ int32x4x4_t vld4q_s32(int32_t const* ptr)
     int32x4x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][i] = ptr[4 * i + 0];
-        r.val[1][i] = ptr[4 * i + 1];
-        r.val[2][i] = ptr[4 * i + 2];
-        r.val[3][i] = ptr[4 * i + 3];
+        r.val[0].val[i] = ptr[4 * i + 0];
+        r.val[1].val[i] = ptr[4 * i + 1];
+        r.val[2].val[i] = ptr[4 * i + 2];
+        r.val[3].val[i] = ptr[4 * i + 3];
     }
     return r;
 }
@@ -621,7 +630,7 @@ float32x4_t vld1q_dup_f32(float32_t const* ptr)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ptr[0];
+        r.val[i] =  ptr[0];
     }
     return r;
 }
@@ -631,9 +640,9 @@ int8x8_t vld1_lane_s8(int8_t const* ptr, int8x8_t src, const int lane)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = src[i];
+        r.val[i] =  src.val[i];
     }
-    r[lane] = ptr[0];
+    r.val[lane] = ptr[0];
     return r;
 }
 
@@ -642,9 +651,9 @@ uint8x8_t vld1_lane_u8(uint8_t const* ptr, uint8x8_t src, const int lane)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = src[i];
+        r.val[i] =  src.val[i];
     }
-    r[lane] = ptr[0];
+    r.val[lane] = ptr[0];
     return r;
 }
 
@@ -663,11 +672,11 @@ uint8x8x2_t vld2_lane_u8(uint8_t const* ptr, uint8x8x2_t src, const int lane)
         {
             if (i == lane)
             {
-                res.val[j][i] = ptr[j];
+                res.val[j].val[i] = ptr[j];
             }
             else
             {
-                res.val[j][i] = src.val[j][i];
+                res.val[j].val[i] = src.val[j].val[i];
             }
         }
     }
@@ -688,11 +697,11 @@ uint8x8x3_t vld3_lane_u8(uint8_t const* ptr, uint8x8x3_t src, const int lane)
         {
             if (i == lane)
             {
-                res.val[j][i] = ptr[j];
+                res.val[j].val[i] = ptr[j];
             }
             else
             {
-                res.val[j][i] = src.val[j][i];
+                res.val[j].val[i] = src.val[j].val[i];
             }
         }
     }
@@ -713,11 +722,11 @@ uint8x8x4_t vld4_lane_u8(uint8_t const* ptr, uint8x8x4_t src, const int lane)
         {
             if (i == lane)
             {
-                res.val[j][i] = ptr[j];
+                res.val[j].val[i] = ptr[j];
             }
             else
             {
-                res.val[j][i] = src.val[j][i];
+                res.val[j].val[i] = src.val[j].val[i];
             }
         }
     }
@@ -731,56 +740,56 @@ void vst1_u8(uint8_t* ptr, uint8x8_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_s8(int8_t* ptr, int8x8_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_u16(uint16_t* ptr, uint16x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_s16(int16_t* ptr, int16x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_u32(uint32_t* ptr, uint32x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_s32(int32_t* ptr, int32x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_s64(int64_t* ptr, int64x1_t val)
 {
     for (int i = 0; i < 1; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1_u64(uint64_t* ptr, uint64x1_t val)
 {
     for (int i = 0; i < 1; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 
@@ -789,63 +798,63 @@ void vst1q_u8(uint8_t* ptr, uint8x16_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_s8(int8_t* ptr, int8x16_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_u16(uint16_t* ptr, uint16x8_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_s16(int16_t* ptr, int16x8_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_u32(uint32_t* ptr, uint32x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_s32(int32_t* ptr, int32x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_s64(int64_t* ptr, int64x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_u64(uint64_t* ptr, uint64x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 void vst1q_f32(float32_t* ptr, float32x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val[i];
+        ptr[i] = val.val[i];
     }
 }
 
@@ -854,24 +863,24 @@ void vst2_s8(int8_t* ptr, int8x8x2_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2_s16(int16_t* ptr, int16x4x2_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2_s32(int32_t* ptr, int32x2x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 
@@ -879,24 +888,24 @@ void vst2_u8(uint8_t* ptr, uint8x8x2_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2_u16(uint16_t* ptr, uint16x4x2_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2_u32(uint32_t* ptr, uint32x2x2_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 
@@ -905,48 +914,48 @@ void vst2q_s8(int8_t* ptr, int8x16x2_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2q_s16(int16_t* ptr, int16x8x2_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2q_s32(int32_t* ptr, int32x4x2_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2q_u8(uint8_t* ptr, uint8x16x2_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2q_u16(uint16_t* ptr, uint16x8x2_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 void vst2q_u32(uint32_t* ptr, uint32x4x2_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[2 * i + 0] = val.val[0][i];
-        ptr[2 * i + 1] = val.val[1][i];
+        ptr[2 * i + 0] = val.val[0].val[i];
+        ptr[2 * i + 1] = val.val[1].val[i];
     }
 }
 
@@ -955,27 +964,27 @@ void vst3_s8(int8_t* ptr, int8x8x3_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3_s16(int16_t* ptr, int16x4x3_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3_s32(int32_t* ptr, int32x2x3_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 
@@ -983,27 +992,27 @@ void vst3_u8(uint8_t* ptr, uint8x8x3_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3_u16(uint16_t* ptr, uint16x4x3_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3_u32(uint32_t* ptr, uint32x2x3_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 
@@ -1012,54 +1021,54 @@ void vst3q_s8(int8_t* ptr, int8x16x3_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3q_s16(int16_t* ptr, int16x8x3_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3q_s32(int32_t* ptr, int32x4x3_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3q_u8(uint8_t* ptr, uint8x16x3_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3q_u16(uint16_t* ptr, uint16x8x3_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 void vst3q_u32(uint32_t* ptr, uint32x4x3_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[3 * i + 0] = val.val[0][i];
-        ptr[3 * i + 1] = val.val[1][i];
-        ptr[3 * i + 2] = val.val[2][i];
+        ptr[3 * i + 0] = val.val[0].val[i];
+        ptr[3 * i + 1] = val.val[1].val[i];
+        ptr[3 * i + 2] = val.val[2].val[i];
     }
 }
 
@@ -1069,30 +1078,30 @@ void vst4_s8(int8_t* ptr, int8x8x4_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4_s16(int16_t* ptr, int16x4x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4_s32(int32_t* ptr, int32x2x4_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 
@@ -1100,30 +1109,30 @@ void vst4_u8(uint8_t* ptr, uint8x8x4_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 4] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 4] = val.val[3].val[i];
     }
 }
 void vst4_u16(uint16_t* ptr, uint16x4x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4_u32(uint32_t* ptr, uint32x2x4_t val)
 {
     for (int i = 0; i < 2; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 2] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 2] = val.val[3].val[i];
     }
 }
 
@@ -1132,60 +1141,60 @@ void vst4q_s8(int8_t* ptr, int8x16x4_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4q_s16(int16_t* ptr, int16x8x4_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4q_s32(int32_t* ptr, int32x4x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4q_u8(uint8_t* ptr, uint8x16x4_t val)
 {
     for (int i = 0; i < 16; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4q_u16(uint16_t* ptr, uint16x8x4_t val)
 {
     for (int i = 0; i < 8; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 void vst4q_u32(uint32_t* ptr, uint32x4x4_t val)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[4 * i + 0] = val.val[0][i];
-        ptr[4 * i + 1] = val.val[1][i];
-        ptr[4 * i + 2] = val.val[2][i];
-        ptr[4 * i + 3] = val.val[3][i];
+        ptr[4 * i + 0] = val.val[0].val[i];
+        ptr[4 * i + 1] = val.val[1].val[i];
+        ptr[4 * i + 2] = val.val[2].val[i];
+        ptr[4 * i + 3] = val.val[3].val[i];
     }
 }
 ///////////////////////
@@ -1195,7 +1204,7 @@ void vst4q_lane_f32(float32_t* ptr, float32x4x4_t val, const int lane)
 {
     for (int i = 0; i < 4; i++)
     {
-        ptr[i] = val.val[i][lane];
+        ptr[i] = val.val[i].val[lane];
     }
 }
 
@@ -1205,7 +1214,7 @@ int8x16_t vmaxq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1215,7 +1224,7 @@ int16x8_t vmaxq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1225,7 +1234,7 @@ int32x4_t vmaxq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1235,7 +1244,7 @@ int8x16_t vmaxq_u8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1245,7 +1254,7 @@ int16x8_t vmaxq_u16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1255,7 +1264,7 @@ int32x4_t vmaxq_u32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1265,7 +1274,7 @@ float32x4_t vmaxq_f32(float32x4_t N, float32x4_t M)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] > M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] > M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -1278,7 +1287,7 @@ int8x8_t vadd_s8(int8x8_t N, int8x8_t M)
     int8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1288,7 +1297,7 @@ int16x4_t vadd_s16(int16x4_t N, int16x4_t M)
     int16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1298,7 +1307,7 @@ int32x2_t vadd_s32(int32x2_t N, int32x2_t M)
     int32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1306,7 +1315,7 @@ int32x2_t vadd_s32(int32x2_t N, int32x2_t M)
 int64x1_t vadd_s64(int64x1_t N, int64x1_t M)
 {
     int64x1_t D;
-    D[0] = N[0] + M[0];
+    D.val[0] = N.val[0] + M.val[0];
     return D;
 }
 
@@ -1315,7 +1324,7 @@ uint8x8_t vadd_u8(uint8x8_t N, uint8x8_t M)
     uint8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1325,7 +1334,7 @@ uint16x4_t vadd_u16(uint16x4_t N, uint16x4_t M)
     uint16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1335,7 +1344,7 @@ uint32x2_t vadd_u32(uint32x2_t N, uint32x2_t M)
     uint32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1343,7 +1352,7 @@ uint32x2_t vadd_u32(uint32x2_t N, uint32x2_t M)
 uint64x1_t vadd_u64(uint64x1_t N, uint64x1_t M)
 {
     uint64x1_t D;
-    D[0] = N[0] + M[0];
+    D.val[0] = N.val[0] + M.val[0];
     return D;
 }
 
@@ -1353,7 +1362,7 @@ uint16x8_t vaddl_u8(uint8x8_t a, uint8x8_t b)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = (uint16_t)(a[i]) + (uint16_t)(b[i]);
+        D.val[i] = (uint16_t)(a.val[i]) + (uint16_t)(b.val[i]);
     }
     return D;
 }
@@ -1363,7 +1372,7 @@ int16x8_t vaddw_s8(int16x8_t a, int8x8_t b)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1373,7 +1382,7 @@ int32x4_t vaddw_s16(int32x4_t a, int16x4_t b)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1383,7 +1392,7 @@ int64x2_t vaddw_s32(int64x2_t a, int32x2_t b)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1393,7 +1402,7 @@ uint16x8_t vaddw_u8(uint16x8_t a, uint8x8_t b)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1403,7 +1412,7 @@ uint32x4_t vaddw_u16(uint32x4_t a, uint16x4_t b)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1413,7 +1422,7 @@ uint64x2_t vaddw_u32(uint64x2_t a, uint32x2_t b)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1425,7 +1434,7 @@ int16x8_t vaddw_high_s8(int16x8_t a, int8x16_t b)
     const int ofs = 8;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1436,7 +1445,7 @@ int32x4_t vaddw_high_s16(int32x4_t a, int16x8_t b)
     const int ofs = 4;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1447,7 +1456,7 @@ int64x2_t vaddw_high_s32(int64x2_t a, int32x4_t b)
     const int ofs = 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1458,7 +1467,7 @@ uint16x8_t vaddw_high_u8(uint16x8_t a, uint8x16_t b)
     const int ofs = 8;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1469,7 +1478,7 @@ uint32x4_t vaddw_high_u16(uint32x4_t a, uint16x8_t b)
     const int ofs = 4;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1480,7 +1489,7 @@ uint64x2_t vaddw_high_u32(uint64x2_t a, uint32x4_t b)
     const int ofs = 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] + b[ofs + i];
+        r.val[i] =  a.val[i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1492,9 +1501,9 @@ int8x16_t vaddhn_high_s16(int8x8_t r, int16x8_t a, int16x8_t b)
 {
     int8x16_t ret;
     for (int i = 0; i < 8; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 8; i++)
-        ret[i + 8] = (int8_t)((a[i] + b[i]) >> 8);
+        ret.val[i + 8] = (int8_t)((a.val[i] + b.val[i]) >> 8);
     return ret;
 }
 
@@ -1502,9 +1511,9 @@ int16x8_t vaddhn_high_s32(int16x4_t r, int32x4_t a, int32x4_t b)
 {
     int16x8_t ret;
     for (int i = 0; i < 4; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 4; i++)
-        ret[i + 4] = (int16_t)((a[i] + b[i]) >> 4);
+        ret.val[i + 4] = (int16_t)((a.val[i] + b.val[i]) >> 4);
     return ret;
 }
 
@@ -1512,9 +1521,9 @@ int32x4_t vaddhn_high_s64(int32x2_t r, int64x2_t a, int64x2_t b)
 {
     int32x4_t ret;
     for (int i = 0; i < 2; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 2; i++)
-        ret[i + 2] = (int32_t)((a[i] + b[i]) >> 2);
+        ret.val[i + 2] = (int32_t)((a.val[i] + b.val[i]) >> 2);
     return ret;
 }
 
@@ -1522,9 +1531,9 @@ uint8x16_t vaddhn_high_u16(uint8x8_t r, uint16x8_t a, uint16x8_t b)
 {
     uint8x16_t ret;
     for (int i = 0; i < 8; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 8; i++)
-        ret[i + 8] = (uint8_t)((a[i] + b[i]) >> 8);
+        ret.val[i + 8] = (uint8_t)((a.val[i] + b.val[i]) >> 8);
     return ret;
 }
 
@@ -1532,9 +1541,9 @@ uint16x8_t vaddhn_high_u32(uint16x4_t r, uint32x4_t a, uint32x4_t b)
 {
     uint16x8_t ret;
     for (int i = 0; i < 4; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 4; i++)
-        ret[i + 4] = (uint16_t)((a[i] + b[i]) >> 4);
+        ret.val[i + 4] = (uint16_t)((a.val[i] + b.val[i]) >> 4);
     return ret;
 }
 
@@ -1542,9 +1551,9 @@ uint32x4_t vaddhn_high_u64(uint32x2_t r, uint64x2_t a, uint64x2_t b)
 {
     uint32x4_t ret;
     for (int i = 0; i < 2; i++)
-        ret[i] = r[i];
+        ret.val[i] = r.val[i];
     for (int i = 0; i < 2; i++)
-        ret[i + 2] = (uint32_t)((a[i] + b[i]) >> 2);
+        ret.val[i + 2] = (uint32_t)((a.val[i] + b.val[i]) >> 2);
     return ret;
 }
 #endif // __aarch64__
@@ -1556,7 +1565,7 @@ int8x16_t vaddq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1566,7 +1575,7 @@ int16x8_t vaddq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1576,7 +1585,7 @@ int32x4_t vaddq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1586,7 +1595,7 @@ int64x2_t vaddq_s64(int64x2_t N, int64x2_t M)
     int64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1596,7 +1605,7 @@ uint8x16_t vaddq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1606,7 +1615,7 @@ uint16x8_t vaddq_u16(uint16x8_t N, uint16x8_t M)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1616,7 +1625,7 @@ uint32x4_t vaddq_u32(uint32x4_t N, uint32x4_t M)
     uint32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1625,7 +1634,7 @@ float32x4_t vaddq_f32(float32x4_t a, float32x4_t b)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] + b[i];
+        r.val[i] =  a.val[i] + b.val[i];
     }
     return r;
 }
@@ -1635,7 +1644,7 @@ uint64x2_t vaddq_u64(uint64x2_t N, uint64x2_t M)
     uint64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] + M[i];
+        D.val[i] = N.val[i] + M.val[i];
     }
     return D;
 }
@@ -1645,14 +1654,14 @@ uint8x8_t vqadd_u8(uint8x8_t a, uint8x8_t b)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        uint16_t temp = (uint16_t)a[i] + (uint16_t)b[i];
+        uint16_t temp = (uint16_t)a.val[i] + (uint16_t)b.val[i];
         if (temp > UINT8_MAX)
         {
-            r[i] = UINT8_MAX;
+            r.val[i] =  UINT8_MAX;
         }
         else
         {
-            r[i] = temp;
+            r.val[i] =  temp;
         }
     }
     return r;
@@ -1666,7 +1675,7 @@ int16x8_t vaddl_high_s8(int8x16_t a, int8x16_t b)
     const int ofs = 16 / 2;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1677,7 +1686,7 @@ int32x4_t vaddl_high_s16(int16x8_t a, int16x8_t b)
     const int ofs = 8 / 2;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1688,7 +1697,7 @@ int64x2_t vaddl_high_s32(int32x4_t a, int32x4_t b)
     const int ofs = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1699,7 +1708,7 @@ uint16x8_t vaddl_high_u8(uint8x16_t a, uint8x16_t b)
     const int ofs = 16 / 2;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1710,7 +1719,7 @@ uint32x4_t vaddl_high_u16(uint16x8_t a, uint16x8_t b)
     const int ofs = 8 / 2;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1721,7 +1730,7 @@ uint64x2_t vaddl_high_u32(uint32x4_t a, uint32x4_t b)
     const int ofs = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[ofs + i] + b[ofs + i];
+        r.val[i] =  a.val[ofs + i] + b.val[ofs + i];
     }
     return r;
 }
@@ -1733,14 +1742,14 @@ uint8x16_t vqaddq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        uint16_t temp = (uint16_t)N[i] + (uint16_t)M[i];
+        uint16_t temp = (uint16_t)N.val[i] + (uint16_t)M.val[i];
         if (temp > UINT8_MAX)
         {
-            D[i] = UINT8_MAX;
+            D.val[i] = UINT8_MAX;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -1751,7 +1760,7 @@ uint16x4_t vpaddl_u8(uint8x8_t a)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[2 * i] + a[2 * i + 1];
+        r.val[i] =  a.val[2 * i] + a.val[2 * i + 1];
     }
     return r;
 }
@@ -1761,7 +1770,7 @@ uint16x8_t vpaddlq_u8(uint8x16_t a)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[2 * i] + a[2 * i + 1];
+        r.val[i] =  a.val[2 * i] + a.val[2 * i + 1];
     }
     return r;
 }
@@ -1771,7 +1780,7 @@ uint32x4_t vpaddlq_u16(uint16x8_t a)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[2 * i] + a[2 * i + 1];
+        r.val[i] =  a.val[2 * i] + a.val[2 * i + 1];
     }
     return r;
 }
@@ -1782,7 +1791,7 @@ int8x8_t vsub_s8(int8x8_t N, int8x8_t M)
     int8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1791,7 +1800,7 @@ int16x4_t vsub_s16(int16x4_t N, int16x4_t M)
     int16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1800,7 +1809,7 @@ int32x2_t vsub_s32(int32x2_t N, int32x2_t M)
     int32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1809,7 +1818,7 @@ int64x1_t vsub_s64(int64x1_t N, int64x1_t M)
     int64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1818,7 +1827,7 @@ uint8x8_t vsub_u8(uint8x8_t N, uint8x8_t M)
     uint8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1827,7 +1836,7 @@ uint16x4_t vsub_u16(uint16x4_t N, uint16x4_t M)
     uint16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1836,7 +1845,7 @@ uint32x2_t vsub_u32(uint32x2_t N, uint32x2_t M)
     uint32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1845,7 +1854,7 @@ uint64x1_t vsub_u64(uint64x1_t N, uint64x1_t M)
     uint64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1855,7 +1864,7 @@ float32x2_t vsub_f32(float32x2_t N, float32x2_t M)
     float32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1865,7 +1874,7 @@ float64x1_t vsub_f32(float64x1_t N, float64x1_t M)
     float64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1876,7 +1885,7 @@ int8x16_t vsubq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1885,7 +1894,7 @@ int16x8_t vsubq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1894,7 +1903,7 @@ int32x4_t vsubq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1903,7 +1912,7 @@ int64x2_t vsubq_s64(int64x2_t N, int64x2_t M)
     int64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1912,7 +1921,7 @@ uint8x16_t vsubq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1921,7 +1930,7 @@ uint16x8_t vsubq_u16(uint16x8_t N, uint16x8_t M)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1930,7 +1939,7 @@ uint32x4_t vsubq_u32(uint32x4_t N, uint32x4_t M)
     uint32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1939,7 +1948,7 @@ uint64x2_t vsubq_u64(uint64x2_t N, uint64x2_t M)
     uint64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1949,7 +1958,7 @@ float32x4_t vsubq_f32(float32x4_t N, float32x4_t M)
     float32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - M[i];
+        D.val[i] = N.val[i] - M.val[i];
     }
     return D;
 }
@@ -1960,7 +1969,7 @@ int8x8_t vsubhn_s16(int16x8_t N, int16x8_t M)
     int8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -1970,7 +1979,7 @@ int16x4_t vsubn_s32(int32x4_t N, int32x4_t M)
     int16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -1980,7 +1989,7 @@ int32x2_t vsubn_s64(int64x2_t N, int64x2_t M)
     int32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -1990,7 +1999,7 @@ uint8x8_t vsubhn_u16(uint16x8_t N, uint16x8_t M)
     uint8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -2000,7 +2009,7 @@ uint16x4_t vsubn_u32(uint32x4_t N, uint32x4_t M)
     uint16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -2010,7 +2019,7 @@ uint32x2_t vsubn_u64(uint64x2_t N, uint64x2_t M)
     uint32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i]) >> 8;
+        D.val[i] = (N.val[i] - M.val[i]) >> 8;
     }
     return D;
 }
@@ -2020,8 +2029,8 @@ int8x8_t vhsub_s8(int8x8_t N, int8x8_t M)
     int8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        //D[i] = (N[i] - M[i]) / 2; //not ok: result differs with `>>1`. 说明，移位和除法，是不一样的！
-        D[i] = (N[i] - M[i]) >> 1; //ok
+        //D.val[i] = (N.val[i] - M.val[i]) / 2; //not ok: result differs with `>>1`. 说明，移位和除法，是不一样的！
+        D.val[i] = (N.val[i] - M.val[i]) >> 1; //ok
     }
     return D;
 }
@@ -2031,7 +2040,7 @@ int16x4_t vhsub_s16(int16x4_t N, int16x4_t M)
     int16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2041,7 +2050,7 @@ int32x2_t vhsub_s32(int32x2_t N, int32x2_t M)
     int32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2051,7 +2060,7 @@ uint8x8_t vhsub_u8(uint8x8_t N, uint8x8_t M)
     uint8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2061,7 +2070,7 @@ uint16x4_t vhsub_u16(uint16x4_t N, uint16x4_t M)
     uint16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2071,7 +2080,7 @@ uint32x2_t vhsub_u32(uint32x2_t N, uint32x2_t M)
     uint32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2082,7 +2091,7 @@ int8x16_t vhsubq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2092,7 +2101,7 @@ int16x8_t vhsubq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2102,7 +2111,7 @@ int32x4_t vhsubq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2112,7 +2121,7 @@ uint8x16_t vhsubq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2122,7 +2131,7 @@ uint16x8_t vhsubq_u16(uint16x8_t N, uint16x8_t M)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2132,7 +2141,7 @@ uint32x4_t vhsubq_u32(uint32x4_t N, uint32x4_t M)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i]) >> 1;
+        D.val[i] = (N.val[i] - M.val[i]) >> 1;
     }
     return D;
 }
@@ -2143,18 +2152,18 @@ int8x8_t vqsub_s8(int8x8_t N, int8x8_t M)
     int8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        int16_t temp = (int16_t)N.val[i] - (int16_t)M.val[i];
         if (temp > INT8_MAX)
         {
-            D[i] = INT8_MAX;
+            D.val[i] = INT8_MAX;
         }
         else if (temp < INT8_MIN)
         {
-            D[i] = INT8_MIN;
+            D.val[i] = INT8_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2165,18 +2174,18 @@ int16x4_t vqsub_s16(int16x4_t N, int16x4_t M)
     int16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        int32_t temp = (int32_t)N.val[i] - (int32_t)M.val[i];
         if (temp > INT16_MAX)
         {
-            D[i] = INT16_MAX;
+            D.val[i] = INT16_MAX;
         }
         else if (temp < INT16_MIN)
         {
-            D[i] = INT16_MIN;
+            D.val[i] = INT16_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2187,18 +2196,18 @@ int32x2_t vqsub_s32(int32x2_t N, int32x2_t M)
     int32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        int64_t temp = (int64_t)N.val[i] - (int64_t)M.val[i];
         if (temp > INT32_MAX)
         {
-            D[i] = INT32_MAX;
+            D.val[i] = INT32_MAX;
         }
         else if (temp < INT32_MIN)
         {
-            D[i] = INT32_MIN;
+            D.val[i] = INT32_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2209,18 +2218,18 @@ int64x1_t vqsub_s64(int64x1_t N, int64x1_t M)
     int64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        double temp = (double)N[i] - (double)M[i];
+        double temp = (double)N.val[i] - (double)M.val[i];
         if (temp > (double)(INT64_MAX))
         {
-            D[i] = INT64_MAX;
+            D.val[i] = INT64_MAX;
         }
         else if (temp < INT64_MIN)
         {
-            D[i] = INT64_MIN;
+            D.val[i] = INT64_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2232,7 +2241,7 @@ int16x8_t vsubl_s8(int8x8_t N, int8x8_t M)
     int16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = (int16_t)(N[i]) - (int16_t)(M[i]);
+        D.val[i] = (int16_t)(N.val[i]) - (int16_t)(M.val[i]);
     }
     return D;
 }
@@ -2242,7 +2251,7 @@ int32x4_t vsubl_s16(int16x4_t N, int16x4_t M)
     int32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = (int32_t)(N[i]) - (int32_t)(M[i]);
+        D.val[i] = (int32_t)(N.val[i]) - (int32_t)(M.val[i]);
     }
     return D;
 }
@@ -2252,7 +2261,7 @@ int64x2_t vsubl_s32(int32x4_t N, int32x2_t M)
     int64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = (int64_t)(N[i]) - (int64_t)(M[i]);
+        D.val[i] = (int64_t)(N.val[i]) - (int64_t)(M.val[i]);
     }
     return D;
 }
@@ -2262,7 +2271,7 @@ uint16x8_t vsubl_u8(uint8x8_t N, uint8x8_t M)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = (uint16_t)(N[i]) - (uint16_t)(M[i]);
+        D.val[i] = (uint16_t)(N.val[i]) - (uint16_t)(M.val[i]);
     }
     return D;
 }
@@ -2272,7 +2281,7 @@ uint32x4_t vsubl_u16(uint16x4_t N, uint16x4_t M)
     uint32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = (uint32_t)(N[i]) - (uint32_t)(M[i]);
+        D.val[i] = (uint32_t)(N.val[i]) - (uint32_t)(M.val[i]);
     }
     return D;
 }
@@ -2282,7 +2291,7 @@ uint64x2_t vsubl_u32(uint32x4_t N, uint32x2_t M)
     uint64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = (uint64_t)(N[i]) - (uint64_t)(M[i]);
+        D.val[i] = (uint64_t)(N.val[i]) - (uint64_t)(M.val[i]);
     }
     return D;
 }
@@ -2293,7 +2302,7 @@ int16x8_t vsubw_s8(int16x8_t N, int8x8_t M)
     int16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - (int16_t)(M[i]);
+        D.val[i] = N.val[i] - (int16_t)(M.val[i]);
     }
     return D;
 }
@@ -2303,7 +2312,7 @@ int32x4_t vsubw_s16(int32x4_t N, int16x4_t M)
     int32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - (int32_t)(M[i]);
+        D.val[i] = N.val[i] - (int32_t)(M.val[i]);
     }
     return D;
 }
@@ -2313,7 +2322,7 @@ int64x2_t vsubw_s32(int64x2_t N, int32x2_t M)
     int64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - (int64_t)(M[i]);
+        D.val[i] = N.val[i] - (int64_t)(M.val[i]);
     }
     return D;
 }
@@ -2323,7 +2332,7 @@ uint16x8_t vsubw_u8(uint16x8_t N, uint8x8_t M)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N[i] - (uint16_t)(M[i]);
+        D.val[i] = N.val[i] - (uint16_t)(M.val[i]);
     }
     return D;
 }
@@ -2333,7 +2342,7 @@ uint32x4_t vsubw_u16(uint32x4_t N, uint16x4_t M)
     uint32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N[i] - (uint32_t)(M[i]);
+        D.val[i] = N.val[i] - (uint32_t)(M.val[i]);
     }
     return D;
 }
@@ -2343,7 +2352,7 @@ uint64x2_t vsubw_u32(uint64x2_t N, uint32x2_t M)
     uint64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N[i] - (uint64_t)(M[i]);
+        D.val[i] = N.val[i] - (uint64_t)(M.val[i]);
     }
     return D;
 }
@@ -2353,18 +2362,18 @@ uint8x8_t vqsub_u8(uint8x8_t N, uint8x8_t M)
     uint8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        int16_t temp = (int16_t)N.val[i] - (int16_t)M.val[i];
         if (temp > UINT8_MAX)
         {
-            D[i] = UINT8_MAX;
+            D.val[i] = UINT8_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2375,18 +2384,18 @@ uint16x4_t vqsub_u16(uint16x4_t N, uint16x4_t M)
     uint16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        int32_t temp = (int32_t)N.val[i] - (int32_t)M.val[i];
         if (temp > UINT16_MAX)
         {
-            D[i] = UINT16_MAX;
+            D.val[i] = UINT16_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2397,18 +2406,18 @@ uint32x2_t vqsub_u32(uint32x2_t N, uint32x2_t M)
     uint32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        int64_t temp = (int64_t)N.val[i] - (int64_t)M.val[i];
         if (temp > UINT32_MAX)
         {
-            D[i] = UINT32_MAX;
+            D.val[i] = UINT32_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2419,18 +2428,18 @@ uint64x1_t vqsub_u64(uint64x1_t N, uint64x1_t M)
     uint64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        double temp = (double)N[i] - (double)M[i];
+        double temp = (double)N.val[i] - (double)M.val[i];
         if (temp > (double)(UINT64_MAX))
         {
-            D[i] = UINT64_MAX;
+            D.val[i] = UINT64_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2442,18 +2451,18 @@ int8x16_t vqsubq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        int16_t temp = (int16_t)N.val[i] - (int16_t)M.val[i];
         if (temp > INT8_MAX)
         {
-            D[i] = INT8_MAX;
+            D.val[i] = INT8_MAX;
         }
         else if (temp < INT8_MIN)
         {
-            D[i] = INT8_MIN;
+            D.val[i] = INT8_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2464,18 +2473,18 @@ int16x8_t vqsubq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        int32_t temp = (int32_t)N.val[i] - (int32_t)M.val[i];
         if (temp > INT16_MAX)
         {
-            D[i] = INT16_MAX;
+            D.val[i] = INT16_MAX;
         }
         else if (temp < INT16_MIN)
         {
-            D[i] = INT16_MIN;
+            D.val[i] = INT16_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2486,18 +2495,18 @@ int32x4_t vqsubq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        int64_t temp = (int64_t)N.val[i] - (int64_t)M.val[i];
         if (temp > INT32_MAX)
         {
-            D[i] = INT32_MAX;
+            D.val[i] = INT32_MAX;
         }
         else if (temp < INT32_MIN)
         {
-            D[i] = INT32_MIN;
+            D.val[i] = INT32_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2508,18 +2517,18 @@ int64x2_t vqsubq_s64(int64x2_t N, int64x2_t M)
     int64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        double temp = (double)N[i] - (double)M[i];
+        double temp = (double)N.val[i] - (double)M.val[i];
         if (temp > (double)(INT64_MAX))
         {
-            D[i] = INT64_MAX;
+            D.val[i] = INT64_MAX;
         }
         else if (temp < INT64_MIN)
         {
-            D[i] = INT64_MIN;
+            D.val[i] = INT64_MIN;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2530,18 +2539,18 @@ uint8x16_t vqsubq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (size_t i = 0; i < 16; i++)
     {
-        int16_t temp = (int16_t)N[i] - (int16_t)M[i];
+        int16_t temp = (int16_t)N.val[i] - (int16_t)M.val[i];
         if (temp > UINT8_MAX)
         {
-            D[i] = UINT8_MAX;
+            D.val[i] = UINT8_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2552,18 +2561,18 @@ uint16x8_t vqsubq_u16(uint16x8_t N, uint16x8_t M)
     uint16x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        int32_t temp = (int32_t)N[i] - (int32_t)M[i];
+        int32_t temp = (int32_t)N.val[i] - (int32_t)M.val[i];
         if (temp > UINT16_MAX)
         {
-            D[i] = UINT16_MAX;
+            D.val[i] = UINT16_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2574,18 +2583,18 @@ uint32x4_t vqsubq_u32(uint32x4_t N, uint32x4_t M)
     uint32x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        int64_t temp = (int64_t)N[i] - (int64_t)M[i];
+        int64_t temp = (int64_t)N.val[i] - (int64_t)M.val[i];
         if (temp > UINT32_MAX)
         {
-            D[i] = UINT32_MAX;
+            D.val[i] = UINT32_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2596,18 +2605,18 @@ uint64x2_t vqsubq_u64(uint64x2_t N, uint64x2_t M)
     uint64x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        double temp = (double)N[i] - (double)M[i];
+        double temp = (double)N.val[i] - (double)M.val[i];
         if (temp > (double)(UINT64_MAX))
         {
-            D[i] = UINT64_MAX;
+            D.val[i] = UINT64_MAX;
         }
         else if (temp < 0)
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
         else
         {
-            D[i] = temp;
+            D.val[i] = temp;
         }
     }
     return D;
@@ -2620,7 +2629,7 @@ int8x8_t vrsubhn_s16(int16x8_t N, int16x8_t M)
     const int16_t delta = (1 << (shift - 1));
     for (int i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2632,7 +2641,7 @@ int16x4_t vrsubhn_s32(int32x4_t N, int32x4_t M)
     const int32_t delta = (1 << (shift - 1));
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2644,7 +2653,7 @@ int32x2_t vrsubhn_s64(int64x2_t N, int64x2_t M)
     const int64_t delta = (1 << (shift - 1));
     for (int i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2656,7 +2665,7 @@ uint8x8_t vrsubhn_u16(uint16x8_t N, uint16x8_t M)
     const uint16_t delta = (1 << (shift - 1));
     for (int i = 0; i < 8; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2668,7 +2677,7 @@ uint16x4_t vrsubhn_u32(uint32x4_t N, uint32x4_t M)
     const uint32_t delta = (1 << (shift - 1));
     for (int i = 0; i < 4; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2680,7 +2689,7 @@ uint32x2_t vrsubhn_u64(uint64x2_t N, uint64x2_t M)
     const uint64_t delta = (1 << (shift - 1));
     for (int i = 0; i < 2; i++)
     {
-        D[i] = (N[i] - M[i] + delta) >> shift;
+        D.val[i] = (N.val[i] - M.val[i] + delta) >> shift;
     }
     return D;
 }
@@ -2691,7 +2700,7 @@ int8x8_t vmul_s8(int8x8_t N, int8x8_t M)
     int8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2701,7 +2710,7 @@ int16x4_t vmul_s16(int16x4_t N, int16x4_t M)
     int16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2711,7 +2720,7 @@ int32x2_t vmul_s32(int32x2_t N, int32x2_t M)
     int32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2721,7 +2730,7 @@ uint8x8_t vmul_u8(uint8x8_t N, uint8x8_t M)
     uint8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2731,7 +2740,7 @@ uint16x4_t vmul_u16(uint16x4_t N, uint16x4_t M)
     uint16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2741,7 +2750,7 @@ uint32x2_t vmul_u32(uint32x2_t N, uint32x2_t M)
     uint32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2752,7 +2761,7 @@ int8x16_t vmulq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2761,7 +2770,7 @@ int16x8_t vmulq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2770,7 +2779,7 @@ int32x4_t vmulq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2779,7 +2788,7 @@ uint8x16_t vmulq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2788,7 +2797,7 @@ uint16x8_t vmulq_u16(uint16x8_t N, uint16x8_t M)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2797,7 +2806,7 @@ uint32x4_t vmulq_u32(uint32x4_t N, uint32x4_t M)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M[i];
+        D.val[i] = N.val[i] * M.val[i];
     }
     return D;
 }
@@ -2807,7 +2816,7 @@ float32x4_t vmulq_f32(float32x4_t a, float32x4_t b)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2818,7 +2827,7 @@ int16x4_t vmul_n_s16(int16x4_t N, int16_t M)
     int16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2828,7 +2837,7 @@ int32x2_t vmul_n_s32(int32x2_t N, int32_t M)
     int32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2838,7 +2847,7 @@ uint16x4_t vmul_n_u16(uint16x4_t N, uint16_t M)
     uint16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2848,7 +2857,7 @@ uint32x2_t vmul_n_u32(uint32x2_t N, uint32_t M)
     uint32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2858,7 +2867,7 @@ float32x2_t vmul_n_f32(float32x2_t N, float32_t M)
     float32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2869,7 +2878,7 @@ float64x1_t vmul_n_f64(float64x1_t N, float64_t M)
     float64x1_t D;
     for (int i = 0; i < 1; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2881,7 +2890,7 @@ int16x8_t vmulq_n_s16(int16x8_t N, int16_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2891,7 +2900,7 @@ int32x4_t vmulq_n_s32(int32x4_t N, int32_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2901,7 +2910,7 @@ uint16x8_t vmulq_n_u16(uint16x8_t N, uint16_t M)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2911,7 +2920,7 @@ uint32x4_t vmulq_n_u32(uint32x4_t N, uint32_t M)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2921,7 +2930,7 @@ float32x4_t vmulq_n_f32(float32x4_t N, float32_t M)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2932,7 +2941,7 @@ float64x2_t vmulq_n_f64(float64x2_t N, float64_t M)
     float64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -2944,7 +2953,7 @@ uint16x8_t vmull_u8(uint8x8_t a, uint8x8_t b)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2953,7 +2962,7 @@ uint32x4_t vmull_u16(uint16x4_t a, uint16x4_t b)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2962,7 +2971,7 @@ uint64x2_t vmull_u32(uint32x2_t a, uint32x2_t b)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2972,7 +2981,7 @@ int16x8_t vmull_s8(int8x8_t a, int8x8_t b)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2981,7 +2990,7 @@ int32x4_t vmull_s16(int16x4_t a, int16x4_t b)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -2990,7 +2999,7 @@ int64x2_t vmull_s32(int32x2_t a, int32x2_t b)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] * b[i];
+        r.val[i] =  a.val[i] * b.val[i];
     }
     return r;
 }
@@ -3001,7 +3010,7 @@ int32x4_t vmull_n_s16(int16x4_t N, int16_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -3011,7 +3020,7 @@ int64x2_t vmull_n_s32(int32x2_t N, int32_t M)
     int64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -3021,7 +3030,7 @@ uint32x4_t vmull_n_u16(uint16x4_t N, uint16_t M)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -3031,7 +3040,7 @@ uint64x2_t vmull_n_u32(uint32x2_t N, uint32_t M)
     uint64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] * M;
+        D.val[i] = N.val[i] * M;
     }
     return D;
 }
@@ -3043,13 +3052,13 @@ int32x4_t vqdmull_s16(int16x4_t M, int16x4_t N)
     for (int i = 0; i < 4; i++)
     {
         // saturating
-        if (N[i] == INT16_MIN && M[i] == INT16_MIN)
+        if (N.val[i] == INT16_MIN && M.val[i] == INT16_MIN)
         {
-            D[i] = INT32_MAX;
+            D.val[i] = INT32_MAX;
         }
         else
         { // most cases
-            D[i] = (M[i] * N[i]) * 2;
+            D.val[i] = (M.val[i] * N.val[i]) * 2;
         }
     }
     return D;
@@ -3061,7 +3070,7 @@ int16x8_t vmlal_s8(int16x8_t N, int8x8_t M, int8x8_t P)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3071,7 +3080,7 @@ int32x4_t vmlal_s16(int32x4_t N, int16x4_t M, int16x4_t P)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3081,7 +3090,7 @@ int64x2_t vmlal_s32(int64x2_t N, int32x2_t M, int32x2_t P)
     int64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3091,7 +3100,7 @@ uint16x8_t vmlal_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3101,7 +3110,7 @@ uint32x4_t vmlal_u16(uint32x4_t N, uint16x4_t M, uint16x4_t P)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3111,7 +3120,7 @@ uint64x2_t vmlal_u32(uint64x2_t N, uint32x2_t M, uint32x2_t P)
     uint64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] + (M[i] * P[i]);
+        D.val[i] = N.val[i] + (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3122,7 +3131,7 @@ int16x8_t vmlsl_s8(int16x8_t N, int8x8_t M, int8x8_t P)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3132,7 +3141,7 @@ int32x4_t vmlsl_s16(int32x4_t N, int16x4_t M, int16x4_t P)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3142,7 +3151,7 @@ int64x2_t vmlsl_s32(int64x2_t N, int32x2_t M, int32x2_t P)
     int64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3152,7 +3161,7 @@ uint16x8_t vmlsl_u8(uint16x8_t N, uint8x8_t M, uint8x8_t P)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3162,7 +3171,7 @@ uint32x4_t vmlsl_u16(uint32x4_t N, uint16x4_t M, uint16x4_t P)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3172,7 +3181,7 @@ uint64x2_t vmlsl_u32(uint64x2_t N, uint32x2_t M, uint32x2_t P)
     uint64x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        D[i] = N[i] - (M[i] * P[i]);
+        D.val[i] = N.val[i] - (M.val[i] * P.val[i]);
     }
     return D;
 }
@@ -3183,7 +3192,7 @@ int8x16_t vmlaq_s8(int8x16_t N, int8x16_t M, int8x16_t P)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3193,7 +3202,7 @@ int16x8_t vmlaq_s16(int16x8_t N, int16x8_t M, int16x8_t P)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3203,7 +3212,7 @@ int32x4_t vmlaq_s32(int32x4_t N, int32x4_t M, int32x4_t P)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3213,7 +3222,7 @@ uint8x16_t vmlaq_u8(uint8x16_t N, uint8x16_t M, uint8x16_t P)
     uint8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3223,7 +3232,7 @@ uint16x8_t vmlaq_u16(uint16x8_t N, uint16x8_t M, uint16x8_t P)
     uint16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3233,7 +3242,7 @@ uint32x4_t vmlaq_u32(uint32x4_t N, uint32x4_t M, uint32x4_t P)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3243,7 +3252,7 @@ float32x4_t vmlaq_f32(float32x4_t N, float32x4_t M, float32x4_t P)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] + M[i] * P[i];
+        D.val[i] = N.val[i] + M.val[i] * P.val[i];
     }
     return D;
 }
@@ -3254,7 +3263,7 @@ float32x4_t vmlaq_n_f32(float32x4_t a, float32x4_t b, float32_t c)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = a[i] + b[i] * c;
+        D.val[i] = a.val[i] + b.val[i] * c;
     }
     return D;
 }
@@ -3266,7 +3275,7 @@ int8x8_t vdup_n_s8(int8_t N)
     int8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3276,7 +3285,7 @@ int16x4_t vdup_n_s16(int16_t N)
     int16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3286,7 +3295,7 @@ int32x2_t vdup_n_s32(int32_t N)
     int32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3296,7 +3305,7 @@ int64x1_t vdup_n_s64(int64_t N)
     int64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3306,7 +3315,7 @@ uint8x8_t vdup_n_u8(uint8_t N)
     uint8x8_t D;
     for (size_t i = 0; i < 8; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3316,7 +3325,7 @@ uint16x4_t vdup_n_u16(uint16_t N)
     uint16x4_t D;
     for (size_t i = 0; i < 4; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3326,7 +3335,7 @@ uint32x2_t vdup_n_u32(uint32_t N)
     uint32x2_t D;
     for (size_t i = 0; i < 2; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3336,7 +3345,7 @@ uint64x1_t vdup_n_u64(uint64_t N)
     uint64x1_t D;
     for (size_t i = 0; i < 1; i++)
     {
-        D[i] = N;
+        D.val[i] = N;
     }
     return D;
 }
@@ -3347,16 +3356,16 @@ uint8x16_t vdupq_n_u8(uint8_t value)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
 int8x16_t vdupq_n_s8(int8_t value)
 {
-    uint8x16_t r;
+    int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3365,7 +3374,7 @@ uint16x8_t vdupq_n_u16(uint16_t value)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3374,7 +3383,7 @@ int16x8_t vdupq_n_s16(int16_t value)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3383,7 +3392,7 @@ uint32x4_t vdupq_n_u32(uint32_t value)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3392,7 +3401,7 @@ int32x4_t vdupq_n_s32(int32_t value)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3401,7 +3410,7 @@ float32x4_t vdupq_n_f32(float32_t value)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3411,7 +3420,7 @@ float32x4_t vmovq_n_f32(float32_t value)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = value;
+        r.val[i] =  value;
     }
     return r;
 }
@@ -3422,7 +3431,7 @@ float32x2_t vget_low_f32(float32x4_t a)
     float32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3432,7 +3441,7 @@ int32x2_t vget_low_s32(int32x4_t a)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3442,7 +3451,7 @@ uint32x2_t vget_low_u32(uint32x4_t a)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3452,7 +3461,7 @@ int16x4_t vget_low_s16(int16x8_t a)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3462,7 +3471,7 @@ uint16x4_t vget_low_u16(uint16x8_t a)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3473,7 +3482,7 @@ int8x8_t vget_low_s8(int8x16_t a)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3483,7 +3492,7 @@ uint8x8_t vget_low_u8(uint8x16_t a)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -3495,7 +3504,7 @@ float32x2_t vget_high_f32(float32x4_t a)
     int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3506,7 +3515,7 @@ int32x2_t vget_high_s32(int32x4_t a)
     int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3517,7 +3526,7 @@ int16x4_t vget_high_s16(int16x8_t a)
     int mid = 8 / 2;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3528,7 +3537,7 @@ uint16x4_t vget_high_u16(uint16x8_t a)
     int mid = 8 / 2;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3539,7 +3548,7 @@ uint32x2_t vget_high_u32(uint32x4_t a)
     int mid = 4 / 2;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3550,7 +3559,7 @@ int8x8_t vget_high_s8(int8x16_t a)
     int mid = 16 / 2;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3561,7 +3570,7 @@ uint8x8_t vget_high_u8(uint8x16_t a)
     int mid = 16 / 2;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[mid + i];
+        r.val[i] =  a.val[mid + i];
     }
     return r;
 }
@@ -3569,22 +3578,22 @@ uint8x8_t vget_high_u8(uint8x16_t a)
 float32x2_t vpmax_f32(float32x2_t a, float32x2_t b)
 {
     float32x2_t r;
-    r[0] = a[0] > a[1] ? a[0] : a[1];
-    r[1] = b[0] > b[1] ? b[0] : b[1];
+    r.val[0] = a.val[0] > a.val[1] ? a.val[0] : a.val[1];
+    r.val[1] = b.val[0] > b.val[1] ? b.val[0] : b.val[1];
     return r;
 }
 
 float32x2_t vpmin_f32(float32x2_t a, float32x2_t b)
 {
     float32x2_t r;
-    r[0] = a[0] < a[1] ? a[0] : a[1];
-    r[1] = b[0] < b[1] ? b[0] : b[1];
+    r.val[0] = a.val[0] < a.val[1] ? a.val[0] : a.val[1];
+    r.val[1] = b.val[0] < b.val[1] ? b.val[0] : b.val[1];
     return r;
 }
 
 float32_t vget_lane_f32(float32x2_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 float32_t vgetq_lane_f32(float32x4_t v, int lane)
@@ -3594,53 +3603,53 @@ float32_t vgetq_lane_f32(float32x4_t v, int lane)
         fprintf(stderr, "%s: lane should is out of range [0, 3]", __FUNCTION__);
         abort();
     }
-    return v[lane];
+    return v.val[lane];
 }
 
 // vgetq_lane_type
 uint8_t vgetq_lane_u8(uint8x16_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 uint16_t vgetq_lane_u16(uint16x8_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 uint32_t vgetq_lane_u32(uint32x4_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 uint64_t vgetq_lane_u64(uint64x2_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 int8_t vgetq_lane_s8(int8x16_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 int16_t vgetq_lane_s16(int16x8_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 int32_t vgetq_lane_s32(int32x4_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 int64_t vgetq_lane_s64(int64x2_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 float64_t vgetq_lane_f64(float64x2_t v, const int lane)
 {
-    return v[lane];
+    return v.val[lane];
 }
 
 // vminq_type
@@ -3649,7 +3658,7 @@ int8x16_t vminq_s8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3659,7 +3668,7 @@ int16x8_t vminq_s16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3669,7 +3678,7 @@ int32x4_t vminq_s32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3679,7 +3688,7 @@ int8x16_t vminq_u8(int8x16_t N, int8x16_t M)
     int8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3689,7 +3698,7 @@ int16x8_t vminq_u16(int16x8_t N, int16x8_t M)
     int16x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3699,7 +3708,7 @@ int32x4_t vminq_u32(int32x4_t N, int32x4_t M)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3709,7 +3718,7 @@ float32x4_t vminq_f32(float32x4_t N, float32x4_t M)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = N[i] < M[i] ? N[i] : M[i];
+        D.val[i] = N.val[i] < M.val[i] ? N.val[i] : M.val[i];
     }
     return D;
 }
@@ -3719,13 +3728,13 @@ uint32x4_t vcltq_f32(float32x4_t N, float32x4_t M)
     uint32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        if (N[i] < M[i])
+        if (N.val[i] < M.val[i])
         {
-            D[i] = 0xFFFFFFFF;
+            D.val[i] = 0xFFFFFFFF;
         }
         else
         {
-            D[i] = 0;
+            D.val[i] = 0;
         }
     }
     return D;
@@ -3736,7 +3745,7 @@ float32x4_t vbslq_f32(uint32x4_t mask, float32x4_t a, float32x4_t b)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = mask[i] ? a[i] : b[i];
+        r.val[i] =  mask.val[i] ? a.val[i] : b.val[i];
     }
     return r;
 }
@@ -3753,7 +3762,7 @@ int8x8_t vshrn_n_s16(int16x8_t a, const int n)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3769,7 +3778,7 @@ uint16x4_t vshr_n_u16(uint16x4_t v, const int n)
     uint16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = v[i] >> n;
+        D.val[i] = v.val[i] >> n;
     }
     return D;
 }
@@ -3785,7 +3794,7 @@ int16x4_t vshrn_n_s32(int32x4_t a, const int n)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3801,7 +3810,7 @@ int32x2_t vshrn_n_s64(int64x2_t a, const int n)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3817,7 +3826,7 @@ uint8x8_t vshrn_n_u16(uint16x8_t a, const int n)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3833,7 +3842,7 @@ uint16x4_t vshrn_n_u32(uint32x4_t a, const int n)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3849,7 +3858,7 @@ uint32x2_t vshrn_n_u64(uint64x2_t a, const int n)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] >> n;
+        r.val[i] =  a.val[i] >> n;
     }
     return r;
 }
@@ -3866,7 +3875,7 @@ uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
     uint8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        int16_t temp = v[i] >> n;
+        int16_t temp = v.val[i] >> n;
         if (temp > UINT8_MAX)
         {
             temp = UINT8_MAX;
@@ -3875,7 +3884,7 @@ uint8x8_t vqshrun_n_s16(int16x8_t v, const int n)
         {
             temp = 0;
         }
-        D[i] = temp;
+        D.val[i] = temp;
     }
     return D;
 }
@@ -3890,7 +3899,7 @@ uint16x4_t vqshrun_n_s32(int32x4_t v, const int n)
     uint16x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        int32_t temp = (v[i] + (1 << (n - 1))) >> n;
+        int32_t temp = (v.val[i] + (1 << (n - 1))) >> n;
         if (temp > UINT16_MAX)
         {
             temp = UINT16_MAX;
@@ -3914,7 +3923,7 @@ uint32x2_t vqshrun_n_s64(int64x2_t v, const int n)
     uint32x2_t D;
     for (int i = 0; i < 2; i++)
     {
-        int64_t temp = (v[i] + (1 << (n - 1))) >> n;
+        int64_t temp = (v.val[i] + (1 << (n - 1))) >> n;
         if (temp > UINT32_MAX)
         {
             temp = UINT32_MAX;
@@ -3937,7 +3946,7 @@ uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
     uint8x8_t D;
     for (int i = 0; i < 8; i++)
     {
-        int16_t temp = (v[i] + (1 << (n - 1))) >> n;
+        int16_t temp = (v.val[i] + (1 << (n - 1))) >> n;
         if (temp > UINT8_MAX)
         {
             temp = UINT8_MAX;
@@ -3946,7 +3955,7 @@ uint8x8_t vqrshrun_n_s16(int16x8_t v, const int n)
         {
             temp = 0;
         }
-        D[i] = temp;
+        D.val[i] = temp;
     }
     return D;
 }
@@ -3957,7 +3966,7 @@ uint8x8_t vrshrn_n_u16(uint16x8_t a, const int n)
     const int delta = (1 << (n - 1));
     for (int i = 0; i < 8; i++)
     {
-        r[i] = (a[i] + delta) >> n;
+        r.val[i] =  (a.val[i] + delta) >> n;
     }
     return r;
 }
@@ -3967,7 +3976,7 @@ int32x4_t vsraq_n_s32(int32x4_t a, int32x4_t b, const int n)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = (a[i] >> n) + (b[i] >> n);
+        r.val[i] =  (a.val[i] >> n) + (b.val[i] >> n);
     }
     return r;
 }
@@ -3978,7 +3987,7 @@ int32x4_t vshlq_n_s32(int32x4_t M, const int n)
     int32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = M[i] << n;
+        D.val[i] = M.val[i] << n;
     }
     return D;
 }
@@ -3988,7 +3997,7 @@ uint16x8_t vshll_n_u8(uint8x8_t a, const int n)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = (uint16_t)a[i] << n;
+        r.val[i] =  (uint16_t)a.val[i] << n;
     }
     return r;
 }
@@ -3996,93 +4005,129 @@ uint16x8_t vshll_n_u8(uint8x8_t a, const int n)
 // type conversion
 uint8x8_t vreinterpret_u8_s8(int8x8_t a)
 {
-    return a;
+    uint8x8_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 8);
+    return r;
 }
 
 int16x8_t vreinterpretq_s16_u16(uint16x8_t a)
 {
-    return a;
+    int16x8_t r;
+    memcpy(&r.val, &a.val, sizeof(int16_t) * 8);
+    return r;
 }
 
 uint16x8_t vreinterpretq_u16_s16(int16x8_t a)
 {
-    return a;
+    uint16x8_t r;
+    memcpy(&r.val, &a.val, sizeof(uint16_t) * 8);
+    return r;
 }
 
 uint16x4_t vreinterpret_u16_u8(uint8x8_t a)
 {
-    return a;
+    uint16x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint16_t) * 4);
+    return r;
 }
 
 uint32x2_t vreinterpret_u32_u16(uint16x4_t a)
 {
-    return a;
+    uint32x2_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 2);
+    return r;
 }
 
 uint8x8_t vreinterpret_u8_u32(uint32x2_t a)
 {
-    return a;
+    uint8x8_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 8);
+    return r;
 }
 
 uint32x2_t vreinterpret_u32_u8(uint8x8_t a)
 {
-    return a;
+    uint32x2_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 2);
+    return r;
 }
 
 int8x8_t vreinterpret_s8_u8(uint8x8_t a)
 {
-    return a;
+    int8x8_t r;
+    memcpy(&r.val, &a.val, sizeof(int8_t) * 8);
+    return r;
 }
 
 int32x2_t vreinterpret_s32_s16(int16x4_t a)
 {
-    return a;
+    int32x2_t r;
+    memcpy(&r.val, &a.val, sizeof(int32_t) * 2);
+    return r;
 }
 
 int16x4_t vreinterpret_s16_s32(int32x2_t a)
 {
-    return a;
+    int16x4_t r;
+    memcpy(&r.val, &a.val, sizeof(int16_t) * 4);
+    return r;
 }
 
 // vreinterpretq_u8_type
 uint8x16_t vreinterpretq_u8_s8(int8x16_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_s16(int16x8_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_s32(int32x4_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_f32(float32x4_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_u16(uint16x8_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_u32(uint32x4_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_u64(uint64x2_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 uint8x16_t vreinterpretq_u8_s64(int64x2_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 #if __fp16
@@ -4094,48 +4139,66 @@ uint8x16_t vreinterpretq_u8_f16(float16x8_t a)
 
 uint8x16_t vreinterpretq_u8_f64(float64x2_t a)
 {
-    return a;
+    uint8x16_t r;
+    memcpy(&r.val, &a.val, sizeof(uint8_t) * 16);
+    return r;
 }
 
 // vreinterpretq_u32_type
 uint32x4_t vreinterpretq_u32_s8(int8x16_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_s16(int16x8_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_s32(int32x4_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_f32(float32x4_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_u8(uint8x16_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_u16(uint16x8_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_u64(uint64x2_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 uint32x4_t vreinterpretq_u32_s64(int64x2_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 #if __fp16
@@ -4147,7 +4210,9 @@ uint32x4_t vreinterpretq_u32_f16(float16x8_t a)
 
 uint32x4_t vreinterpretq_u32_f64(float64x2_t a)
 {
-    return a;
+    uint32x4_t r;
+    memcpy(&r.val, &a.val, sizeof(uint32_t) * 4);
+    return r;
 }
 
 float32x4_t vcvtq_f32_s32(int32x4_t a)
@@ -4155,7 +4220,7 @@ float32x4_t vcvtq_f32_s32(int32x4_t a)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4165,7 +4230,7 @@ int32x4_t vcvtq_s32_f32(float32x4_t a)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4175,7 +4240,7 @@ uint32x4_t vcvtq_u32_f32(float32x4_t a)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4185,7 +4250,7 @@ int32x4_t vcvtnq_s32_f32(float32x4_t a)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4271,7 +4336,7 @@ float32x4_t vrecpeq_f32(float32x4_t N)
     float32x4_t D;
     for (int i = 0; i < 4; i++)
     {
-        D[i] = FPRecipEstimate(N[i]);
+        D.val[i] = FPRecipEstimate(N.val[i]);
     }
     return D;
 }
@@ -4281,7 +4346,7 @@ float32x4_t vrecpsq_f32(float32x4_t a, float32x4_t b)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = 2.0 - (a[i] * b[i]);
+        r.val[i] =  2.0 - (a.val[i] * b.val[i]);
     }
     return r;
 }
@@ -4292,13 +4357,13 @@ int8x8x2_t vtrn_s8(int8x8_t a, int8x8_t b)
     int8x8x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 4; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4308,13 +4373,13 @@ uint8x8x2_t vtrn_u8(uint8x8_t a, uint8x8_t b)
     uint8x8x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 4; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4324,13 +4389,13 @@ int16x4x2_t vtrn_s16(int16x4_t a, int16x4_t b)
     int16x4x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 2; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4340,13 +4405,13 @@ uint16x4x2_t vtrn_u16(uint16x4_t a, uint16x4_t b)
     uint16x4x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 2; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4356,13 +4421,13 @@ int32x2x2_t vtrn_s32(int32x2_t a, int32x2_t b)
     int32x2x2_t r;
     for (int i = 0; i < 1; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 1; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4372,13 +4437,13 @@ uint32x2x2_t vtrn_u32(uint32x2_t a, uint32x2_t b)
     uint32x2x2_t r;
     for (int i = 0; i < 1; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 1; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4389,13 +4454,13 @@ uint16x8x2_t vtrnq_u16(uint16x8_t a, uint16x8_t b)
     uint16x8x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 4; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4405,13 +4470,13 @@ uint32x4x2_t vtrnq_u32(uint32x4_t a, uint32x4_t b)
     uint32x4x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 2; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4421,13 +4486,13 @@ int16x8x2_t vtrnq_s16(int16x8_t a, int16x8_t b)
     int16x8x2_t r;
     for (int i = 0; i < 4; i++)
     {
-        r.val[0][2 * i] = a[2 * i];
-        r.val[0][2 * i + 1] = b[2 * i];
+        r.val[0].val[2 * i] = a.val[2 * i];
+        r.val[0].val[2 * i + 1] = b.val[2 * i];
     }
     for (int i = 0; i < 4; i++)
     {
-        r.val[1][2 * i] = a[2 * i + 1];
-        r.val[1][2 * i + 1] = b[2 * i + 1];
+        r.val[1].val[2 * i] = a.val[2 * i + 1];
+        r.val[1].val[2 * i + 1] = b.val[2 * i + 1];
     }
     return r;
 }
@@ -4439,13 +4504,13 @@ int16x4x2_t vzip_s16(int16x4_t a, int16x4_t b)
     const int n = 2;
     for (int i = 0; i < n; i++)
     {
-        r.val[0][2 * i] = a[i];
-        r.val[0][2 * i + 1] = b[i];
+        r.val[0].val[2 * i] = a.val[i];
+        r.val[0].val[2 * i + 1] = b.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r.val[1][2 * i] = a[n + i];
-        r.val[1][2 * i + 1] = b[n + i];
+        r.val[1].val[2 * i] = a.val[n + i];
+        r.val[1].val[2 * i + 1] = b.val[n + i];
     }
     return r;
 }
@@ -4457,11 +4522,11 @@ uint8x16_t vcombine_u8(uint8x8_t low, uint8x8_t high)
     const int n = 8;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4471,11 +4536,11 @@ uint16x8_t vcombine_u16(uint16x4_t low, uint16x4_t high)
     const int n = 4;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4485,11 +4550,11 @@ uint32x4_t vcombine_u32(uint32x2_t low, uint32x2_t high)
     const int n = 2;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4500,11 +4565,11 @@ int8x16_t vcombine_s8(int8x8_t low, int8x8_t high)
     const int n = 8;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4514,11 +4579,11 @@ int16x8_t vcombine_s16(int16x4_t low, int16x4_t high)
     const int n = 4;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4528,11 +4593,11 @@ int32x4_t vcombine_s32(int32x2_t low, int32x2_t high)
     const int n = 2;
     for (int i = 0; i < n; i++)
     {
-        r[i] = low[i];
+        r.val[i] =  low.val[i];
     }
     for (int i = 0; i < n; i++)
     {
-        r[n + i] = high[i];
+        r.val[n + i] = high.val[i];;
     }
     return r;
 }
@@ -4543,7 +4608,7 @@ int16x4_t vmovn_s32(int32x4_t a)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4553,7 +4618,7 @@ uint16x4_t vmovn_u32(uint32x4_t a)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4563,7 +4628,7 @@ uint8x8_t vmovn_u16(uint16x8_t a)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4574,7 +4639,7 @@ uint16x8_t vmovl_u8(uint8x8_t a)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4583,7 +4648,7 @@ uint32x4_t vmovl_u16(uint16x4_t a)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4592,7 +4657,7 @@ uint64x2_t vmovl_u32(uint32x2_t a)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4602,7 +4667,7 @@ int16x8_t vmovl_s8(int8x8_t a)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4611,7 +4676,7 @@ int32x4_t vmovl_s16(int16x4_t a)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4620,7 +4685,7 @@ int64x2_t vmovl_s32(int32x2_t a)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i];
+        r.val[i] =  a.val[i];
     }
     return r;
 }
@@ -4631,13 +4696,13 @@ uint8x8_t vqmovn_u16(uint16x8_t a)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        if (a[i] > UINT8_MAX)
+        if (a.val[i] > UINT8_MAX)
         {
-            r[i] = UINT8_MAX;
+            r.val[i] =  UINT8_MAX;
         }
         else
         {
-            r[i] = a[i];
+            r.val[i] =  a.val[i];
         }
     }
     return r;
@@ -4648,17 +4713,17 @@ uint8x8_t vqmovun_s16(int16x8_t a)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        if (a[i] < 0)
+        if (a.val[i] < 0)
         {
-            r[i] = 0;
+            r.val[i] =  0;
         }
-        else if (a[i] > UINT8_MAX)
+        else if (a.val[i] > UINT8_MAX)
         {
-            r[i] = UINT8_MAX;
+            r.val[i] =  UINT8_MAX;
         }
         else
         {
-            r[i] = a[i];
+            r.val[i] =  a.val[i];
         }
     }
     return r;
@@ -4670,7 +4735,7 @@ uint8x8_t vqtbl1_u8(uint8x16_t t, uint8x8_t idx)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = t[idx[i]];
+        r.val[i] =  t.val[idx.val[i]];
     }
     return r;
 }
@@ -4687,11 +4752,11 @@ uint8x8_t vext_u8(uint8x8_t a, uint8x8_t b, const int n)
     }
     for (int i = 0; i < len - n; i++)
     {
-        r[i] = a[i + n];
+        r.val[i] =  a.val[i + n];
     }
     for (int i = 0; i < n; i++)
     {
-        r[i + len - n] = b[i];
+        r.val[i + len - n] = b.val[i];
     }
     return r;
 }
@@ -4707,11 +4772,11 @@ uint16x4_t vext_u16(uint16x4_t a, uint16x4_t b, const int n)
     }
     for (int i = 0; i < len - n; i++)
     {
-        r[i] = a[i + n];
+        r.val[i] =  a.val[i + n];
     }
     for (int i = 0; i < n; i++)
     {
-        r[i + len - n] = b[i];
+        r.val[i + len - n] = b.val[i];
     }
     return r;
 }
@@ -4727,11 +4792,11 @@ int16x4_t vext_s16(int16x4_t a, int16x4_t b, const int n)
     }
     for (int i = 0; i < len - n; i++)
     {
-        r[i] = a[i + n];
+        r.val[i] =  a.val[i + n];
     }
     for (int i = 0; i < n; i++)
     {
-        r[i + len - n] = b[i];
+        r.val[i + len - n] = b.val[i];
     }
     return r;
 }
@@ -4748,11 +4813,11 @@ uint16x8_t vextq_u16(uint16x8_t a, uint16x8_t b, const int n)
     }
     for (int i = 0; i < len - n; i++)
     {
-        r[i] = a[i + n];
+        r.val[i] =  a.val[i + n];
     }
     for (int i = 0; i < n; i++)
     {
-        r[i + len - n] = b[i];
+        r.val[i + len - n] = b.val[i];
     }
     return r;
 }
@@ -4763,7 +4828,7 @@ uint8x16_t vcgtq_u8(uint8x16_t N, uint8x16_t M)
     uint8x16_t D;
     for (int i = 0; i < 16; i++)
     {
-        D[i] = N[i] > M[i] ? 0xFF : 0;
+        D.val[i] = N.val[i] > M.val[i] ? 0xFF : 0;
     }
     return D;
 }
@@ -4777,17 +4842,17 @@ uint8x16_t vbslq_u8(uint8x16_t mask, uint8x16_t src1, uint8x16_t src2)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = 0;
+        r.val[i] =  0;
         for (int j = 0; j < 8; j++)
         {
             uint8_t x = (1 << (8 - 1 - j));
-            if ((mask[i] & x) == x)
+            if ((mask.val[i] & x) == x)
             {
-                r[i] += (src1[i] & x);
+                r.val[i] += (src1.val[i] & x);
             }
             else
             {
-                r[i] += (src2[i] & x);
+                r.val[i] += (src2.val[i] & x);
             }
         }
     }
@@ -4803,11 +4868,11 @@ uint8x8_t vtbl1_u8(uint8x8_t a, uint8x8_t idx)
         int index = idx.val[i];
         if (index < 0 || index > 7)
         {
-            r[i] = 0;
+            r.val[i] =  0;
         }
         else
         {
-            r[i] = a.val[index];
+            r.val[i] =  a.val[index];
         }
     }
     return r;
@@ -4822,23 +4887,23 @@ uint8x8_t vtbl4_u8(uint8x8x4_t a, uint8x8_t idx)
         int index = idx.val[i];
         if (index < 0 || index > 31)
         {
-            r[i] = 0;
+            r.val[i] =  0;
         }
         else if (index < 8)
         { // [0, 7]
-            r[i] = a.val[0][index];
+            r.val[i] =  a.val[0].val[index];
         }
         else if (index < 16)
         { // [8, 15]
-            r[i] = a.val[1][index - 8];
+            r.val[i] =  a.val[1].val[index - 8];
         }
         else if (index < 24)
         { // [16, 23]
-            r[i] = a.val[2][index - 16];
+            r.val[i] =  a.val[2].val[index - 16];
         }
         else
         { // [24, 31]
-            r[i] = a.val[3][index - 24];
+            r.val[i] =  a.val[3].val[index - 24];
         }
     }
     return r;
@@ -4853,15 +4918,15 @@ uint8x8_t vtbl2_u8(uint8x8x2_t a, uint8x8_t idx)
         int index = idx.val[i];
         if (index < 0 || index > 15)
         {
-            r[i] = 0;
+            r.val[i] =  0;
         }
         else if (index < 8)
         {
-            r[i] = a.val[0][index];
+            r.val[i] =  a.val[0].val[index];
         }
         else
         { // index in [8, 15]
-            r[i] = a.val[1][index - 8];
+            r.val[i] =  a.val[1].val[index - 8];
         }
     }
     return r;
@@ -4873,7 +4938,7 @@ int8x8_t vand_s8(int8x8_t a, int8x8_t b)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4883,7 +4948,7 @@ int16x4_t vand_s16(int16x4_t a, int16x4_t b)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4893,7 +4958,7 @@ int32x2_t vand_s32(int32x2_t a, int32x2_t b)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4903,7 +4968,7 @@ int64x1_t vand_s64(int64x1_t a, int64x1_t b)
     int64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4913,7 +4978,7 @@ uint8x8_t vand_u8(uint8x8_t a, uint8x8_t b)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4923,7 +4988,7 @@ uint16x4_t vand_u16(uint16x4_t a, uint16x4_t b)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4933,7 +4998,7 @@ uint32x2_t vand_u32(uint32x2_t a, uint32x2_t b)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4943,7 +5008,7 @@ uint64x1_t vand_u64(uint64x1_t a, uint64x1_t b)
     uint64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4954,7 +5019,7 @@ int8x16_t vandq_s8(int8x16_t a, int8x16_t b)
     int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4964,7 +5029,7 @@ int16x8_t vandq_s16(int16x8_t a, int16x8_t b)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4974,7 +5039,7 @@ int32x4_t vandq_s32(int32x4_t a, int32x4_t b)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4984,7 +5049,7 @@ int64x2_t vandq_s64(int64x2_t a, int64x2_t b)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -4994,7 +5059,7 @@ uint8x16_t vandq_u8(uint8x16_t a, uint8x16_t b)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -5004,7 +5069,7 @@ uint16x8_t vandq_u16(uint16x8_t a, uint16x8_t b)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -5014,7 +5079,7 @@ uint32x4_t vandq_u32(uint32x4_t a, uint32x4_t b)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -5024,7 +5089,7 @@ uint64x2_t vandq_u64(uint64x2_t a, uint64x2_t b)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] & b[i];
+        r.val[i] =  a.val[i] & b.val[i];
     }
     return r;
 }
@@ -5035,7 +5100,7 @@ int8x8_t vorr_s8(int8x8_t a, int8x8_t b)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5045,7 +5110,7 @@ int16x4_t vorr_s16(int16x4_t a, int16x4_t b)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5055,7 +5120,7 @@ int32x2_t vorr_s32(int32x2_t a, int32x2_t b)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5065,7 +5130,7 @@ int64x1_t vorr_s64(int64x1_t a, int64x1_t b)
     int64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5075,7 +5140,7 @@ uint8x8_t vorr_u8(uint8x8_t a, uint8x8_t b)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5085,7 +5150,7 @@ uint16x4_t vorr_u16(uint16x4_t a, uint16x4_t b)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5095,7 +5160,7 @@ uint32x2_t vorr_u32(uint32x2_t a, uint32x2_t b)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5105,7 +5170,7 @@ uint64x1_t vorr_u64(uint64x1_t a, uint64x1_t b)
     uint64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5116,7 +5181,7 @@ int8x16_t vorrq_s8(int8x16_t a, int8x16_t b)
     int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5126,7 +5191,7 @@ int16x8_t vorrq_s16(int16x8_t a, int16x8_t b)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5136,7 +5201,7 @@ int32x4_t vorrq_s32(int32x4_t a, int32x4_t b)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5146,7 +5211,7 @@ int64x2_t vorrq_s64(int64x2_t a, int64x2_t b)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5156,7 +5221,7 @@ uint8x16_t vorrq_u8(uint8x16_t a, uint8x16_t b)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5166,7 +5231,7 @@ uint16x8_t vorrq_u16(uint16x8_t a, uint16x8_t b)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5176,7 +5241,7 @@ uint32x4_t vorrq_u32(uint32x4_t a, uint32x4_t b)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5186,7 +5251,7 @@ uint64x2_t vorrq_u64(uint64x2_t a, uint64x2_t b)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] | b[i];
+        r.val[i] =  a.val[i] | b.val[i];
     }
     return r;
 }
@@ -5197,7 +5262,7 @@ int8x8_t veor_s8(int8x8_t a, int8x8_t b)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5207,7 +5272,7 @@ int16x4_t veor_s16(int16x4_t a, int16x4_t b)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5217,7 +5282,7 @@ int32x2_t veor_s32(int32x2_t a, int32x2_t b)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5227,7 +5292,7 @@ int64x1_t veor_s64(int64x1_t a, int64x1_t b)
     int64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5237,7 +5302,7 @@ uint8x8_t veor_u8(uint8x8_t a, uint8x8_t b)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5247,7 +5312,7 @@ uint16x4_t veor_u16(uint16x4_t a, uint16x4_t b)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5257,7 +5322,7 @@ uint32x2_t ver_u32(uint32x2_t a, uint32x2_t b)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5267,7 +5332,7 @@ uint64x1_t veor_u64(uint64x1_t a, uint64x1_t b)
     uint64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5278,7 +5343,7 @@ int8x16_t veorq_s8(int8x16_t a, int8x16_t b)
     int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5288,7 +5353,7 @@ int16x8_t veorq_s16(int16x8_t a, int16x8_t b)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5298,7 +5363,7 @@ int32x4_t veorq_s32(int32x4_t a, int32x4_t b)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5308,7 +5373,7 @@ int64x2_t veorq_s64(int64x2_t a, int64x2_t b)
     int64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5318,7 +5383,7 @@ uint8x16_t veorq_u8(uint8x16_t a, uint8x16_t b)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5328,7 +5393,7 @@ uint16x8_t veorq_u16(uint16x8_t a, uint16x8_t b)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5338,7 +5403,7 @@ uint32x4_t veorq_u32(uint32x4_t a, uint32x4_t b)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5348,7 +5413,7 @@ uint64x2_t veorq_u64(uint64x2_t a, uint64x2_t b)
     uint64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] ^ b[i];
+        r.val[i] =  a.val[i] ^ b.val[i];
     }
     return r;
 }
@@ -5359,7 +5424,7 @@ int8x8_t vmvn_s8(int8x8_t a)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5369,7 +5434,7 @@ int16x4_t vmvn_s16(int16x4_t a)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5379,7 +5444,7 @@ int32x2_t vmvn_s32(int32x2_t a)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5389,7 +5454,7 @@ uint8x8_t vmvn_u8(uint8x8_t a)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5399,7 +5464,7 @@ uint16x4_t vmvn_u16(uint16x4_t a)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5409,7 +5474,7 @@ uint32x2_t vmvn_u32(uint32x2_t a)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5420,7 +5485,7 @@ int8x16_t vmvnq_s8(int8x16_t a)
     int8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5430,7 +5495,7 @@ int16x8_t vmvnq_s16(int16x8_t a)
     int16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5440,7 +5505,7 @@ int32x4_t vmvnq_s32(int32x4_t a)
     int32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5450,7 +5515,7 @@ uint8x16_t vmvnq_u8(uint8x16_t a)
     uint8x16_t r;
     for (int i = 0; i < 16; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5460,7 +5525,7 @@ uint16x8_t vmvnq_u16(uint16x8_t a)
     uint16x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5470,7 +5535,7 @@ uint32x4_t vmvnq_u32(uint32x4_t a)
     uint32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = ~a[i];
+        r.val[i] =  ~a.val[i];
     }
     return r;
 }
@@ -5484,13 +5549,13 @@ int8x8x2_t vzip_s8(int8x8_t a, int8x8_t b)
     {
         if (i % 2 == 0)
         {
-            r.val[0][i] = a[i / 2];
-            r.val[1][i] = a[i / 2 + vlen / 2];
+            r.val[0].val[i] = a.val[i / 2];
+            r.val[1].val[i] = a.val[i / 2 + vlen / 2];
         }
         else
         {
-            r.val[0][i] = b[i / 2];
-            r.val[1][i] = b[i / 2 + vlen / 2];
+            r.val[0].val[i] = b.val[i / 2];
+            r.val[1].val[i] = b.val[i / 2 + vlen / 2];
         }
     }
     return r;
@@ -5504,13 +5569,13 @@ uint8x8x2_t vzip_u8(uint8x8_t a, uint8x8_t b)
     {
         if (i % 2 == 0)
         {
-            r.val[0][i] = a[i / 2];
-            r.val[1][i] = a[i / 2 + vlen / 2];
+            r.val[0].val[i] = a.val[i / 2];
+            r.val[1].val[i] = a.val[i / 2 + vlen / 2];
         }
         else
         {
-            r.val[0][i] = b[i / 2];
-            r.val[1][i] = b[i / 2 + vlen / 2];
+            r.val[0].val[i] = b.val[i / 2];
+            r.val[1].val[i] = b.val[i / 2 + vlen / 2];
         }
     }
     return r;
@@ -5522,14 +5587,14 @@ uint8x8x2_t vuzp_u8(uint8x8_t a, uint8x8_t b)
     uint8x8x2_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r.val[0][i / 2] = a[i];
-        r.val[1][i / 2] = a[i + 1];
+        r.val[0].val[i / 2] = a.val[i];
+        r.val[1].val[i / 2] = a.val[i + 1];
     }
 
     for (int i = 0; i < 8; i += 2)
     {
-        r.val[0][i / 2 + 4] = b[i];
-        r.val[1][i / 2 + 4] = b[i + 1];
+        r.val[0].val[i / 2 + 4] = b.val[i];
+        r.val[1].val[i / 2 + 4] = b.val[i + 1];
     }
     return r;
 }
@@ -5539,14 +5604,14 @@ int8x8x2_t vuzp_s8(int8x8_t a, int8x8_t b)
     int8x8x2_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r.val[0][i / 2] = a[i];
-        r.val[1][i / 2] = a[i + 1];
+        r.val[0].val[i / 2] = a.val[i];
+        r.val[1].val[i / 2] = a.val[i + 1];
     }
 
     for (int i = 0; i < 8; i += 2)
     {
-        r.val[0][i / 2 + 4] = b[i];
-        r.val[1][i / 2 + 4] = b[i + 1];
+        r.val[0].val[i / 2 + 4] = b.val[i];
+        r.val[1].val[i / 2 + 4] = b.val[i + 1];
     }
     return r;
 }
@@ -5557,8 +5622,8 @@ int8x8_t vrev16_s8(int8x8_t vec)
     int8x8_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r[i] = vec[i + 1];
-        r[i + 1] = vec[i];
+        r.val[i] =  vec.val[i + 1];
+        r.val[i + 1] = vec.val[i];
     }
     return r;
 }
@@ -5568,8 +5633,8 @@ uint8x8_t vrev16_u8(uint8x8_t vec)
     uint8x8_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r[i] = vec[i + 1];
-        r[i + 1] = vec[i];
+        r.val[i] =  vec.val[i + 1];
+        r.val[i + 1] = vec.val[i];
     }
     return r;
 }
@@ -5580,8 +5645,8 @@ int8x16_t vrev16q_s8(int8x16_t vec)
     int8x16_t r;
     for (int i = 0; i < 16; i += 2)
     {
-        r[i] = vec[i + 1];
-        r[i + 1] = vec[i];
+        r.val[i] =  vec.val[i + 1];
+        r.val[i + 1] = vec.val[i];
     }
     return r;
 }
@@ -5591,8 +5656,8 @@ uint8x16_t vrev16q_u8(uint8x16_t vec)
     uint8x16_t r;
     for (int i = 0; i < 16; i += 2)
     {
-        r[i] = vec[i + 1];
-        r[i + 1] = vec[i];
+        r.val[i] =  vec.val[i + 1];
+        r.val[i + 1] = vec.val[i];
     }
     return r;
 }
@@ -5600,13 +5665,13 @@ uint8x16_t vrev16q_u8(uint8x16_t vec)
 // vrev32_type
 int8x8_t vrev32_s8(int8x8_t vec)
 {
-    int8x16_t r;
+    int8x8_t r;
     for (int i = 0; i < 16; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5616,8 +5681,8 @@ int16x4_t vrev32_s16(int16x4_t vec)
     int16x4_t r;
     for (int i = 0; i < 4; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5627,10 +5692,10 @@ uint8x8_t vrev32_u8(uint8x8_t vec)
     uint8x8_t r;
     for (int i = 0; i < 8; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5640,8 +5705,8 @@ uint16x4_t vrev32_u16(uint16x4_t vec)
     uint16x4_t r;
     for (int i = 0; i < 4; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5652,10 +5717,10 @@ int8x16_t vrev32q_s8(int8x16_t vec)
     int8x16_t r;
     for (int i = 0; i < 16; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5665,8 +5730,8 @@ int16x8_t vrev32q_s16(int16x8_t vec)
     int16x8_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5676,10 +5741,10 @@ uint8x16_t vrev32q_u8(uint8x16_t vec)
     uint8x16_t r;
     for (int i = 0; i < 16; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5689,8 +5754,8 @@ uint16x8_t vrev32q_u16(uint16x8_t vec)
     uint16x8_t r;
     for (int i = 0; i < 8; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5701,14 +5766,14 @@ int8x8_t vrev64_s8(int8x8_t vec)
     int8x8_t r;
     for (int i = 0; i < 8; i += 8)
     {
-        r[i + 0] = vec[i + 7];
-        r[i + 1] = vec[i + 6];
-        r[i + 2] = vec[i + 5];
-        r[i + 3] = vec[i + 4];
-        r[i + 4] = vec[i + 3];
-        r[i + 5] = vec[i + 2];
-        r[i + 6] = vec[i + 1];
-        r[i + 7] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 7];
+        r.val[i + 1] = vec.val[i + 6];
+        r.val[i + 2] = vec.val[i + 5];
+        r.val[i + 3] = vec.val[i + 4];
+        r.val[i + 4] = vec.val[i + 3];
+        r.val[i + 5] = vec.val[i + 2];
+        r.val[i + 6] = vec.val[i + 1];
+        r.val[i + 7] = vec.val[i + 0];
     }
     return r;
 }
@@ -5718,10 +5783,10 @@ int16x4_t vrev64_s16(int16x4_t vec)
     int16x4_t r;
     for (int i = 0; i < 4; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5731,8 +5796,8 @@ int32x2_t vrev64_s32(int32x2_t vec)
     int32x2_t r;
     for (int i = 0; i < 2; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5742,14 +5807,14 @@ uint8x8_t vrev64_u8(uint8x8_t vec)
     uint8x8_t r;
     for (int i = 0; i < 8; i += 8)
     {
-        r[i + 0] = vec[i + 7];
-        r[i + 1] = vec[i + 6];
-        r[i + 2] = vec[i + 5];
-        r[i + 3] = vec[i + 4];
-        r[i + 4] = vec[i + 3];
-        r[i + 5] = vec[i + 2];
-        r[i + 6] = vec[i + 1];
-        r[i + 7] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 7];
+        r.val[i + 1] = vec.val[i + 6];
+        r.val[i + 2] = vec.val[i + 5];
+        r.val[i + 3] = vec.val[i + 4];
+        r.val[i + 4] = vec.val[i + 3];
+        r.val[i + 5] = vec.val[i + 2];
+        r.val[i + 6] = vec.val[i + 1];
+        r.val[i + 7] = vec.val[i + 0];
     }
     return r;
 }
@@ -5759,10 +5824,10 @@ uint16x4_t vrev64_u16(uint16x4_t vec)
     uint16x4_t r;
     for (int i = 0; i < 4; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5772,8 +5837,8 @@ uint32x2_t vrev64_u32(uint32x2_t vec)
     uint32x2_t r;
     for (int i = 0; i < 2; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5783,8 +5848,8 @@ float32x2_t vrev64_f32(float32x2_t vec)
     float32x2_t r;
     for (int i = 0; i < 2; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5795,14 +5860,14 @@ int8x16_t vrev64q_s8(int8x16_t vec)
     int8x16_t r;
     for (int i = 0; i < 8; i += 8)
     {
-        r[i + 0] = vec[i + 7];
-        r[i + 1] = vec[i + 6];
-        r[i + 2] = vec[i + 5];
-        r[i + 3] = vec[i + 4];
-        r[i + 4] = vec[i + 3];
-        r[i + 5] = vec[i + 2];
-        r[i + 6] = vec[i + 1];
-        r[i + 7] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 7];
+        r.val[i + 1] = vec.val[i + 6];
+        r.val[i + 2] = vec.val[i + 5];
+        r.val[i + 3] = vec.val[i + 4];
+        r.val[i + 4] = vec.val[i + 3];
+        r.val[i + 5] = vec.val[i + 2];
+        r.val[i + 6] = vec.val[i + 1];
+        r.val[i + 7] = vec.val[i + 0];
     }
     return r;
 }
@@ -5812,10 +5877,10 @@ int16x8_t vrev64q_s16(int16x8_t vec)
     int16x8_t r;
     for (int i = 0; i < 4; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5825,8 +5890,8 @@ int32x4_t vrev64q_s32(int32x4_t vec)
     int32x4_t r;
     for (int i = 0; i < 4; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5836,14 +5901,14 @@ uint8x16_t vrev64q_u8(uint8x16_t vec)
     uint8x16_t r;
     for (int i = 0; i < 16; i += 8)
     {
-        r[i + 0] = vec[i + 7];
-        r[i + 1] = vec[i + 6];
-        r[i + 2] = vec[i + 5];
-        r[i + 3] = vec[i + 4];
-        r[i + 4] = vec[i + 3];
-        r[i + 5] = vec[i + 2];
-        r[i + 6] = vec[i + 1];
-        r[i + 7] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 7];
+        r.val[i + 1] = vec.val[i + 6];
+        r.val[i + 2] = vec.val[i + 5];
+        r.val[i + 3] = vec.val[i + 4];
+        r.val[i + 4] = vec.val[i + 3];
+        r.val[i + 5] = vec.val[i + 2];
+        r.val[i + 6] = vec.val[i + 1];
+        r.val[i + 7] = vec.val[i + 0];
     }
     return r;
 }
@@ -5853,10 +5918,10 @@ uint16x8_t vrev64q_u16(uint16x8_t vec)
     uint16x8_t r;
     for (int i = 0; i < 8; i += 4)
     {
-        r[i + 0] = vec[i + 3];
-        r[i + 1] = vec[i + 2];
-        r[i + 2] = vec[i + 1];
-        r[i + 3] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 3];
+        r.val[i + 1] = vec.val[i + 2];
+        r.val[i + 2] = vec.val[i + 1];
+        r.val[i + 3] = vec.val[i + 0];
     }
     return r;
 }
@@ -5866,8 +5931,8 @@ uint32x4_t vrev64q_u32(uint32x4_t vec)
     uint32x4_t r;
     for (int i = 0; i < 4; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5877,8 +5942,8 @@ float32x4_t vrev64q_f32(float32x4_t vec)
     float32x4_t r;
     for (int i = 0; i < 4; i += 2)
     {
-        r[i + 0] = vec[i + 1];
-        r[i + 1] = vec[i + 0];
+        r.val[i + 0] = vec.val[i + 1];
+        r.val[i + 1] = vec.val[i + 0];
     }
     return r;
 }
@@ -5891,7 +5956,7 @@ float32x2_t vdiv_f32(float32x2_t a, float32x2_t b)
     float32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] / b[i];
+        r.val[i] =  a.val[i] / b.val[i];
     }
     return r;
 }
@@ -5901,7 +5966,7 @@ float64x1_t vdiv_f64(float64x1_t a, float64x1_t b)
     float64x1_t r;
     for (int i = 0; i < 1; i++)
     {
-        r[i] = a[i] / b[i];
+        r.val[i] =  a.val[i] / b.val[i];
     }
     return r;
 }
@@ -5914,7 +5979,7 @@ float32x4_t vdivq_f32(float32x4_t a, float32x4_t b)
     float32x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = a[i] / b[i];
+        r.val[i] =  a.val[i] / b.val[i];
     }
     return r;
 }
@@ -5924,7 +5989,7 @@ float64x2_t vdivq_f64(float64x2_t a, float64x2_t b)
     float64x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = a[i] / b[i];
+        r.val[i] =  a.val[i] / b.val[i];
     }
     return r;
 }
@@ -5938,7 +6003,7 @@ int8x8_t vqshrn_n_s16(int16x8_t a, const int n)
     int8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = std::min(std::max(a[i] >> n, INT8_MIN), INT8_MAX);
+        r.val[i] =  std::min(std::max(a.val[i] >> n, INT8_MIN), INT8_MAX);
     }
     return r;
 }
@@ -5948,7 +6013,7 @@ int16x4_t vqshrn_n_s32(int32x4_t a, const int n)
     int16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = std::min(std::max(a[i] >> n, INT16_MIN), INT16_MAX);
+        r.val[i] =  std::min(std::max(a.val[i] >> n, INT16_MIN), INT16_MAX);
     }
     return r;
 }
@@ -5958,7 +6023,7 @@ int32x2_t vqshrn_n_s64(int64x2_t a, const int n)
     int32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = std::min<int32_t>(std::max<int64_t>(a[i] >> n, INT32_MIN), INT32_MAX);
+        r.val[i] =  std::min<int32_t>(std::max<int64_t>(a.val[i] >> n, INT32_MIN), INT32_MAX);
     }
     return r;
 }
@@ -5968,7 +6033,7 @@ uint8x8_t vqshrn_n_u16(uint16x8_t a, const int n)
     uint8x8_t r;
     for (int i = 0; i < 8; i++)
     {
-        r[i] = std::min(a[i] >> n, UINT8_MAX);
+        r.val[i] =  std::min(a.val[i] >> n, UINT8_MAX);
     }
     return r;
 }
@@ -5978,7 +6043,7 @@ uint16x4_t vqshrn_n_u32(uint32x4_t a, const int n)
     uint16x4_t r;
     for (int i = 0; i < 4; i++)
     {
-        r[i] = std::min<uint32_t>(a[i] >> n, UINT16_MAX);
+        r.val[i] =  std::min<uint32_t>(a.val[i] >> n, UINT16_MAX);
     }
     return r;
 }
@@ -5988,7 +6053,7 @@ uint32x2_t vqshrn_n_u64(uint64x2_t a, const int n)
     uint32x2_t r;
     for (int i = 0; i < 2; i++)
     {
-        r[i] = std::min<uint64_t>(a[i] >> n, UINT32_MAX);
+        r.val[i] =  std::min<uint64_t>(a.val[i] >> n, UINT32_MAX);
     }
     return r;
 }
